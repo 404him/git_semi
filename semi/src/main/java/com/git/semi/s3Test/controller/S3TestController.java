@@ -1,4 +1,4 @@
-package com.git.semi.test.controller;
+package com.git.semi.s3Test.controller;
 
 import com.git.semi.util.s3.S3ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
