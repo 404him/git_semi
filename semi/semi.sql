@@ -71,6 +71,7 @@ INSERT INTO MEMBER values(seq_member_idx.nextval,'admin1','1111','관리자1','�
 INSERT INTO MEMBER values(seq_member_idx.nextval,'user2','1111','회원2','회원이번','010-1111-1111',NULL,'우편번호1','주소1','1997-02-17',5, 'n', '일반', DEFAULT);
 INSERT INTO MEMBER values(seq_member_idx.nextval,'user3','1111','회원3','회원삼번','010-1111-1111',NULL,'우편번호1','주소1','1997-02-17',5, 'n', '일반', DEFAULT);
 INSERT INTO MEMBER values(seq_member_idx.nextval,'reporter2','2222','기자2','기자이번','010-2222-1111',NULL,'우편번호2','주소2','1997-02-22',DEFAULT, DEFAULT, '기자', DEFAULT);
+
 SELECT * FROM MEMBER;
 
 ------ 성수&순철's 테이블  --------

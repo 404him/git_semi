@@ -124,11 +124,15 @@
       <version>2.16.1</version>
     </dependency>
 
+	<!-- https://mvnrepository.com/artifact/org.json/json json드라이버-->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20240205</version>
+		</dependency>
 
 
-
-
-    <!-- BOM에 종속되는 s3 추가 -->
+		<!-- BOM에 종속되는 s3 추가 -->
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-s3</artifactId>
@@ -140,7 +144,7 @@
 
   </dependencies>
 
-  <!-- 개별 SDK 모듈 지정을 위한 BOM 추가 -->
+	<!-- 개별 SDK 모듈 지정을 위한 BOM 추가 -->
   <dependencyManagement>
     <dependencies>
       <dependency>

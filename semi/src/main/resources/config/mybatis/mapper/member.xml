@@ -3,8 +3,35 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="">
-    <!-- TODO : write to namespace -->
+<mapper namespace="member">
+
+	<!-- 회원가입 -->
+	<insert id="member_login_insert" parameterType="member">
+		INSERT INTO member VALUES(seq_member_idx.nextval ,
+							 	  #{ mem_id } ,
+								  #{ mem_pwd } ,
+								  #{ mem_name } ,
+								  #{ mem_nickname } ,
+								  #{ mem_phone } ,
+								  #{ mem_img_url } ,
+								  #{ mem_zipcode } ,
+								  #{ mem_addr } ,
+								  #{ mem_birth } ,
+								  default , 
+								  default , 
+								  default ,
+								  default )
+	</insert>
 
 
+	<!-- ID 중복체크 -->
+	<select id="member_one_id" parameterType="String" resultType="member">
+		SELECT * FROM member WHERE mem_id = #{ mem_id }
+	</select>
+	
+	
+	<!-- 닉네임 중복체크 -->
+	<select id="member_one_nickname" parameterType="String" resultType="member">
+		SELECT * FROM member WHERE mem_nickname = #{ mem_nickname }
+	</select>
 </mapper>
