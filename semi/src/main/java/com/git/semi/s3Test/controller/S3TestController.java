@@ -1,11 +1,14 @@
 package com.git.semi.s3Test.controller;
 
-import com.git.semi.util.s3.S3ImageService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.git.semi.util.s3.S3ImageService;
 
 @Controller
 @RequestMapping("/s3/")
@@ -32,18 +35,20 @@ public class S3TestController {
     /**
      * S3에 이미지 업로드 test api
      */
-    @RequestMapping("uploadS3.do")
-    public String uploadS3(MultipartFile image, Model model) {
+    @RequestMapping(value="uploadS3.do", produces="application/json; charset=utf-8;")
+    @ResponseBody
+    public String uploadS3(MultipartFile image) {
 
         // s3에 업로드 후 url 받아오기.
         String imageUrl = s3ImageService.uploadS3(image);
 
-        // TODO : imageUrl을 해당 db에 insert하는 로직 구현할 것.
 
-        // model에 담아 포워딩하기.
-        model.addAttribute("imageUrl", imageUrl);
-
-        return "/s3Test/s3TestResult";
+       
+        
+        JSONObject json = new JSONObject();
+		json.put("imageUrl", imageUrl); // {"imageUrl": imageUrl }
+		
+		return json.toString();
     }
 
 
