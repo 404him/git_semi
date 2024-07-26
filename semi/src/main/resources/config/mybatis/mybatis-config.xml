@@ -9,9 +9,11 @@
 	</settings>
 	
 	<typeAliases>
-		<!-- TODO : 필요 시 타입 명칭 지정할 것.
-		   ex : <typeAlias type="vo.BoardVo" alias="board"/>
-		 -->
+		<typeAlias type="com.git.semi.member.vo.MemberVo" alias="member"/>
+		<typeAlias type="com.git.semi.news.vo.NewsVo" alias="news"/>
+		<typeAlias type="com.git.semi.reply.vo.ReplyVo" alias="reply"/>
+		<typeAlias type="com.git.semi.report.vo.ReportVo" alias="report"/>
+
 
 
 	</typeAliases>

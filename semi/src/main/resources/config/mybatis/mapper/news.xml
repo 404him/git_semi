@@ -3,8 +3,26 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="">
-    <!-- TODO : write to namespace -->
+<mapper namespace="news">
+    <select id="news_list" resultType="news">
+        SELECT *
+          FROM NEWS
+          JOIN CATEGORY c
+         USING (category_idx)
+    </select>
 
+    <select id="news_category_list" resultType="news" parameterType="int">
+        SELECT *
+          FROM NEWS
+          JOIN CATEGORY c
+         USING (category_idx)
+         WHERE category_idx = #{category_idx}
+    </select>
+
+    <select id="news_one" resultType="news" parameterType="int">
+        SELECT *
+          FROM NEWS
+         WHERE news_idx = #{news_idx}
+    </select>
 
 </mapper>
