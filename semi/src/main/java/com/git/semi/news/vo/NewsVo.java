@@ -9,8 +9,17 @@ public class NewsVo {
     String news_createAt;
     String news_updateAt;
     int mem_idx;
-    int category_idx;
+    String mem_name;
 
+    public String getMem_name() {
+        return mem_name;
+    }
+
+    public void setMem_name(String mem_name) {
+        this.mem_name = mem_name;
+    }
+
+    int category_idx;
     String category_name;
     int news_like_count;
 
