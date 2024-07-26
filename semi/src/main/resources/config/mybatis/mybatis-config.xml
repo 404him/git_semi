@@ -9,14 +9,21 @@
 	</settings>
 	
 	<typeAliases>
-		<!-- <typeAlias type="vo.BoardVo" alias="board"/> -->
+		<!-- TODO : 필요 시 타입 명칭 지정할 것.
+		   ex : <typeAlias type="vo.BoardVo" alias="board"/>
+		 -->
 
 
 	</typeAliases>
 	
 	<mappers>
-		<!-- <mapper resource="config/mybatis/mapper/s3attechment.xml" /> -->
 
+		<mapper resource="config/mybatis/mapper/admin.xml" />
+		<mapper resource="config/mybatis/mapper/category.xml" />
+		<mapper resource="config/mybatis/mapper/member.xml" />
+		<mapper resource="config/mybatis/mapper/news.xml" />
+		<mapper resource="config/mybatis/mapper/reply.xml" />
+		<mapper resource="config/mybatis/mapper/report.xml" />
 
 	</mappers>
 	
