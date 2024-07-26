@@ -4,12 +4,25 @@ public class NewsVo {
 
     int news_idx;
     String news_title;
+    String news_thumbnail_image;
     String news_content;
     int news_count;
     String news_createAt;
     String news_updateAt;
     int mem_idx;
     String mem_name;
+    int category_idx;
+    String category_name;
+    int news_like_count;
+
+
+    public String getNews_thumbnail_image() {
+        return news_thumbnail_image;
+    }
+
+    public void setNews_thumbnail_image(String news_thumbnail_image) {
+        this.news_thumbnail_image = news_thumbnail_image;
+    }
 
     public String getMem_name() {
         return mem_name;
@@ -19,9 +32,6 @@ public class NewsVo {
         this.mem_name = mem_name;
     }
 
-    int category_idx;
-    String category_name;
-    int news_like_count;
 
     public int getNews_like_count() {
         return news_like_count;

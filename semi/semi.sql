@@ -111,9 +111,9 @@ INSERT INTO news values(seq_news_idx.nextval, '제목1', 'https://goss-s3-test-b
 INSERT INTO news values(seq_news_idx.nextval, '제목2', 'https://goss-s3-test-bucket.s3.ap-northeast-2.amazonaws.com/images/ac13f79e-7country-6.jpg', '내용2', 12, DEFAULT, NULL, 6, 1);
 INSERT INTO news values(seq_news_idx.nextval, '제목3', 'https://goss-s3-test-bucket.s3.ap-northeast-2.amazonaws.com/images/c7bc9f7f-cgrid-2.jpg', '내용3', 27, DEFAULT, NULL, 2, 1);
 INSERT INTO news values(seq_news_idx.nextval, '제목4', 'https://goss-s3-test-bucket.s3.ap-northeast-2.amazonaws.com/images/6aa8d207-5%EC%A3%BC%EC%95%99.png', '내용4', 5, DEFAULT, NULL, 2, 1);
-INSERT INTO news values(seq_news_idx.nextval, '제목5', 'https://goss-s3-test-bucket.s3.ap-northeast-2.amazonaws.com/images/icons8-%EB%B4%84-%EB%A1%9C%EA%B3%A0-48.png', '내용5', 2, DEFAULT, NULL, 6, 1);
-INSERT INTO news values(seq_news_idx.nextval, '제목6', 'https://goss-s3-test-bucket.s3.ap-northeast-2.amazonaws.com/images/icons8-%EC%98%A4%EB%9D%BC%ED%81%B4-%EB%A1%9C%EA%B3%A0-48.png', '내용6', 27, DEFAULT, NULL, 6, 1);
-INSERT INTO news values(seq_news_idx.nextval, '제목7', 'https://goss-s3-test-bucket.s3.ap-northeast-2.amazonaws.com/images/icons8-%EC%9E%90%EB%B0%94-%EC%BB%A4%ED%94%BC-%EC%BB%B5-%EB%A1%9C%EA%B3%A0-48.png', '내용7', 27, DEFAULT, NULL, 6, 2);
+INSERT INTO news values(seq_news_idx.nextval, '제목5', 'https://goss-s3-test-bucket.s3.ap-northeast-2.amazonaws.com/images/ea056883-3icons8-%EA%B0%9C%EB%B0%9C-64.png', '내용5', 2, DEFAULT, NULL, 6, 1);
+INSERT INTO news values(seq_news_idx.nextval, '제목6', 'https://goss-s3-test-bucket.s3.ap-northeast-2.amazonaws.com/images/6aa8d207-5%EC%A3%BC%EC%95%99.png', '내용6', 27, DEFAULT, NULL, 6, 1);
+INSERT INTO news values(seq_news_idx.nextval, '제목7', 'https://goss-s3-test-bucket.s3.ap-northeast-2.amazonaws.com/images/c7bc9f7f-cgrid-2.jpg', '내용7', 27, DEFAULT, NULL, 6, 2);
 
 
 SELECT * FROM news;
