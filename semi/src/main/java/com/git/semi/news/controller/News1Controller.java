@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
+
 public class News1Controller {
 
     private final News1Service news1Service;
@@ -57,6 +58,7 @@ public class News1Controller {
 
         NewsVo vo = news1Service.selectOne(news_idx);
 
+
         model.addAttribute("vo", vo);
 
         return "news/newsDetailView";
@@ -74,4 +76,14 @@ public class News1Controller {
         return (result > 0 ? "true":"false");
     }
 
+    /**
+     * 뉴스 좋아요 하기.
+     */
+    @RequestMapping("/news/insert_news_like.do")
+    public String insert_news_like(NewsLikeVo vo) {
+
+//        news1Service.insert_news_like(vo);
+
+        return "";
+    }
 }
