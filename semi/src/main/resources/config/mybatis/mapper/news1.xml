@@ -57,4 +57,27 @@
           AND news_idx = #{news_idx}
     </select>
 
+    <!-- 뉴스 좋아요 개수 -->
+    <select id="news_like_count" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM NEWS_LIKE
+         WHERE news_idx = #{news_idx}
+    </select>
+
+    <!-- 뉴스 좋아요 추가 -->
+    <insert id="insert_news_like" parameterType="hashMap">
+        INSERT INTO NEWS_LIKE
+        VALUES (
+                seq_news_like_idx.nextval,
+                #{news_idx},
+                #{mem_idx}
+               )
+    </insert>
+
+    <!-- 뉴스 좋아요 삭제 -->
+    <delete id="delete_news_like" parameterType="hashMap">
+        DELETE FROM NEWS_LIKE
+         WHERE mem_idx = #{mem_idx}
+           AND news_idx = #{news_idx}
+    </delete>
+
 </mapper>

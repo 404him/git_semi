@@ -37,4 +37,19 @@ public class News1Service {
     public int checkMemberIsLikeNews(NewsLikeVo vo) {
         return news1Dao.checkMemberIsLikeNews(vo);
     }
+
+    public int news_like_on_off(String heartColor, int mem_idx, int news_idx) {
+        // 좋아요한 뉴스일 경우 - 좋아요 취소
+        if(heartColor.equals("red")) {
+            return news1Dao.deleteNewsLike(mem_idx, news_idx);
+        }else {
+            // 뉴스를 좋아요할 경우 - 좋아요
+            return news1Dao.insertNewsLike(mem_idx, news_idx);
+        }
+
+    }
+
+    public int news_like_count(int news_idx) {
+        return news1Dao.news_like_count(news_idx);
+    }
 }

@@ -77,13 +77,31 @@ public class News1Controller {
     }
 
     /**
-     * 뉴스 좋아요 하기.
+     * 뉴스 좋아요 갯수
      */
-    @RequestMapping("/news/insert_news_like.do")
-    public String insert_news_like(NewsLikeVo vo) {
+    @RequestMapping(value = "/news/news_like_count.do",
+            produces="application/json; charset=utf-8;")
+    @ResponseBody
+    public int news_like_count(int news_idx) {
+        int count = news1Service.news_like_count(news_idx);
 
-//        news1Service.insert_news_like(vo);
+        return count;
+    }
 
-        return "";
+
+
+
+    /**
+     * news_like_on_off
+     * 뉴스 좋아요/취소 하기.
+     */
+    @RequestMapping(value = "/news/news_like_on_off.do",
+            produces="application/json; charset=utf-8;")
+    @ResponseBody
+    public String news_like_on_off(String heartColor, int mem_idx, int news_idx) {
+
+        int result = news1Service.news_like_on_off(heartColor, mem_idx, news_idx);
+
+        return String.valueOf(result);
     }
 }
