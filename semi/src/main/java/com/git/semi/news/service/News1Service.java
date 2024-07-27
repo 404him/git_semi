@@ -3,6 +3,7 @@ package com.git.semi.news.service;
 
 import com.git.semi.news.dao.News1Dao;
 import com.git.semi.news.dao.NewsDao;
+import com.git.semi.news.vo.NewsLikeVo;
 import com.git.semi.news.vo.NewsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,7 @@ public class News1Service {
     }
 
 
-
+    public int checkMemberIsLikeNews(NewsLikeVo vo) {
+        return news1Dao.checkMemberIsLikeNews(vo);
+    }
 }

@@ -1,11 +1,13 @@
 package com.git.semi.news.controller;
 
 import com.git.semi.news.service.News1Service;
+import com.git.semi.news.vo.NewsLikeVo;
 import com.git.semi.news.vo.NewsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class News1Controller {
 
 
     /**
-     * 뉴스 전체 조회
+     * 뉴스 리스트 조회
      * @return
      */
     @RequestMapping("/news/list.do")
@@ -31,11 +33,11 @@ public class News1Controller {
 
         model.addAttribute("newsList", newsList);
 
-        return "news/newsList";
+        return "news/newsListView";
     }
 
     /**
-     * 카테고리별 뉴스 조회
+     * 카테고리별 뉴스 리스트 조회
      */
     @RequestMapping("/news/category/list.do")
     public String newsCategoryList(int category_idx, Model model) {
@@ -50,17 +52,26 @@ public class News1Controller {
     /**
      * 뉴스 상세 조회
      */
-    @RequestMapping("/news/one.do")
+    @RequestMapping("/news/detail.do")
     public String newsOne(int news_idx, Model model) {
 
-        NewsVo news = news1Service.selectOne(news_idx);
+        NewsVo vo = news1Service.selectOne(news_idx);
 
-        model.addAttribute("news", news);
+        model.addAttribute("vo", vo);
 
-        return "news/news.jsp";
+        return "news/newsDetailView";
     }
 
+    /**
+     * 뉴스 좋아요한 사용자 조회
+     */
+    @RequestMapping(value = "/news/check_member_isLike_news.do",
+                    produces="application/json; charset=utf-8;")
+    @ResponseBody
+    public String check_member_isLike_news(NewsLikeVo vo) {
 
-
+        int result = news1Service.checkMemberIsLikeNews(vo);
+        return (result > 0 ? "true":"false");
+    }
 
 }

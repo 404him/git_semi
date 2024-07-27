@@ -1,6 +1,7 @@
 package com.git.semi.news.dao;
 
 
+import com.git.semi.news.vo.NewsLikeVo;
 import com.git.semi.news.vo.NewsVo;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class News1Dao {
     }
 
 
+
     public List<NewsVo> selectAll() {
         return sqlSession.selectList("news.news_list");
     }
@@ -30,5 +32,9 @@ public class News1Dao {
 
     public NewsVo selectOne(int news_idx) {
         return sqlSession.selectOne("news.news_one", news_idx);
+    }
+
+    public int checkMemberIsLikeNews(NewsLikeVo vo) {
+        return sqlSession.selectOne("news.check_news_like",vo);
     }
 }
