@@ -5,18 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Global Times</title>
-<link rel="stylesheet" href="/git_semi/semi/src/main/webapp/resources/main/css/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/main.css">
 </head>
 
 <body>
     <!-- 해더 메인로고 -->
     <header class="container">
-        <h1><img class="main_logo" src="/git_semi/semi/src/main/webapp/resources/member/세미로고.png" alt="main_logo" onclick="location.href='#'"></h1>
+        <h1><img class="main_logo" src="${pageContext.request.contextPath}/resources/member/세미로고.png" alt="main_logo" onclick="location.href='#'"></h1>
             <span class="r_posi">
             <ul class="r_info">
                 <li class="r_li"><a href="#">신문구독</a></li>
                 <li class="r_li"><a href="#">로그인</a></li>
                 <li class="r_li"><a href="#">회원가입</a></li>
+            </ul>
             </span>
     </header>
         <!-- 세계시간 -->
