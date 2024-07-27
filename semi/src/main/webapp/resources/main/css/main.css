@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin: auto;
+    
+}
+
+/* 헤더 */
+.container {
+    margin: auto;
+    text-align: center;
+    padding: 0;
+    margin: 0 auto; 
+    
+}
+
+img{
+    margin: auto !important;
+    
+}
+
+.main_logo {
+    position: relative;
+    max-width: 100%; 
+    height: auto;
+    width: 400px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    margin: auto;
+    cursor: pointer;
+}
+
+h1{
+    margin-top: 10px;
+    display: inline-block;
+    margin-left: 235px;
+}
+
+/* 네비 */
+.r_info {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    float: right;
+    margin-top: 25px;
+    margin-right: 20px;
+    
+}
+
+.r_li {
+    margin-left: 20px; 
+}
+
+a{
+    color: #000000;
+    text-decoration: none;
+}
+
+.clock{
+    margin: 50px;
+    text-align: center;
+}
+
+/* 배너 */
+.wrapper{
+    width: 1170px;
+    margin: 20px auto;
+    font-family: "Noto Sans KR", sans-serif;
+}
+nav{
+    position: absolute;
+    background: #ffffff;
+    font-size: 16px;
+}
+nav > ul{
+    position: relative;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: center;
+    width: 1170px;
+    margin: 0 auto;
+    padding: 0;
+}
+nav a{
+    display: block;
+    color: #000000;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+nav ul li{
+    color: #000000;
+    list-style: none;
+    transition: 0.5s;
+}
+
+nav > ul > li > a{
+    padding: 15px 25px;
+}
+
+nav > ul > li.dropdown > a:after{
+    position: relative;
+    float: right;
+    content: '';
+    margin-left: 10px;
+    margin-top: 8px;
+}
+
+nav > ul > li:hover {
+    background: #f6f6f6;
+}
+
+nav ul.menu-area{
+    padding: 40px 40px 0 40px;
+    background: #fff;
+    text-align: left;
+    border-top: 5px solid #000000;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    position: absolute;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-wrap: wrap;
+    width: 1170px;
+    top: -9999px;
+    left: 0;
+}
+
+nav ul li:hover ul.menu-area{
+    top: 100%;
+}
+
+nav ul.menu-area ul{
+    width: 25%;
+    margin-bottom: 40px;
+    color: #000000;
+}
+h4{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+nav ul.menu-area h4{
+    margin-bottom: 15px;
+}
+
+nav ul.menu-area ul li{
+    display: block;
+}
+nav ul.menu-area ul li a{
+    margin-top: 10px;
+    color: #000000;
+    text-transform: none;
+}
+
+nav ul.menu-area ul li a:hover{
+    color: #164c82;
+}
+
+
+
+.slide{
+    margin: 50px;
+    text-align: center;
+    margin-top: 50px;
+}
+
