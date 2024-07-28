@@ -5,12 +5,27 @@
 <html>
 <head>
     <title>뉴스 상세 조회</title>
+    <style>
+        #newsSearch{
+            display: inline-block;
+            padding-top: 3px;
+        }
+
+    </style>
 </head>
 <body>
 
 <jsp:include page="../mainpage/mainPage.jsp"/>
 
-<br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
+
+<span style="width: 100px;height: 50px; margin: 0">
+    검색 :
+    &nbsp;<input id="newsSearchText" style="height: 30px" type="text" placeholder="검색어를 입력해주세요">
+    &nbsp;<svg id="newsSearch"  style="cursor:pointer" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 550"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+</span>
+
+<br><br><br>
 
     <div>뉴스 idx : ${vo.news_idx}</div>
     <div>뉴스 제목 : ${vo.news_title}</div>
@@ -130,6 +145,15 @@
 
     }
 
+    // 검색 버튼 클릭 시 검색
+    $("#newsSearch").click(function () {
+            let newsSearchText = $("#newsSearchText").val();
+            console.log("검색어 : " + newsSearchText);
+
+            // 제목 + 내용 + 기자이름 + 카테고리 이름
+            location.href="news_search.do?news_search_text="+newsSearchText;
+
+    });
 
 
 </script>

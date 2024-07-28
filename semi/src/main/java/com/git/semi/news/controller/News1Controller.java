@@ -101,11 +101,7 @@ public class News1Controller {
         return count;
     }
 
-
-
-
     /**
-     * news_like_on_off
      * 뉴스 좋아요/취소 하기.
      */
     @RequestMapping(value = "/news/news_like_on_off.do",
@@ -117,4 +113,23 @@ public class News1Controller {
 
         return String.valueOf(result);
     }
+
+    /**
+     * 뉴스 제목,내용,기자이름, 카테고리 이름 으로 검색 조회
+     */
+    @RequestMapping("/news/news_search.do")
+    public String newsSearch(String news_search_text, Model model) {
+
+        List<NewsVo> searchNewsList = news1Service.news_search(news_search_text);
+
+        model.addAttribute("searchNewsList", searchNewsList);
+        model.addAttribute("news_search_text", news_search_text);
+
+        return "news/newsSearchView";
+
+    }
+
+
+
+
 }

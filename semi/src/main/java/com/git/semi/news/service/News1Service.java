@@ -56,4 +56,8 @@ public class News1Service {
     public int news_count_up(int news_idx) {
         return news1Dao.news_count_up(news_idx);
     }
+
+    public List<NewsVo> news_search(String news_search_text) {
+        return news1Dao.news_search(news_search_text);
+    }
 }

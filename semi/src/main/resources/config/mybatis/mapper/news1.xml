@@ -89,4 +89,24 @@
            AND news_idx = #{news_idx}
     </delete>
 
+    <!-- 뉴스 검색(제목,내용,기자,카테고리) -->
+    <select id="news_search" parameterType="String" resultType="news">
+        SELECT an.*, m.mem_name, c.category_name
+        FROM (SELECT *
+              FROM news n
+                       LEFT OUTER JOIN (SELECT news_idx as ni, count(news_idx) news_like_count
+                                          FROM news_like
+                                         GROUP BY news_idx) nl
+                                            ON nl.ni = n.news_idx) an
+                 JOIN category c
+                      ON an.category_idx = c.category_idx
+                 JOIN MEMBER m
+                      ON an.mem_idx = m.mem_idx
+        WHERE an.news_title LIKE '%'|| #{news_search_text} ||'%'
+           OR an.news_content LIKE '%'|| #{news_search_text} ||'%'
+           OR m.mem_name LIKE '%'|| #{news_search_text} ||'%'
+           OR c.CATEGORY_NAME LIKE '%'|| #{news_search_text} ||'%'
+        ORDER BY news_createAt DESC
+    </select>
+
 </mapper>

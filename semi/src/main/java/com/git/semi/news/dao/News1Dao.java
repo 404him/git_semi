@@ -61,4 +61,8 @@ public class News1Dao {
     public int news_count_up(int news_idx) {
         return sqlSession.update("news.news_count_up",news_idx);
     }
+
+    public List<NewsVo> news_search(String news_search_text) {
+        return sqlSession.selectList("news.news_search", news_search_text);
+    }
 }
