@@ -92,6 +92,7 @@ img {
 		}
 		
 		
+		
 		if(news_title==''){
 			alert("제목을 입력하세요!!");
 			f.news_title.value="";
