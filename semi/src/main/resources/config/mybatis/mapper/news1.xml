@@ -50,6 +50,13 @@
                       ON nn.mem_idx = m.mem_idx
     </select>
 
+    <!-- 뉴스 조회수 증가 -->
+    <update id="news_count_up" parameterType="int">
+        UPDATE NEWS
+           SET news_count = (news_count + 1)
+         WHERE news_idx = #{news_idx}
+    </update>
+
     <!-- 좋아요 확인 -->
     <select id="check_news_like" resultType="int" parameterType="newsLike">
         SELECT COUNT(*) FROM NEWS_LIKE

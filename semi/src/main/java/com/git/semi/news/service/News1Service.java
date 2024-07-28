@@ -52,4 +52,8 @@ public class News1Service {
     public int news_like_count(int news_idx) {
         return news1Dao.news_like_count(news_idx);
     }
+
+    public int news_count_up(int news_idx) {
+        return news1Dao.news_count_up(news_idx);
+    }
 }

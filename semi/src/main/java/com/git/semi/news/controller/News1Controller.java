@@ -65,15 +65,28 @@ public class News1Controller {
     }
 
     /**
+     * 뉴스 조회 수 증가
+     */
+    @RequestMapping(value = "/news/count_up.do",
+            produces = "application/json; charset=utf-8;")
+    @ResponseBody    public String newsCountUp(int news_idx) {
+        int result = news1Service.news_count_up(news_idx);
+
+        return String.valueOf(result);
+    }
+
+
+
+    /**
      * 뉴스 좋아요한 사용자 조회
      */
     @RequestMapping(value = "/news/check_member_isLike_news.do",
-                    produces="application/json; charset=utf-8;")
+            produces = "application/json; charset=utf-8;")
     @ResponseBody
     public String check_member_isLike_news(NewsLikeVo vo) {
 
         int result = news1Service.checkMemberIsLikeNews(vo);
-        return (result > 0 ? "true":"false");
+        return (result > 0 ? "true" : "false");
     }
 
     /**

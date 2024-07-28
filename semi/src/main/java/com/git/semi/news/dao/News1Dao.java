@@ -57,4 +57,8 @@ public class News1Dao {
     public int news_like_count(int news_idx) {
         return sqlSession.selectOne("news.news_like_count",news_idx);
     }
+
+    public int news_count_up(int news_idx) {
+        return sqlSession.update("news.news_count_up",news_idx);
+    }
 }

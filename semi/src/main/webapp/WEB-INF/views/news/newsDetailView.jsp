@@ -46,6 +46,24 @@
         newsLikeCount();
     });
 
+    // 10초 동안 화면에 머물시 조회수 증가
+    setTimeout(function() {
+        console.log("조회수 증가 timeout 실행!");
+        $.ajax({
+            url : "count_up.do",
+            data : {"news_idx" : ${vo.news_idx}},
+            success : function (result) {
+                if(result) {
+                    console.log("조회수 증가 성공!");
+
+                }
+            },
+            error : function () {
+                console.log("뉴스 조회 수 증가 ajax 실패!");
+            }
+        })
+    }, 10000);
+
     // 뉴스 좋아요 개수 조회하는 함수
     function newsLikeCount() {
         $.ajax({
@@ -53,12 +71,24 @@
             data : {"news_idx" : ${vo.news_idx} },
             success : function (data) {
                 $("#newsLikeCount").html(data);
+            },
+            error : function () {
+                console.log("뉴스 좋아요 수 조회 ajax 실패!");
             }
         })
     }
 
+
     // 좋아요 클릭 시 실행 될 함수
     $("#heart").click(function () {
+
+        // TODO :  비회원일 경우 좋아요 기능 제한하기.
+        <%--if('${user}' == '') {--%>
+        <%--    alert("로그인 후 이용 가능합니다.");--%>
+        <%--    return;--%>
+        <%--}--%>
+
+
         // 좋아요 통합 구현. 좋아요 <--> 좋아요 취소
         // 하트 색깔 변수로 할당.
         let heartColor = $(this).attr('fill');
