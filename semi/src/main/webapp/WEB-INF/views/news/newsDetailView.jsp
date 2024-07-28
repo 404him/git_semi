@@ -5,15 +5,6 @@
 <html>
 <head>
     <title>뉴스 상세 조회</title>
-    <style>
-        #heart {
-        }
-
-        #heart.active {
-            fill: red;
-
-        }
-    </style>
 </head>
 <body>
 
