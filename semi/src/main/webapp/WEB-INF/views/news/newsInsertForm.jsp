@@ -79,20 +79,23 @@ img {
 		let news_title = f.news_title.value.trim();
 		let news_content = f.news_content.value.trim();
 		
+		let thumbnail = document.getElementById('url_sum');
+		let children = thumbnail.children;
 		
-		let news_thumbnail_image = f.url_sum.////////// 여기서 막힘
+		let news_thumbnail_image = children[0];
+		console.log(news_thumbnail_image);
 		
-		if(b_subject==''){
+		if(news_title==''){
 			alert("제목을 입력하세요!!");
-			f.b_subject.value="";
-			f.b_subject.focus();
+			f.news_title.value="";
+			f.news_title.focus();
 			return;
 		}
 		
-		if(b_content==''){
+		if(news_content==''){
 			alert("내용을 입력하세요!!");
-			f.b_content.value="";
-			f.b_content.focus();
+			f.news_content.value="";
+			f.news_content.focus();
 			return;
 		}
 		
@@ -123,7 +126,7 @@ img {
 		</form>
 		<br>
 		<form class="post">
-				<div id="url_sum" name="url_sum" style="display: none;"></div>
+				<div id="url_sum" style="display: none;"></div>
 			<div id="box">
 				<!-- Bootstrap Panel -->
 				<div class="panel panel-primary">

@@ -28,7 +28,8 @@ public class S3TestController {
      */
     @RequestMapping("uploadS3Form.do")
     public String uploadS3Form() {
-        return "/s3Test/uploadS3Test";
+        //return "/s3Test/uploadS3Test";
+    	return "/news/newsInsertForm";
     }
 
 
