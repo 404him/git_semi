@@ -83,7 +83,14 @@ img {
 		let children = thumbnail.children;
 		
 		let news_thumbnail_image = children[0];
-		console.log(news_thumbnail_image);
+		console.log("썸네일 : " + news_thumbnail_image);
+		
+		var imageArray = new Array();
+		for ( let i = 1 ; children.length; i++){
+		imageArray.push(children[i]);
+		console.log("추가이미지 : " + children[i]);
+		}
+		
 		
 		if(news_title==''){
 			alert("제목을 입력하세요!!");
