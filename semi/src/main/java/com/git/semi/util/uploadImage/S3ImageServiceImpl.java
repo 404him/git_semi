@@ -1,4 +1,4 @@
-package com.git.semi.util.s3;
+package com.git.semi.util.uploadImage;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;

@@ -1,17 +1,16 @@
-package com.git.semi.util.s3;
+package com.git.semi.util.uploadImage;
 
 import com.amazonaws.services.s3.AmazonS3;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import s3.repository.FileUploadDao;
 
 @Service
-public class ImageServiceImplImpl extends S3ImageServiceImpl implements ImageService {
+public class ImageServiceImpl extends S3ImageServiceImpl implements ImageService {
 
     private final FileUploadDao fileUploadDao;
 
     @Autowired
-    public ImageServiceImplImpl(FileUploadDao fileUploadDao, AmazonS3 amazonS3) {
+    public ImageServiceImpl(FileUploadDao fileUploadDao, AmazonS3 amazonS3) {
         super(amazonS3);
         System.out.println("-- ImageServiceImpl --");
         this.fileUploadDao = fileUploadDao;

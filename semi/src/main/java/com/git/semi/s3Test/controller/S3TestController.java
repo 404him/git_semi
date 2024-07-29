@@ -3,12 +3,11 @@ package com.git.semi.s3Test.controller;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.git.semi.util.s3.S3ImageService;
+import com.git.semi.util.uploadImage.S3ImageService;
 
 @Controller
 @RequestMapping("/s3/")

@@ -1,4 +1,4 @@
-package com.git.semi.util.s3;
+package com.git.semi.util.uploadImage;
 
 import org.springframework.web.multipart.MultipartFile;
 
