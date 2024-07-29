@@ -18,7 +18,6 @@
 	href="${pageContext.request.contextPath}/resources/main/css/footer.css">
 
 
-
 <footer class="footer">
 	<div class="footer-container">
 		<div class="footer-top">
@@ -38,9 +37,12 @@
 			<div>
 				<h6 class="footer-title">공란</h6>
 			</div>
-			<div>
+			<!-- <div>
 				<h6 class="footer-title">공란</h6>
 			</div>
+			<div>
+				<h6 class="footer-title">공란</h6>
+			</div> -->
 
 		</div>
 
@@ -64,5 +66,6 @@
 
 	</div>
 </footer>
+
 </body>
 </html>
