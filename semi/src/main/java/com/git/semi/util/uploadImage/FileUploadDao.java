@@ -1,5 +1,9 @@
 package com.git.semi.util.uploadImage;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,9 +20,12 @@ public class FileUploadDao {
 
 
     // db에 이미지 url 저장
-    public int save(String fileUrl) {
-
-        return this.sqlSession.insert("s3attechment.s3attechment_insert",fileUrl);
+    public int save(String imageUrl, int news_idx) {
+    	Map<String, Object> map = new HashMap<>();
+    	map.put("imageUrl", imageUrl);
+    	map.put("news_idx", news_idx);
+    	
+        return this.sqlSession.insert("s3attechment.s3attechment_insert",map);
     }
 
     // db에 이미지 삭제(fileUrl)
@@ -27,11 +34,11 @@ public class FileUploadDao {
     }
 
     // db에 이미지 삭제(fileNo)
-    public int delete(int fileNo) {
-        return this.sqlSession.delete("s3attechment.s3attechment_delete_fileNo", fileNo);
+    public int deleteByNewsIdx(int news_idx) {
+        return this.sqlSession.delete("s3attechment.s3attechment_delete_news_idx", news_idx);
     }
 
-    public String select(int fileNo) {
-        return this.sqlSession.selectOne("s3attechment.s3attechment_select_fileNo", fileNo);
+    public List<String> select(int news_idx) {
+        return this.sqlSession.selectList("s3attechment.s3attechment_select_news_idx", news_idx);
     }
 }

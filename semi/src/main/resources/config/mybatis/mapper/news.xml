@@ -4,20 +4,37 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="news">
+	<!-- 카테고리 -->
+	<select id="news_category" resultType="category">
+		select * from CATEGORY
+	</select>
+
     <!-- 뉴스 등록 -->
     
     <insert id="news_insert" parameterType="news">
+    
+    
     	  INSERT INTO news values(
   						seq_news_idx.nextval,
 						#{news_title},
 						#{news_thumbnail_image},
 						#{news_content},
 						0,
-						sysdate,
+						default,
 						null,
 						1, <!-- 멤버 idx 추후 변경필요(mem_idx) -->
 						1 <!-- 카테고리 idx 추후변경필요(category_idx) -->
-);
+			)
+		<selectKey resultType="int" keyProperty="news_idx" order="AFTER">
+    		SELECT seq_news_idx.CURRVAL from dual
+    	</selectKey>
     
     </insert>
+    
+      <!-- 삭제  -->
+   <delete id="news_delete"  parameterType="int">
+      delete from news where news_idx=#{ news_idx }
+     
+   </delete>
+   
 </mapper>

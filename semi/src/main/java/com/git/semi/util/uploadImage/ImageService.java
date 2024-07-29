@@ -10,16 +10,16 @@ public interface ImageService {
      * DB Service
      */
     // db에 이미지 저장(fileUrl)
-    int save(String fileUrl);
+    int save(String imageUrl,int news_idx);
 
     // db에 이미지 삭제(fileUrl)
     void deleteByUrl(String fileUrl);
 
-    // db에 이미지 삭제(PK)
-    int deleteById(int fileNo);
+    // 이미지 db에 이미지 삭제(FK)
+    int deleteByNewsIdx(int news_idx);
 
-    // db에 이미지 1개 조회(PK)
-    String getFileUrlById(int fileNo);
+    // db에 뉴스 이미지등 조회(FK)
+    List<String> getFileUrlByNewsIdx(int news_idx);
 
     /**
      * S3 Service

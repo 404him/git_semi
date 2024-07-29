@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>S3 업로드 테스트</title>
+<title>뉴스 등록하기</title>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style type="text/css">
 .basic{
 width: 40%;
@@ -82,13 +82,15 @@ img {
 		let thumbnail = document.getElementById('url_sum');
 		let children = thumbnail.children;
 		
-		let news_thumbnail_image = children[0];
-		console.log("썸네일 : " + news_thumbnail_image);
+		let category_idx = f.category_idx.value
+		
+		//let news_thumbnail_image = children[0];
+		//console.log("썸네일 : " + news_thumbnail_image);
 		
 		var imageArray = new Array();
-		for ( let i = 1 ; children.length; i++){
-		imageArray.push(children[i]);
-		console.log("추가이미지 : " + children[i]);
+		for (let i = 0; i <= children.length-1; i++) {
+			imageArray.push(children[i].textContent);
+			console.log("이미지 : " + children[i].value);
 		}
 		
 		
@@ -106,6 +108,12 @@ img {
 			f.news_content.focus();
 			return;
 		}
+		
+		if(category_idx=="none"){
+			alert("카테고리를 선택해주세요");
+			return;
+		}
+		
 		
 		f.action = "insert.do";
 		f.submit(); //
@@ -134,11 +142,21 @@ img {
 		</form>
 		<br>
 		<form class="post">
-				<div id="url_sum" style="display: none;"></div>
+				<div id="url_sum" style="display: none;" ></div>
 			<div id="box">
 				<!-- Bootstrap Panel -->
 				<div class="panel panel-primary">
 					<div class="panel-body">
+						
+						<div>
+							<a>카테고리 : </a>
+							<select id="category" name="category_idx">
+								<option value="none">==카테고리==</option>
+								<c:forEach var="category" items="${ vo }">
+									<option value="${category.category_idx }">${category.category_name }</option>
+								</c:forEach>
+							</select>
+						</div>
 
 						<div>
 							<h4 class="title">제목 :</h4>
@@ -198,7 +216,7 @@ img {
 	<script>
 
 	function ClipboardClear(){
-		window.navigator.clipboard.clearPrimaryClip();
+		window.navigator.clipboard.writeText("");
 	}
     function uploadS3(f) {
         let image = f.image.value;
@@ -216,7 +234,7 @@ img {
         
         $.ajax({
         	type : 'post',
-			url		:	"uploadS3.do",
+			url		:	"../s3/uploadS3.do",
 			enctype:'multipart/form-data',
 			data	:	formData,
 			processData: false,
@@ -229,7 +247,7 @@ img {
 			        // 복사가 완료되면 호출된다.
 			       alert("이미지 url 복사완료");
 			       //$("#b_content").append(navigator.clipboard.readText());
-			       $("#url_sum").append("<a>" + data.imageUrl + "</a>");
+			       $("#url_sum").append("<input type='hidden' name='url' value='" + data.imageUrl + "'>");
 				});
 			},
 			error	:	function(err){alert(err.responseText);

@@ -17,7 +17,7 @@
                       ON an.category_idx = c.category_idx
                  JOIN MEMBER m
                       ON an.mem_idx = m.mem_idx
-        ORDER BY news_createAt DESC;
+        ORDER BY news_createAt DESC
     </select>
 
     <!-- 카테고리 별 뉴스 리스트 조회 -->
@@ -34,7 +34,7 @@
                  JOIN MEMBER m
                       ON an.mem_idx = m.mem_idx
         WHERE an.category_idx = #{category_idx}
-        ORDER BY news_create DESC;
+        ORDER BY news_create DESC
     </select>
 
     <!-- 뉴스 상세 조회 -->
