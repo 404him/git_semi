@@ -7,6 +7,7 @@
 
 DROP SEQUENCE seq_member_idx;
 DROP SEQUENCE seq_news_idx;
+DROP SEQUENCE news_s3attechment_seq;
 DROP SEQUENCE seq_news_like_idx;
 DROP SEQUENCE seq_category_idx;
 DROP SEQUENCE seq_subscribe_idx;
@@ -23,6 +24,7 @@ DROP TABLE REPLY_UNLIKE;
 DROP TABLE REPLY;
 DROP TABLE SUBSCRIBE;
 DROP TABLE NEWS_LIKE;
+DROP TABLE news_s3attechment;
 DROP TABLE NEWS;
 DROP TABLE CATEGORY;
 DROP TABLE MEMBER;
@@ -34,6 +36,7 @@ DROP TABLE MEMBER;
 
 CREATE SEQUENCE seq_member_idx;
 CREATE SEQUENCE seq_news_idx;
+CREATE SEQUENCE news_s3attechment_seq;
 CREATE SEQUENCE seq_news_like_idx;
 CREATE SEQUENCE seq_category_idx;
 CREATE SEQUENCE seq_subscribe_idx;
@@ -118,6 +121,19 @@ INSERT INTO news values(seq_news_idx.nextval, '제목7', 'https://goss-s3-test-b
 
 
 SELECT * FROM news;
+
+
+-- n
+
+CREATE TABLE news_s3Attechment(
+                                  idx int PRIMARY KEY ,
+                                  fileUrl varchar2(400),
+                                  news_idx int ,
+                                  CONSTRAINT fk_news_s3attechment_news_idx FOREIGN KEY (news_idx)
+                                      REFERENCES NEWS (news_idx)
+);
+
+
 
 -- NEWS_LIKE
 CREATE TABLE NEWS_LIKE (
