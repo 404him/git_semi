@@ -8,7 +8,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
@@ -20,8 +20,8 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.util.*;
 
-@Component
-public class S3ImageServiceImpl implements S3ImageService{
+@Service
+public abstract class S3ImageServiceImpl implements ImageService {
 
     // 저장할 버킷의 폴더
     private static final String BASE_DIR = "images/";
@@ -33,64 +33,38 @@ public class S3ImageServiceImpl implements S3ImageService{
 
     @Autowired
     public S3ImageServiceImpl(AmazonS3 amazonS3) {
+        System.out.println("-- S3ImageService --");
         this.amazonS3 = amazonS3;
     }
 
-    // S3에 단일 업로드.
-    @Override
+    // S3에 업로드.
     public String uploadS3(MultipartFile image) {
         // 가져온 이미지 파일이 빈 파일인지 검증하기.
         if (image.isEmpty() || Objects.isNull(image.getOriginalFilename())) {
-            System.out.println("이미지가 없습니다.");
+            System.out.println("파일이 없습니다.");
         }
         // uploadImage를 호출하여 S3에 저장된 이미지의 public url을 반환한다.
         return this.uploadImage(image);
     }
 
     // S3에 다중 업로드.
-    @Override
-    public List<String> uploadS3(List<MultipartFile> multipartFiles) {
+    public List<String> uploadS3(List<MultipartFile> images) {
 
         List<String> imgUrlList = new ArrayList<>();
 
         // 리스트가 비어있는지 검증하기.
-        if(multipartFiles.isEmpty()) {
-            System.out.println("업로드할 이미지가 없습니다.");
+        if (images.isEmpty()) {
+            System.out.println("업로드할 파일이 없습니다.");
         }
 
         // 반복문을 통해 업로드 하기.
-        for (MultipartFile multipartFile : multipartFiles) {
+        for (MultipartFile multipartFile : images) {
             String fileUrl = uploadS3(multipartFile);
 
             imgUrlList.add(fileUrl);
         }
 
         return imgUrlList;
-    }
-
-    // S3에 이미지 단일 삭제.
-    @Override
-    public void deleteImageFromS3(String imageAddress) {
-        String key = getKeyFromImageAddress(imageAddress);
-        try {
-            amazonS3.deleteObject(new DeleteObjectRequest(bucketName, key));
-        } catch (Exception e) {
-            System.out.println("S3에 이미지 삭제에 실패하였습니다.");
-        }
-    }
-
-    // S3에 이미지 다중 삭제.
-    public void deleteImageFromS3(List<String> imageAddressList) {
-        // 삭제할 이미지가 없을 경우
-        if(imageAddressList.isEmpty()) {
-            System.out.println("삭제할 이미지가 없습니다.");
-        }
-
-        // 반복문을 통해 S3에 이미지 제거.
-        for (String imageAddress : imageAddressList) {
-            deleteImageFromS3(imageAddress);
-        }
-
     }
 
 
@@ -163,12 +137,20 @@ public class S3ImageServiceImpl implements S3ImageService{
         return amazonS3.getUrl(bucketName, s3FileName).toString();
     }
 
-
+    // S3에 이미지 삭제하기.
+    public void deleteImageFromS3(String imageUrl) {
+        String key = getKeyFromimageUrl(imageUrl);
+        try {
+            amazonS3.deleteObject(new DeleteObjectRequest(bucketName, key));
+        } catch (Exception e) {
+            System.out.println("S3에 이미지 삭제에 실패하였습니다.");
+        }
+    }
 
     // S3에 삭제 요청 시 필요한 key 생성.
-    private String getKeyFromImageAddress(String imageAddress) {
+    private String getKeyFromimageUrl(String imageUrl) {
         try {
-            URL url = new URL(imageAddress);
+            URL url = new URL(imageUrl);
             String decodingKey = URLDecoder.decode(url.getPath(), "UTF-8");
             return decodingKey.substring(1); // 맨 앞의 '/' 제거
         } catch (MalformedURLException | UnsupportedEncodingException e) {

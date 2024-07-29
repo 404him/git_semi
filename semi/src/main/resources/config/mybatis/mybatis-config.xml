@@ -28,6 +28,8 @@
 		<mapper resource="config/mybatis/mapper/news1.xml" />
 		<mapper resource="config/mybatis/mapper/reply.xml" />
 		<mapper resource="config/mybatis/mapper/report.xml" />
+		<mapper resource="config/mybatis/mapper/s3attechment.xml" />
+
 
 	</mappers>
 	

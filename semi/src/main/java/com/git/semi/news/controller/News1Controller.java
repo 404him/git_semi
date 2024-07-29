@@ -3,6 +3,7 @@ package com.git.semi.news.controller;
 import com.git.semi.news.service.News1Service;
 import com.git.semi.news.vo.NewsLikeVo;
 import com.git.semi.news.vo.NewsVo;
+import com.git.semi.util.openApi.NewsApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,7 @@ public class News1Controller {
 
     /**
      * 뉴스 리스트 조회
+     *
      * @return
      */
     @RequestMapping("/news/list.do")
@@ -69,12 +71,12 @@ public class News1Controller {
      */
     @RequestMapping(value = "/news/count_up.do",
             produces = "application/json; charset=utf-8;")
-    @ResponseBody    public String newsCountUp(int news_idx) {
+    @ResponseBody
+    public String newsCountUp(int news_idx) {
         int result = news1Service.news_count_up(news_idx);
 
         return String.valueOf(result);
     }
-
 
 
     /**
@@ -93,7 +95,7 @@ public class News1Controller {
      * 뉴스 좋아요 갯수
      */
     @RequestMapping(value = "/news/news_like_count.do",
-            produces="application/json; charset=utf-8;")
+            produces = "application/json; charset=utf-8;")
     @ResponseBody
     public int news_like_count(int news_idx) {
         int count = news1Service.news_like_count(news_idx);
@@ -105,7 +107,7 @@ public class News1Controller {
      * 뉴스 좋아요/취소 하기.
      */
     @RequestMapping(value = "/news/news_like_on_off.do",
-            produces="application/json; charset=utf-8;")
+            produces = "application/json; charset=utf-8;")
     @ResponseBody
     public String news_like_on_off(String heartColor, int mem_idx, int news_idx) {
 
@@ -129,7 +131,17 @@ public class News1Controller {
 
     }
 
+    /**
+     * 외부 newsapi에서 top-headline news 호출
+     */
+    @RequestMapping("/news/top.do")
+    public String topHeadLine() {
+
+        NewsApiService newsApiService = new NewsApiService();
+
+        newsApiService.getTopHeadLineNews();
 
 
-
+        return "";
+    }
 }
