@@ -1,5 +1,6 @@
 package com.git.semi.util.openApi;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -29,15 +30,21 @@ public class NewsApiService {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("x-api-key", API_KEY);
         headers.add("Content-Type","application/json");
 
-        HttpEntity request = new HttpEntity(headers);
-        ResponseEntity<JSONObject> response = restTemplate.exchange(BASE_URL, HttpMethod.GET, request, JSONObject.class);
-        JSONObject resultMap = response.getBody();
+        String url = BASE_URL+"&apikey="+API_KEY;
 
-        System.out.println(response.getBody().toString());
-        System.out.println("totalResults = " +  resultMap.toString());
+        HttpEntity request = new HttpEntity(headers);
+        ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.GET, request, Map.class);
+        Map resultMap = response.getBody();
+        List<Object> articles = (List<Object>) resultMap.get("articles");
+
+        // 1.반복문 돌려서 vo에 set하고 다 set 하면 list에 add 하기.
+        // 2. jackson readTree mapper 로 해보기.
+
+
+        System.out.println(articles.toString());
+        System.out.println("resultMap = " +  resultMap.toString());
 
     }
 

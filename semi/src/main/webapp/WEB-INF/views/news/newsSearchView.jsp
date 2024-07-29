@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<jsp:include page="../mainpage/mainPage.jsp"/>
+<jsp:include page="../mainpage/menubar.jsp"/>
 
 <br><br><br><br><br>
 
