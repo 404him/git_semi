@@ -27,6 +27,7 @@
     --z-tooltip: 10;
   }
 
+/* TODO: 확인필요 */
 /*  수정필요 /  메인페이지 내  반영 되면 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 
 *{
     margin: 0 auto;
@@ -85,249 +86,32 @@
 
 
 
-/* 시계 */
-@media screen and (min-width: 968px) {
-  :root {
-    --biggest-font-size: 3.5rem;
-    --small-font-size: .875rem;
-    --smaller-font-size: .813rem;
-    --tiny-font-size: .75rem;
-  }
-}
-
-.clock__circle {
-  box-shadow: 6px 6px 16px hsla(var(--hue-color), 8%, 12%, 1), 
-              -6px -6px 16px hsla(var(--hue-color), 8%, 20%, 1), 
-              inset -6px -6px 16px hsla(var(--hue-color), 8%, 20%, 1), 
-              inset 6px 6px 12px hsla(var(--hue-color), 8%, 12%, 1);
-}
-
-
-.clock_container {
-  margin-top: 50px;
-  width: 1000px;
-  height: 100%;
-}
-
-
-.colck__container.grid{
-  margin: 0;  
-}
-
-
-
-.clock__content.grid{
-  margin-left: -350px;
-}
-
-.clock{
-   width: 300px;
-   float: left;
-   margin: auto;  
-}
-
-.clock__circle {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  box-shadow: -6px -6px 16px var(--white-color), 
-              6px 6px 16px hsla(var(--hue-color), 30%, 86%, 1), 
-              inset 6px 6px 16px hsla(var(--hue-color), 30%, 86%, 1), 
-              inset -6px -6px 16px var(--white-color);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: .4s; 
-  margin: 0 20px 0;
-}
-
-
-.clock__twelve, 
-.clock__three, 
-.clock__six, 
-.clock__nine {
-  position: absolute;
-  width: 1rem;
-  height: 1px;
-  background-color: var(--text-color-light);
-}
-
-.clock__twelve, 
-.clock__six {
-  transform: translateX(-50%) rotate(90deg);
-}
-
-.clock__twelve {
-  top: 1.25rem;
-  left: 50%;
-}
-
-.clock__three {
-  top: 50%;
-  right: .75rem;
-}
-
-.clock__six {
-  bottom: 1.25rem;
-  left: 50%;
-}
-
-.clock__nine {
-  left: .75rem;
-  top: 50%;
-}
-
-.clock__rounder {
-  width: .75rem;
-  height: .75rem;
-  background-color: var(--first-color);
-  border-radius: 50%;
-  border: 2px solid var(--body-color);
-  z-index: var(--z-tooltip);
-}
-
-.clock__hour, 
-.clock__minutes, 
-.clock__seconds {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-}
-
-.clock__hour {
-  width: 105px;
-  height: 105px;
-}
-
-.clock__hour::before {
-  content: '';
-  position: absolute;
-  background-color: var(--text-color);
-  width: .25rem;
-  height: 5rem;
-  border-radius: .75rem;
-  z-index: var(--z-normal);
-}
-
-.clock__minutes {
-  width: 136px;
-  height: 136px;
-}
-
-.clock__minutes::before {
-  content: '';
-  position: absolute;
-  background-color: var(--text-color);
-  width: .25rem;
-  height: 7rem;
-  border-radius: .75rem;
-  z-index: var(--z-normal);
-}
-
-.clock__seconds {
-  width: 130px;
-  height: 130px;
-}
-
-.clock__seconds::before {
-  content: '';
-  position: absolute;
-  background-color: var(--first-color);
-  width: .125rem;
-  height: 6.8rem;
-  border-radius: .75rem;
-  z-index: var(--z-normal);
-}
-
-.clock__logo {
-  width: max-content;
-  justify-self: center;
-  margin-bottom: var(--mb-2-5);
-  font-size: var(--smaller-font-size);
-  font-weight: var(--font-medium);
-  color: var(--text-color-light);
-  transition: .3s;
-}
-
-.clock__logo:hover {
-  color: var(--first-color);
-}
-
-.clock_text{
-  margin-left: 70px;
-  margin-top: 15px;
-}
-
-.clock__text {
-  display: flex;
-  justify-content: center;
-  margin: auto;
-}
-
-.clock__text-hour, 
-.clock__text-minutes {
-  font-size: var(--biggest-font-size);
-  font-weight: var(--font-medium);
-  color: var(--title-color);
-  width: 50px;
-}
-
-.clock__text-ampm {
-  font-size: var(--tiny-font-size);
-  color: var(--title-color);
-  font-weight: var(--font-medium);
-  margin-left: var(--mb-0-25);
-  display: inline-block;
-}
-
-.clock__date {
-  text-align: center;
-  font-size: var(--small-font-size);
-  font-weight: var(--font-medium);
-  width: 100px;
-  display: inline-block;
-  margin-left: 10px;
-}
-
-
-/* TODO: 확인필요 */
-@media screen and (min-width: 1000px) {
-  .container {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .clock__logo {
-    margin-bottom: 3rem;
-  }
-}
-
 
 /* 배너 */
 
 .nav_wrapper{
   margin-top: 40px;
-  width: 1900px;
+  width: 100%;
   text-align: center;
   font-family: "Noto Sans KR", sans-serif;
 }
 
 .nav_container{
-  position: absolute;
-  background: #ffffff;
+  /* position: absolute; */
+  /* background: #ffffff; */
   font-size: 16px;
+  margin: auto;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 .nav_ul_form{
-  position: relative;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-flex;
+  /* position: relative; */
   display: flex;
   justify-content: center;
-  width: 1400px;
+  width: 100%;
   margin: 0 auto;
   padding: 0;
+  list-style-type: none;
 }
 .nav_container .nav_a{
   display: block;
@@ -335,10 +119,12 @@
   text-decoration: none;
 }
 
-.nav_container .nav_ul .nav_li{
+.nav_container > .nav_ul_form > li{
   color: #000000;
   list-style: none;
   transition: 0.5s;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 .nav_container > .nav_ul > .nav_li > .nav_a{
@@ -370,14 +156,10 @@
   display: -o-flex;
   display: flex;
   flex-wrap: wrap;
-  width: 1400px;
   top: -9999px;
   left: 0;
 }
 
-.nav_wrapper .nav_ul_form .dropdown:hover .menu-area{
-  top: 100%;
-}
 
 .nav_wrapper .menu-area .nav_ul{
     margin: 0 auto;

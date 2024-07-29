@@ -111,7 +111,9 @@ public class NewsController {
     }
     
     
+}   
     
+    /*    
     //수정폼 띄우기
   	@RequestMapping("/news/modify_form.do")
   	public String modify_form(int news_idx, Model model) {
@@ -153,5 +155,6 @@ public class NewsController {
   	
   		return "";
   	}
-    
-}
+
+*/
+
