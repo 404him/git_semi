@@ -45,7 +45,7 @@
     <br>
 </div>
 
-
+<jsp:include page="../mainpage/footer.jsp"/>
 
 <script>
 
