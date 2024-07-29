@@ -115,7 +115,7 @@ img {
 		}
 		
 		
-		f.action = "insert.do";
+		f.action = "modify.do";
 		f.submit(); //
 		
 		
@@ -142,10 +142,13 @@ img {
 		</form>
 		<br>
 		<form class="post">
-				<div id="url_sum" style="display: none;" >{vo.</div>
+				<div id="url_sum" style="display: none;" >
+						<%-- <img src=${vo.asdasd _ idx }  for --%>
+					</div>
 			<div id="box">
 				<!-- Bootstrap Panel -->
 				<div class="panel panel-primary">
+					<h4>기사 수정하기</h4>
 					<div class="panel-body">
 						
 						<div>
@@ -153,21 +156,26 @@ img {
 							<select id="category" name="category_idx">
 								<option value="none">==카테고리==</option>
 								<c:forEach var="category" items="${ categoryVo }">
-									<option value="${category.category_idx }">${category.category_name }</option>
+									<c:if test="${category.category_idx == vo.category_idx }">
+										<option value="${category.category_idx }" selected >${category.category_name }</option>
+									</c:if>
+									<c:if test="${category.category_idx != vo.category_idx }">
+										<option value="${category.category_idx }">${category.category_name }</option>
+									</c:if>
 								</c:forEach>
 							</select>
 						</div>
 
 						<div>
 							<h4 class="title">제목 :</h4>
-							<input class="title_name" name="news_title" id="news_title"
+							<input class="title_name" name="news_title" id="news_title" value="${vo.news_title}"
 								onkeyup="preview1();">
 						</div>
 
 						<div>
 							<h4>내용 :</h4>
 							<textarea class="form-control" rows="10" name="news_content"
-								id="news_content" onkeyup="preview2();"></textarea>
+								id="news_content" onkeyup="preview2();">${vo.news_content}</textarea>
 
 						</div>
 
@@ -196,12 +204,12 @@ img {
 
 						<div>
 							<h4 class="title">제목 :</h4>
-							<div class="title_name" id="news_title_retrun"></div>
+							<div class="title_name" id="news_title_retrun">${vo.news_title}</div>
 						</div>
 
 						<div>
 							<h4>내용 :</h4>
-							<div class="form-control" id="news_content_return"></div>
+							<div class="form-control" id="news_content_return">${vo.news_content}</div>
 						</div>
 
 

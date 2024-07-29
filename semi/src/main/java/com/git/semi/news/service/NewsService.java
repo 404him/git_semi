@@ -37,6 +37,10 @@ public class NewsService {
 		
 		return newsDao.delete(news_idx);
 	}
+	
+    public NewsVo selectOne(int news_idx) {
+        return newsDao.selectOne(news_idx);
+    }
 	 
 	 
 }

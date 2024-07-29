@@ -15,8 +15,8 @@
 </head>
 <body>
 
-<jsp:include page="../mainpage/mainPage.jsp"/>
-
+<jsp:include page="../mainpage/menubar.jsp"/>
+<div>
 <br><br><br><br><br>
 
 <span style="width: 100px;height: 50px; margin: 0">
@@ -44,6 +44,9 @@
     </div>
     <br>
 </div>
+
+
+
 <script>
 
     // 화면 로딩 시 실행 될 함수

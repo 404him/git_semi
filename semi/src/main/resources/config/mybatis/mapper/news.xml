@@ -34,7 +34,11 @@
       <!-- 삭제  -->
    <delete id="news_delete"  parameterType="int">
       delete from news where news_idx=#{ news_idx }
-     
    </delete>
+   
+     <!-- 뉴스 수정시 조회 -->
+    <select id="news_modify_select_one" resultType="news" parameterType="int">
+        select * from news where news_idx=#{news_idx}
+    </select>
    
 </mapper>

@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+
+
+/* 풋터 */
+.footer_html{
+  width: 1900px;
+  font-size: 62.5%;
+
+}
+
+.footer_body{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  font-family: sans-serif;
+  font-size: 1.6rem;
+}
+
+i{
+  font-size: 2.4rem;
+}
+
+.footer{  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  padding-block: 5rem;
+  background-color: #000000;
+  color: #666873;
+  
+}
+
+.footer-container{
+  max-width: 170rem;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  resize: none;
+}
+
+.footer-top{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  row-gap: 2rem;
+}
+
+.footer-title{
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.footer-list{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.footer-list-item{
+  list-style: none;
+}
+
+.footer-list-link{
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.25s;
+}
+
+.footer-list-link:hover{
+  color: #fff;
+}
+
+.footer-divider{
+  margin-block: 2rem;
+  border: none;
+  border-top: 5px solid rgba(252, 255, 255, 0.1);
+}
+
+.footer-bottom{
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-bottom .footer-list{
+  flex-direction: row;
+}

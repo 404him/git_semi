@@ -36,4 +36,9 @@ public class NewsDao {
 
 		return sqlSession.delete("news.news_delete",news_idx);
 	}
+
+
+    public NewsVo selectOne(int news_idx) {
+        return sqlSession.selectOne("news.news_modify_select_one", news_idx);
+    }
 }

@@ -35,9 +35,9 @@ public class NewsController {
     @RequestMapping("/news/insert_form.do")
     public String newsInsertForm(Model model) {
     	
-    	List<CategoryVo> vo = newsService.category_list();
+    	List<CategoryVo> categoryVo = newsService.category_list();
     	
-    	model.addAttribute("vo", vo);
+    	model.addAttribute("categoryVo", categoryVo);
     	
     	return "news/newsInsertForm";
     }
@@ -83,8 +83,6 @@ public class NewsController {
     		}
     	}
 
-    	 	
-
     	return "redirect:/news/list.do";
     }
     
@@ -113,5 +111,47 @@ public class NewsController {
     }
     
     
+    
+    //수정폼 띄우기
+  	@RequestMapping("/news/modify_form.do")
+  	public String modify_form(int news_idx, Model model) {
+  	
+  		
+  		//2.idx에 해당되는 게시물 1건 얻어오기
+  		NewsVo vo = newsService.selectOne(news_idx);
+  		List<CategoryVo> categoryVo = newsService.category_list();
+  		// 이미지  가져올 Vo  기재
+  		
+  		
+  		// textarea \n기능처리 : <br> -> \n변환
+  		String content = vo.getNews_content().replaceAll("<br>", "\n");
+  		vo.setNews_content(content);
+
+  		//3.request binding
+  		model.addAttribute("vo", vo);
+  		model.addAttribute("categoryVo", categoryVo);
+  		model.addAttribute("news_s3AttechmentVo", news_s3AttechmentVo);
+  		
+  		
+  		return "news/newsModifyForm";
+  	}
+  	
+  	// 뉴스 수정하기
+  	@RequestMapping("/news/modify.do")
+    public String modify(NewsVo vo, @RequestParam(name="url") List<String> list ,RedirectAttributes ra) {
+  		
+  		// 1. vo에 있는 news_idx로 s3attachment에 있는 이미지를 전부 삭제.
+  		url      1  2 3 
+  		url  = http://1 / 2 3 
+  			
+  			
+  			list =  add /  
+  		// 2. 
+  		
+  	
+  	
+  	
+  		return "";
+  	}
     
 }
