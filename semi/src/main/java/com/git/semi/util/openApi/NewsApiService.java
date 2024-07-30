@@ -1,8 +1,13 @@
 package com.git.semi.util.openApi;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -11,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,15 +42,12 @@ public class NewsApiService {
 
         HttpEntity request = new HttpEntity(headers);
         ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.GET, request, Map.class);
-        Map resultMap = response.getBody();
-        List<Object> articles = (List<Object>) resultMap.get("articles");
+        Map articles = response.getBody();
+
 
         // 1.반복문 돌려서 vo에 set하고 다 set 하면 list에 add 하기.
         // 2. jackson readTree mapper 로 해보기.
 
-
-        System.out.println(articles.toString());
-        System.out.println("resultMap = " +  resultMap.toString());
 
     }
 

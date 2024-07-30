@@ -1,11 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Global Times</title>
-
+<style>
+	#content-wrap-area {
+		width: 100%;
+		min-height: calc(100vh - 260px);
+		margin-top: 40px;
+	}
+	footer {
+		height: 260px;
+	}
+</style>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -47,9 +57,6 @@
 				<li class="dropdown"><a href="#" class="nav_title">정치</a></li>
 				<li class="dropdown"><a href="#" class="nav_title">연예</a></li>
 				<li class="dropdown"><a href="#" class="nav_title">스포츠</a></li>
-				<!-- <li class="dropdown"><a href="#" class="nav_title">공란</a>
-				<li class="dropdown"><a href="#" class="nav_title">공란</a>
-				<li class="dropdown"><a href="#" class="nav_title">공란</a> -->
 			</ul>
 		</nav>
 

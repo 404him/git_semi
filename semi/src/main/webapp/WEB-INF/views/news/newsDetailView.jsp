@@ -15,10 +15,8 @@
 </head>
 <body>
 
-<jsp:include page="../mainpage/menubar.jsp"/>
-<div>
-<br><br><br><br><br>
-
+<jsp:include page="../common/menubar.jsp"/>
+<div id="content-wrap-area">
 <span style="width: 100px;height: 50px; margin: 0">
     검색 :
     &nbsp;<input id="newsSearchText" style="height: 30px" type="text" placeholder="검색어를 입력해주세요">
@@ -45,7 +43,7 @@
     <br>
 </div>
 
-<jsp:include page="../mainpage/footer.jsp"/>
+
 
 <script>
 
@@ -161,6 +159,6 @@
 
 </script>
 
-
+<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

@@ -5,10 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Global Times</title>
+	<style>
+		.footer-span-text {
+			margin-bottom: 10px;
+		}
+		.footer-small-text {
+			font-size: 90%;
+		}
+	</style>
 </head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
 	rel="stylesheet">
@@ -20,30 +25,21 @@
 
 <footer class="footer">
 	<div class="footer-container">
-		<div class="footer-top">
-		<!-- TODO : 포이치문 돌릴것 -->
-			<div>
-				<h6 class="footer-title">정치</h6>
-			</div>
-			<div>
-				<h6 class="footer-title">연예</h6>
-			</div>
-			<div>
-				<h6 class="footer-title">스포츠</h6>
-			</div>
-			<div>
-				<h6 class="footer-title">공란</h6>
-			</div>
-			<div>
-				<h6 class="footer-title">공란</h6>
-			</div>
-			<!-- <div>
-				<h6 class="footer-title">공란</h6>
-			</div>
-			<div>
-				<h6 class="footer-title">공란</h6>
-			</div> -->
+		<div class="footer-text-area">
+			<div style="width: 20%; display: inline-block;"></div>
 
+			<div  style="display: inline-block;">
+				<div class="footer-span-text">
+					<span style="font-weight: bold">로그인 | 전체서비스 | 서비스안내 | 오류신고 | 고객센터 | </span>
+						<span class="footer-small-text">청소년 보호 책임자 : 류순철</span>
+				</div>
+				<div class="footer-span-text">
+					<span class="footer-small-text">각 언론사가 직접 콘텐츠를 편집합니다.</span>
+				</div>
+				<div class="footer-span-text">
+					<span class="footer-small-text">이 콘텐츠의 저작권은 저작권자 또는 제공처에 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 법적 책임을 질 수 있습니다.</span>
+				</div>
+			</div>
 		</div>
 
 		<hr class="footer-divider">
@@ -63,9 +59,7 @@
 				</a></li>
 			</ul>
 		</div>
-
 	</div>
 </footer>
-
 </body>
 </html>
