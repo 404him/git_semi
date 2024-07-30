@@ -101,8 +101,15 @@
 	    function check_pwd(f){
 	
 	        let mem_pw1 = $("#mem_pw1").val().trim();
-	        let mem_pw2 = $("#mem_pw2").val().trim();
+	        let mem_pw2 = f.mem_pwd.value.trim();
 	        let mem_idx	= f.mem_idx.value;
+	        
+	        if(mem_pw2 == ""){
+				alert("공백은 입력할 수 없습니다");
+				mem_pw2.value="";
+				return;
+	        }
+	        
 	        
 	        $.ajax({
 	            url: "check_pw.do",
@@ -236,27 +243,28 @@
 		}
 
 		
-		if(nickname == 1){
+		/* if(nickname == 1){
 			$("#mem_nickname1").prop("disabled", false);
 		} else{
 			if(confirm("닉네임 중복확인을 체크하세요"));
 			return;
-		}
+		} */
 		
 		if(pw == 1){
-			$("#mem_pw1").prop("disabled", false);
+			$("#mem_pw2").prop("disabled", false);
+			$("#mem_nickname1").prop("disabled", false);
 		} else{
-			if(confirm("전화번호 인증을 확인하세요"));
+			if(confirm("비밀번호를 확인하세요"));
 			return;
 		}
 		
-		if(phone == 1){
+	/* 	if(phone == 1){
 			$("#mem_phone1").prop("disabled", false);
 		} else{
 			if(confirm("전화번호 인증을 확인하세요"));
 			return;
 		}
-			
+			 */
 			f.action="profile_update.do";
 			f.submit();
 		
@@ -336,7 +344,7 @@
             <hr>
             <div class="profile_update_btn_box">
                 <input class="profile_update_btn" type="button" value="수정" onclick="send_update(this.form)">
-                <input class="profile_update_btn" type="button" value="목록" onclick="location.href='profile.do'">
+                <input class="profile_update_btn" type="button" value="목록" onclick="location.href='profile.do?mem_idx=${ user.mem_idx }'">
             </div>
         </form>
     </div>

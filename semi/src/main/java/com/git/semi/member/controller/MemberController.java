@@ -12,10 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.git.semi.member.dao.MemberDaoImp;
 import com.git.semi.member.vo.MemberVo;
+import com.git.semi.util.uploadImage.ImageService;
 
 @Controller
 @RequestMapping("/member/")
@@ -23,14 +25,17 @@ public class MemberController {
 	
 	private final HttpSession session;
 	private final MemberDaoImp member_dao;
+	private final ImageService imageService;
 	
 	
 	
 	@Autowired
 	public MemberController(HttpSession session,
-							MemberDaoImp member_dao) {
+							MemberDaoImp member_dao,
+							ImageService imageService) {
 		this.session = session;
 		this.member_dao =  member_dao;
+		this.imageService = imageService;
 	}
 	
 	// 임시 메인페이지
@@ -224,14 +229,6 @@ public class MemberController {
 	@RequestMapping("profile_update_form.do")
 	public String profile_update_form() {
 		
-		MemberVo user = (MemberVo) session.getAttribute("user");
-		
-		if (user == null) {
-			
-			return "redirect:login_form.do";
-			
-		}
-		
 		
 		return "member/member_profile_form";
 	}
@@ -240,7 +237,8 @@ public class MemberController {
 	@RequestMapping("profile_update.do")
 	public String profile_update(MemberVo vo,
 								 int mem_idx,
-								 RedirectAttributes ra) {
+								 RedirectAttributes ra,
+								 Model model) {
 		
 		MemberVo user = (MemberVo) session.getAttribute("user");
 		
@@ -260,9 +258,43 @@ public class MemberController {
 		
 		ra.addAttribute("mem_idx", mem_idx);
 		
+		MemberVo member = member_dao.selectProfile(mem_idx);
+		
+		model.addAttribute("vo",member);
+		
+		
 		return "redirect:profile.do";
 	}
 	
+	// 회원 이미지 수정
+	@RequestMapping(value = "member_img_update.do", 
+			produces = "application/json; charset=utf-8;")
+	@ResponseBody
+	public String member_img_update(MultipartFile image) {
+		
+		System.out.println(image);
+		
+			MemberVo userMember = (MemberVo)session.getAttribute("user");
+			int mem_idx = userMember.getMem_idx();
+			
+		// 1. db에서 이미지 url을 가져와서 default image인지 비교한다.
+		String mem_image_url = member_dao.selectImageUrlByMemIdx(mem_idx);
+		
+		if(!mem_image_url.equals("https://goss-s3-test-bucket.s3.ap-northeast-2.amazonaws.com/images/default/default_member_image.jpg")) {
+			// s3 삭제
+			imageService.deleteImageFromS3(mem_image_url);
+		}
+		
+		// s3에 이미지 추가.
+			String s3Url = imageService.uploadS3(image);
+		// member에 imageurl을 update한다.
+		int result = member_dao.updateImageUrl(s3Url, mem_idx);
+		
+	
+		return String.valueOf(result);
+	}
+	
+		
 	
 	// 회원 삭제
 	@RequestMapping("member_delete.do")

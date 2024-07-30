@@ -53,10 +53,7 @@
 	<!-- 회원 프로필 수정 -->
 	<update id="member_profile_update" parameterType="member">
 		UPDATE member SET mem_nickname = #{ mem_nickname },
-						  mem_phone	= #{ mem_phone },
 						  mem_pwd = #{ mem_pwd },
-						  mem_zipcode = #{ mem_zipcode },
-						  mem_addr = #{ mem_addr },
 						  mem_grade = #{ mem_grade }
 						  WHERE mem_idx = #{ mem_idx }
 	</update>
@@ -70,6 +67,21 @@
 	<!-- 현재 로그인 된 유저의 사용중인 비밀번호 체크 -->
 	<select id="member_user_pw" parameterType="int" resultType="member">
 		SELECT mem_pwd FROM member WHERE mem_idx = #{ mem_idx }
+	</select>
+	
+	<!-- 회원 이미지 url 조회 -->
+	<select id="member_image_url" parameterType="int" resultType="String">
+		SELECT mem_img_url FROM member WHERE mem_idx = #{ mem_idx }
+	</select>
+	
+	<!-- 회원 이미지 업데이트 -->
+	<update id="member_image_url_update" parameterType="HashMap">
+		UPDATE member SET mem_img_url = #{ s3Url } WHERE mem_idx = #{ mem_idx } 
+	</update>
+	
+	<!-- 이미지 미리보기 -->
+	<select id="member_photo_preview" resultType="member" parameterType="int">
+		UPDATE member SET mem_img_url = #{ mem_img_url } WHERE mem_idx = #{ mem_idx }
 	</select>
 	
 	

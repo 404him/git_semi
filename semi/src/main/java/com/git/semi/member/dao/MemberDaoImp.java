@@ -1,6 +1,7 @@
 package com.git.semi.member.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,6 +80,26 @@ public class MemberDaoImp implements MemberDao {
 	public MemberVo selectMemPwd(int mem_idx) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("member.member_user_pw",mem_idx);
+	}
+
+	public String selectImageUrlByMemIdx(int mem_idx) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.member_image_url",mem_idx);
+	}
+
+	public int updateImageUrl(String s3Url, int mem_idx) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("s3Url", s3Url);
+		map.put("mem_idx", mem_idx);
+		
+		return sqlSession.update("member.member_image_url_update",map);
+		
+	}
+
+	public MemberVo selectPhotoOne(int mem_idx) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.member_photo_preview",mem_idx);
 	}
 
 
