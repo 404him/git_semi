@@ -98,7 +98,7 @@
 							<img src="${news.news_thumbnail_image}" width="160px;" height="120px;" />
 						</div>
 						<div style="width : 75%; display: inline-block; margin-left: 20px;">
-							<span style="font-weight: bold;">${news.news_title}</span>
+							<span style="font-weight: bold;">[${news.category_name}] ${news.news_title}</span>
 
 
 							<span style="float: right">${fn:substring(news.news_createAt,0,10)}</span>
@@ -134,14 +134,5 @@
 <!-- TODO : 푸터바 -->
 <jsp:include page="../common/footer.jsp"/>
 
-
-<script>
-	function moreNews() {
-
-
-	}
-
-
-</script>
 </body>
 </html>

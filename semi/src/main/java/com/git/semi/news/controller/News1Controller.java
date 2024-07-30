@@ -47,11 +47,11 @@ public class News1Controller {
     @RequestMapping("/news/category/list.do")
     public String newsCategoryList(int category_idx, Model model) {
 
-        List<NewsVo> news_clist = news1Service.selectAllByCategoryIdx(category_idx);
+        List<NewsVo> newsList = news1Service.selectAllByCategoryIdx(category_idx);
 
-        model.addAttribute("news_clist", news_clist);
+        model.addAttribute("newsList", newsList);
 
-        return "news/newsCategoryList";
+        return "news/newsListView";
     }
 
     /**

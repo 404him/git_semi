@@ -1,15 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
 <head>
     <title>검색 조회</title>
     <style>
-        .highlight{
+        .highlight {
             display: inline;
             background-color: #D9FCDB;
             /*-10px은 highlight의 두께*/
+        }
+
+        .main-blank-area {
+            width: 20%;
+            height: 1px;
+            float: left;
+        }
+
+        #news-content-area {
+            width: 50%;
+            float: left;
+            margin-bottom: 50px;
+        }
+
+        .main-side-area {
+            width: 20%;
+            float: left;
+        }
+
+        .news {
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+
+        .news:hover {
+            cursor: pointer;
+            background-color: #e8e7e7;
+        }
+
+        .news-box-area {
         }
     </style>
 </head>
@@ -17,54 +48,67 @@
 
 <jsp:include page="../common/menubar.jsp"/>
 
-<br><br><br><br><br>
+<div id="content-wrap-area">
+    <div class="main-blank-area"></div>
 
-<span style="width: 100px;height: 50px; margin: 0">
-    검색 :
-    &nbsp;<input id="newsSearchText" style="height: 30px" type="text" value="${news_search_text}">
-    &nbsp;<svg id="newsSearch"  style="cursor:pointer" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 550"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
-</span>
-
-<br><br><br>
-
-<c:forEach var="vo" items="${searchNewsList}">
-    <div class="searchTarget">뉴스 제목 : ${vo.news_title}</div>
-    <div class="searchTarget">기자 : ${vo.mem_name}</div>
-    <div><img src="${vo.news_thumbnail_image}"></div>
-    <div class="searchTarget">뉴스 내용 : ${vo.news_content}</div>
-    <div>조회 수 : ${vo.news_count}</div>
-    <div>뉴스 작성일 : <c:out value="${vo.news_updateAt}" default="${vo.news_createAt}" /> </div>
-    <div class="searchTarget">카테고리 : ${vo.category_name}</div>
-    <div>뉴스 좋아요 수 : ${vo.news_like_count}</div>
-    <br>
-</c:forEach>
+    <div id="news-content-area">
+        <div class="news-box-area">
+            <c:choose>
+                <c:when test="${ empty searchNewsList }">
+                    <div style="text-align: center"><h3>검색한 뉴스가 없습니다.</h3></div>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach var="news" items="${searchNewsList}">
+                        <hr>
+                        <div class="news" onclick="location.href='${pageContext.request.contextPath}/news/detail.do?news_idx=${news.news_idx}'">
+                            <div style="width : 20%; display: inline-block;">
+                                <img src="${news.news_thumbnail_image}" width="160px;" height="120px;" />
+                            </div>
+                            <div style="width : 75%; display: inline-block; margin-left: 20px;">
+                                <span class="searchTarget" style="font-weight: bold;">[${news.category_name}] ${news.news_title}</span>
 
 
+                                <span style="float: right">${fn:substring(news.news_createAt,0,10)}</span>
+                                <br>
+                                <c:if test="${fn:length(news.news_content) > 20 }" >
+                                    <span class="searchTarget"> ${fn:substring(news.news_content,0,20)}...</span>
+                                </c:if>
+                                <c:if test="${fn:length(news.news_content) <= 20 }" >
+                                    <span class="searchTarget">${news.news_content}</span>
+                                </c:if>
+                                <br>
+                                <span style="float: right;">&nbsp;기자</span>
+                                <span class="searchTarget" style="float: right; font-weight: bold;">${news.mem_name}</span>
+                            </div>
+                            <div style="text-align: right; padding-right: 10px;">
+							<span style="font-size: 14px;">
+								조회수 : ${news.news_count}ㅣ좋아요 수 : ${news.news_like_count}
+							</span>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    <hr>
+                    <br>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </div>
+</div>
 <script>
     // 화면 로딩 시 실행 될 함수
     $(function () {
-        let te = "${vo.category_name}";
-        console.log(${vo.category_name});
+
         // 검색 타겟으로 설정된 태그들의 text값이 검색어와 일치할 경우 highlight 효과 주기.
-        $(".searchTarget").each(function (index, item){
+        $(".searchTarget").each(function (index, item) {
             console.log($(item).text());
-           let replace = $(item).text().replaceAll('${news_search_text}',"<span class='highlight'>${news_search_text}</span>");
-           $(item).html(replace);
+            let replace = $(item).text().replaceAll('${news_search_text}', "<span class='highlight'>${news_search_text}</span>");
+            $(item).html(replace);
 
         });
     });
 
-    // 검색 버튼 클릭 시 검색
-    $("#newsSearch").click(function () {
-        let newsSearchText = $("#newsSearchText").val();
-        console.log("검색어 : " + newsSearchText);
-
-        // 제목 + 내용 + 기자이름 + 카테고리 이름
-        location.href="news_search.do?news_search_text="+newsSearchText;
-
-    });
-
 </script>
 
+<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
