@@ -17,18 +17,20 @@
 	}
 </style>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- ajax & jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+<!-- bootstrap 5.xx -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- menubar css. -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/main/css/menubar.css">
 
-
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 </head>
 
 <body>
@@ -37,7 +39,7 @@
 		<h1 class="header_h1">
 			<img class="main_logo"
 				src="${pageContext.request.contextPath}/resources/member/세미로고.png"
-				alt="main_logo" onclick="location.href='#'">
+				alt="main_logo" onclick="location.href='${pageContext.request.contextPath}/main.do'">
 		</h1>
 		<span class="r_posi">
 			<ul class="r_info">
