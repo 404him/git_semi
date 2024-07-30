@@ -80,17 +80,19 @@ img {
 		let news_content = f.news_content.value.trim();
 		
 		let thumbnail = document.getElementById('url_sum');
-		let children = thumbnail.children;
 		
 		let category_idx = f.category_idx.value
 		
-		//let news_thumbnail_image = children[0];
-		//console.log("썸네일 : " + news_thumbnail_image);
+		//textarea 안에 img 태그 가져오기 정규식
+		const regexr = /(https?):\/\/([^:\/\s]+)(:([^\/]*))?((\/[^\s/\/]+)*)?\/?([^#\s\?]*)(\?([^#\s]*))?(#(\w*))?/ig;
+		console.log("콘텐츠내용 : " +  news_content );
+		console.log(news_content.match(regexr));
 		
-		var imageArray = new Array();
-		for (let i = 0; i <= children.length-1; i++) {
-			imageArray.push(children[i].textContent);
-			console.log("이미지 : " + children[i].value);
+		
+		var imagechangeArray = news_content.match(regexr)
+			console.log("어레이 이미지 : " + imagechangeArray[0]);
+		for (let i = 0; i <= imagechangeArray.length-1; i++) {
+			$("#url_sum").append("<input type='hidden' name='url' value='" + imagechangeArray[i]);
 		}
 		
 		
@@ -230,6 +232,7 @@ img {
 		var formData = new FormData();
 		
 		
+		
 		formData.append('image', form);
         
         $.ajax({
@@ -247,7 +250,7 @@ img {
 			        // 복사가 완료되면 호출된다.
 			       alert("이미지 url 복사완료");
 			       //$("#b_content").append(navigator.clipboard.readText());
-			       $("#url_sum").append("<input type='hidden' name='url' value='" + data.imageUrl + "'>");
+			       //$("#url_sum").append("<input type='hidden' name='url' value='" + data.imageUrl + "'>");
 				});
 			},
 			error	:	function(err){alert(err.responseText);
