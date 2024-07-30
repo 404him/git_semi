@@ -13,19 +13,17 @@
 
 	.main-blank-area {
 		width: 20%;
-		border: 1px solid red;
+		height: 1px;
 		float: left;
 	}
 
 	#news-content-area {
 		width: 50%;
-		border: 1px solid blue;
 		float: left;
 		margin-bottom: 50px;
 	}
 	.main-side-area {
 		width: 20%;
-		border: 1px solid red;
 		float: left;
 	}
 
@@ -46,8 +44,18 @@
 	}
 
 	.news-box-area {
-		box-shadow: 5px 5px 10px -5px;
 	}
+
+	#moreNews {
+		cursor : pointer;
+		text-align: center;
+		font-size: 24px;
+		border: solid 3px;
+	}
+	#moreNews:hover{
+		background-color: #e4e4e4;
+	}
+
 
 </style>
 </head>
@@ -55,6 +63,7 @@
 <body>
 <!-- TODO : 메뉴바 -->
 <jsp:include page="../common/menubar.jsp"/>
+<hr>
 <div id="content-wrap-area">
 	<div class="main-blank-area"></div>
 
@@ -62,29 +71,33 @@
 
 		<div class="news-box-area">
 			<h4>♬ 어제의 핫 이슈!</h4>
-			<c:forEach var="top" items="${topList}">
-				<c:if test="${ top.urlToImage != 'null' and top.title != 'null' and top.url != 'null' }">
-					<hr>
-					<div class="hot-news" onclick="location.href='${top.url}'">
-						<span><img src="${top.urlToImage}" width="160px;" height="120px;" /></span>
-						<span>${top.title}</span>
-					</div>
-
+			<hr>
+			<c:if test="${ topList != null }">
+				<c:forEach var="top" items="${topList}">
+					<c:if test="${ top.title != 'null' and top.url != 'null' }">
+						<div class="hot-news" onclick="location.href='${top.url}'">
+								<div  style="display: inline-block;">
+									<c:set var="noImage" value="${pageContext.request.contextPath}/resources/main/noImage.png" />
+									<img src="${ top.urlToImage != 'null' ? top.urlToImage : noImage }" width="160px;" height="120px;" onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/resources/main/noImage.png';" />
+								</div>
+							<div style="display: inline-block; width: 60%;">${top.title}</div>
+						</div>
+						<hr>
 					</c:if>
-			</c:forEach>
+				</c:forEach>
+			</c:if>
 		</div>
 		<br>
-		<div style="border: 1px solid black;"></div>
 		<br>
 		<div class="news-box-area">
 			<h4>☞ 우리의 최신 뉴스</h4>
 			<c:forEach var="news" items="${newsList}">
 					<hr>
-					<div class="news" onclick="location.href='/news/detail.do?news_idx=${news.news_idx}'">
+					<div class="news" onclick="location.href='news/detail.do?news_idx=${news.news_idx}'">
 						<div style="width : 20%; display: inline-block;">
 							<img src="${news.news_thumbnail_image}" width="160px;" height="120px;" />
 						</div>
-						<div style="width : 75%; display: inline-block;">
+						<div style="width : 75%; display: inline-block; margin-left: 20px;">
 							<span style="font-weight: bold;">${news.news_title}</span>
 
 
@@ -107,6 +120,7 @@
 						</div>
 					</div>
 			</c:forEach>
+			<hr>
 		<br>
 		</div>
 	</div>
@@ -119,5 +133,15 @@
 
 <!-- TODO : 푸터바 -->
 <jsp:include page="../common/footer.jsp"/>
+
+
+<script>
+	function moreNews() {
+
+
+	}
+
+
+</script>
 </body>
 </html>

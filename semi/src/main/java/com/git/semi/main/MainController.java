@@ -32,6 +32,7 @@ public class MainController {
 
         // 핫 뉴스 리스트 조회
         List<NewsApiVo> topList = newsApiService.getTopHeadLineNews();
+
         model.addAttribute("topList", topList);
 
         return "/common/mainPage";

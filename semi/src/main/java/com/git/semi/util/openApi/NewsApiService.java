@@ -35,7 +35,12 @@ public class NewsApiService {
         HttpEntity request = new HttpEntity(headers);
 
         // restTemplate로 해당 url로 요청해 response data 가져오기.
+
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, request, String.class);
+
+        if(response == null) {
+            return null;
+        }
 
         JSONObject jsonObject = new JSONObject(response.getBody());
 
