@@ -19,9 +19,14 @@
 								  #{ mem_birth } ,
 								  default , 
 								  default , 
-								  default ,
+								  #{ mem_grade } ,
 								  default )
 	</insert>
+
+	<!-- 비밀번호 찾기 -->
+	<select id="member_search_pw" resultType="String" parameterType="Map">
+		SELECT mem_pwd FROM member WHERE mem_id = #{ mem_id } AND mem_phone = #{ mem_phone }
+	</select>
 
 
 	<!-- ID 중복체크 -->
@@ -29,9 +34,43 @@
 		SELECT * FROM member WHERE mem_id = #{ mem_id }
 	</select>
 	
+	<!-- 휴대폰 번호 중복체크 -->
+	<select id="member_one_phone" parameterType="String" resultType="member">
+		SELECT * FROM member WHERE mem_phone = #{ mem_phone }	
+	</select>
 	
 	<!-- 닉네임 중복체크 -->
 	<select id="member_one_nickname" parameterType="String" resultType="member">
 		SELECT * FROM member WHERE mem_nickname = #{ mem_nickname }
 	</select>
+	
+	
+	<!-- 회원 프로필 조회 -->
+	<select id="member_profile" resultType="member" parameterType="int">
+		SELECT * FROM member WHERE mem_idx = #{ mem_idx }
+	</select>
+	
+	<!-- 회원 프로필 수정 -->
+	<update id="member_profile_update" parameterType="member">
+		UPDATE member SET mem_nickname = #{ mem_nickname },
+						  mem_phone	= #{ mem_phone },
+						  mem_pwd = #{ mem_pwd },
+						  mem_zipcode = #{ mem_zipcode },
+						  mem_addr = #{ mem_addr },
+						  mem_grade = #{ mem_grade }
+						  WHERE mem_idx = #{ mem_idx }
+	</update>
+	
+	<!-- 회원 삭제 -->
+	<delete id="member_delete" parameterType="int">
+		DELETE member WHERE mem_idx = #{ mem_idx }
+	</delete>
+	
+	
+	<!-- 현재 로그인 된 유저의 사용중인 비밀번호 체크 -->
+	<select id="member_user_pw" parameterType="int" resultType="member">
+		SELECT mem_pwd FROM member WHERE mem_idx = #{ mem_idx }
+	</select>
+	
+	
 </mapper>

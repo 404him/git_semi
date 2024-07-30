@@ -58,12 +58,12 @@
   function showMessage(){
 	  // /member/login_form.do?reason=fail_id => "true"
 	  if("${ param.reason == 'fail_id'}" == "true"){
-		  alert("아이디가 틀립니다!!");
+		  alert("아이디가 없습니다");
 	  }		
 	  
 	  // /member/login_form.do?reason=fail_pwd => "true"
 	  if("${ param.reason == 'fail_pwd'}" == "true"){
-		  alert("비밀번호가 틀립니다!!");
+		  alert("비밀번호가 틀립니다");
 	  }	
 	  
 	  // /member/login_form.do?reason=session_timeout
@@ -103,11 +103,11 @@
 				<hr>&nbsp;&nbsp;&nbsp;<span class="or">OR</span>&nbsp;&nbsp;&nbsp;<hr>
                 </div>
 				<div class="sign_up_box">
-					<span>계정이 없으신가요?</span><a href="#" class="sign_up"> 가입하기 </a>
+					<span>계정이 없으신가요?</span><a href="insert_form.do" class="sign_up"> 가입하기 </a>
 				</div>
 				
 				<div class="f_pw_box">
-					<a href="#" class="f_pw"> 비밀번호를 잊어 버리셨나요?  </a>
+					<a href="pw_search_form.do" class="f_pw"> 비밀번호를 잊어 버리셨나요?  </a>
 				</div>
 			</div>
 		</div>

@@ -118,7 +118,7 @@
         
         
         if(mem_pw == mem_pw2){
-            alert("비밀번호가 일치 합니다.");
+            alert("입력하신 비밀번호가 일치합니다. \n현재 입력하신 비밀번호를 사용하시겠습니까?.");
             $("#pwd_check").prop("disabled",true);
             $("#mem_pw1").prop("disabled",true);
             $("#mem_pw2").prop("disabled",true);
@@ -188,7 +188,7 @@
 		});
 	}// end:mem_nickname()
 
-	// 휴대폰번호 정규식 체크
+	// 휴대폰번호 정규식 체크,ajax 중복확인
 	function check_phone(){
 
 		const phoneNumberPattern = /^\d{3}-\d{3,4}-\d{4}$/;
@@ -201,21 +201,40 @@
 			return;
 		}
 		
-		if (phoneNumberPattern.test(phone_check) == true) {
-			alert("인증되었습니다.")
-			$("#phone_check").prop("disabled", true)
-			$("#mem_phone1").prop("disabled", true)
-			count = count + 1;
-			return;
-		}
+		$.ajax({
+			url		:	"check_phone.do",		    
+			data	:	{"mem_phone":phone_check},
+			dataType:	"json",
+			success	:	function(res_data){
+				if(res_data.result) {
+
+					if (phoneNumberPattern.test(phone_check) == true) {
+						alert("인증되었습니다.")
+						$("#phone_check").prop("disabled", true)
+						$("#mem_phone1").prop("disabled", true)
+						count = count + 1;
+						return;
+					}
+					
+
+				} else {
+                    if(confirm("현재 사용중인 전화번호 입니다")){
+                        $("#mem_phone1").val("");
+                        $("#mem_phone1").focus();
+                        return;
+                    }
+				}
+			},
+			error	:	function(err){
+				alert("다시한번 시도해 주세요.");
+			}
+		});
 		
-		
-		
-	}
+	}//end:check_phone()
 	
 	
 	
-	// 우편번호 AIP
+	// 우편번호 API
 	function send_zipcode() {
 		
 	    new daum.Postcode({
@@ -230,14 +249,14 @@
     function send_signup(f) {
 		
 		let mem_name	 = f.mem_name.value.trim();
-        let mem_id  	 = f.mem_id.value.trim();//
+        let mem_id  	 = f.mem_id.value.trim();
 		let mem_pwd 	 = f.mem_pwd.value.trim();
 		let mem_phone    = f.mem_phone.value;
         let mem_nickname = f.mem_nickname.value.trim();
-		let mem_zipcode  = f.mem_zipcode.value.trim();//
-		let mem_addr 	 = f.mem_addr.value.trim();//
-		let mem_birth	 = f.mem_birth.value;//
-		//let mem_img_url	 = f.mem_img_url.value;// null
+		let mem_zipcode  = f.mem_zipcode.value.trim();
+		let mem_addr 	 = f.mem_addr.value.trim();
+		let mem_birth	 = f.mem_birth.value;
+		let mem_grade	 = f.mem_grade.value;
 		
 		if(mem_name == ""){
 			alert("이름을 입력하세요");
@@ -365,10 +384,20 @@
                 <input class="login_insert_addr" type="text" id="mem_addr1" name="mem_addr" placeholder="상세주소를 입력해주세요">
             </div>
 
+		
+			<span class="s_addr">회원등급</span>
+			<div>
+			<select class="s_grade" name="mem_grade">
+				<option value="일반">일반회원</option>
+				<option value="기자">기자</option>
+			</select>
+			</div>
+			
             <span class="s_birth">생년월일</span>
             <div class="login_insert_birth_box">
                 <input class="login_insert_birth" type="date" name="mem_birth">
             </div>
+            
 
             <div class="check_box">
                 <span><b>개인정보 수집에 동의합니다</b> <input style='zoom:1.5;' type="checkbox" id="all_check"></span>

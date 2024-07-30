@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
+:root{
+    --background-color: #f8f8f8;
+
+}
+
+	.main_box{
+		margin: 0px;		
+		padding: 0px;
+	}
+	
+    img{
+        width: 400px;
+        margin: auto;
+        margin-top: 45px;
+        margin-bottom: 50px;
+        padding-left: 47px;
+    }
+
+    .login_login{
+        font-size: 30px;
+        margin-left: 40px;
+        color: #2e2e2e;
+        font-family: 'Abril Fatface', serif;
+    }
+	
+    .pw_search{
+        font-size: 20px;
+        font-weight: bold;
+        padding: 10px;
+        margin-left: 30px;
+    }
+	
+	.search_box{
+		margin: auto;
+		margin-top: 150px;
+		width: 500px;
+		height: 450px;
+		border: 4px solid #6c6c6c;
+        border-radius: 10px;
+	}
+
+	.search_box .search_id,.search_phone{
+		width: 400px;
+		height: 50px;
+		border-radius: 5px;
+	}
+
+	.search_id_box,.search_phone_box{
+		text-align: center;
+		padding: 7px;
+	}
+
+	.search_id,.search_phone{
+        border: 1px solid rgb(206, 199, 199);
+        font-size: 20px;
+        padding-left: 20px;
+		background-color:  var(--background-color);
+    }
+
+	.search_btn_box{
+		text-align: center;
+		padding: 7px;
+        margin-top: 20px;
+	}
+	
+	.search_btn{
+		width: 410px;
+		height: 50px;
+		border-radius: 15px;	
+        background-color: #78cbff;
+        border: 1px solid rgb(255, 255, 255);
+		transition : all 0.7s;
+		font-size: 20px;
+        color: rgb(255, 255, 255);
+	}
+	
+	.search_btn:hover{
+		background-color: #3b8dff;
+        cursor: pointer;
+	}
+	
+	
+   
+	

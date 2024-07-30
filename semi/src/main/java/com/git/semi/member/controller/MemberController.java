@@ -1,10 +1,15 @@
 package com.git.semi.member.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -64,8 +69,41 @@ public class MemberController {
 		json.put("result", bResult);
 
 		return json.toString();
-}
 	
+	}//end:닉네임 중복체크
+	
+	
+	// 휴대폰 번호 중복체크
+	@RequestMapping(value = "check_phone.do", 
+					produces = "application/json; charset=utf-8;")
+	@ResponseBody
+	public String check_phone(String mem_phone) {
+
+		MemberVo vo = member_dao.selectMemPhone(mem_phone);
+
+		boolean bResult = (vo == null);
+
+		JSONObject json = new JSONObject();
+		json.put("result", bResult);
+
+		return json.toString();
+	}
+	
+	// 현재 사용중인 비밀번호 체크
+	@RequestMapping(value = "check_pw.do", 
+					produces = "application/json; charset=utf-8;")
+	@ResponseBody
+	public String check_pw(String mem_pwd,Integer mem_idx) {
+
+//		MemberVo vo = member_dao.selectMemPwd(mem_idx);
+		MemberVo vo = member_dao.selectProfile(mem_idx);
+		
+		boolean bResult = (vo.getMem_pwd().equals(mem_pwd));
+		JSONObject json = new JSONObject();
+		json.put("result", bResult);
+
+		return json.toString();
+}
 	
 	//로그인 폼 띄우기
 	@RequestMapping("login_form.do")
@@ -105,8 +143,36 @@ public class MemberController {
 
 		return "redirect:test_list.do";
 
+	}//end:로그인
+	
+	// 비밀번호 찾기 폼 띄우기
+	@RequestMapping("pw_search_form.do")
+	public String pw_search_form() {
+		
+		return "member/member_pw_search_form";
 	}
 	
+	//비밀번호 찾기 json
+	@RequestMapping(value = "search_pw.do",
+			 		produces = "application/json; charset=utf-8;")
+	@ResponseBody
+	public String search_pw(String mem_id,
+							String mem_phone) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("mem_id", mem_id);
+		map.put("mem_phone", mem_phone);
+		
+		
+		List<String> search_pw = member_dao.selectSearchPw(map);
+
+		//boolean bResult = (search_pw != null && !search_pw.isEmpty());
+		
+		JSONObject json = new JSONObject();
+		json.put("result", search_pw);
+		
+		return json.toString();
+	}//end:비밀번호 찾기 json
 	
 	
 	// 회원가입 폼 띄우기
@@ -117,7 +183,6 @@ public class MemberController {
 	}
 	
 	
-	// insert.do?mem_img_url=&mem_name=test&mem_zipcode=test&mem_addr=setes&mem_birth=2024-08-01
 	// 회원가입
 	@RequestMapping("insert.do")
 	public String insert(MemberVo vo) {
@@ -127,13 +192,100 @@ public class MemberController {
 			vo.setMem_img_url("https://goss-s3-test-bucket.s3.ap-northeast-2.amazonaws.com/images/default/default_member_image.jpg");
 		}
 		
-		System.out.println(vo.toString());
-		
 		int res = member_dao.insert(vo);
 		
 		return "redirect:test_list.do";
+	}//end:회원가입
+	
+	
+	
+	// 회원 프로필 페이지
+	@RequestMapping("profile.do")
+	public String profile(Model model,int mem_idx) {
+		
+		MemberVo user = (MemberVo) session.getAttribute("user");
+		
+		if (user == null) {
+			
+			return "redirect:login_form.do";
+			
+		}
+		
+		MemberVo vo = member_dao.selectProfile(mem_idx);
+		
+		model.addAttribute("vo",vo);
+		
+		return "member/member_profile";
+	
+	}//end:회원 프로필
+	
+	
+	// 회원 프로필 수정폼 이동
+	@RequestMapping("profile_update_form.do")
+	public String profile_update_form() {
+		
+		MemberVo user = (MemberVo) session.getAttribute("user");
+		
+		if (user == null) {
+			
+			return "redirect:login_form.do";
+			
+		}
+		
+		
+		return "member/member_profile_form";
 	}
 	
+	// 회원 프로필 수정
+	@RequestMapping("profile_update.do")
+	public String profile_update(MemberVo vo,
+								 int mem_idx,
+								 RedirectAttributes ra) {
+		
+		MemberVo user = (MemberVo) session.getAttribute("user");
+		
+		if (user == null) {
+			
+			return "redirect:login_form.do";
+			
+		}
+		
+		int res = member_dao.selectProfileUpdate(vo);
+		
+		if (res > 0 ) {
+			session.removeAttribute("user");
+			session.setAttribute("user", vo);
+			
+		}
+		
+		ra.addAttribute("mem_idx", mem_idx);
+		
+		return "redirect:profile.do";
+	}
+	
+	
+	// 회원 삭제
+	@RequestMapping("member_delete.do")
+	public String member_delete(int mem_idx,RedirectAttributes ra) {
+		
+		MemberVo user = (MemberVo) session.getAttribute("user");
+		
+		if (user == null) {
+
+			return "redirect:login_form.do";
+
+		}
+		
+		int res = member_dao.deleteOneMember(mem_idx);
+		
+		if (res > 0) {
+			session.removeAttribute("user");
+		}
+		
+		
+		
+		return "redirect:test_list.do";
+	}
 	
 	
 }
