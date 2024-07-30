@@ -1,8 +1,5 @@
 package com.git.semi.util.openApi;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
@@ -13,9 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 
 @Component
@@ -36,15 +31,15 @@ public class NewsApiService {
 
         String url = BASE_URL + "&apikey=" + API_KEY;
 
+        // http 통신용 entitiy에 header 정보 넣기.
         HttpEntity request = new HttpEntity(headers);
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, request, String.class);
 
+        // restTemplate로 해당 url로 요청해 response data 가져오기.
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, request, String.class);
 
         JSONObject jsonObject = new JSONObject(response.getBody());
 
         JSONArray articles = (JSONArray) jsonObject.get("articles");
-
-        System.out.println(articles);
 
         List<NewsApiVo> list = new ArrayList<>();
 

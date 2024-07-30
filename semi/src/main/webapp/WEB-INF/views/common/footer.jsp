@@ -24,7 +24,8 @@
 
 
 <body>
-	<div class="footer-container" style="background-color: black;color: #666873;">
+	<div class="footer-container" style="background-color: rgb(23,23,23);">
+		<br>
 		<div class="footer-text-area">
 			<div style="width: 20%; display: inline-block;"></div>
 

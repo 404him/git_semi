@@ -162,11 +162,11 @@ SELECT * FROM NEWS_LIKE;
 CREATE TABLE SUBSCRIBE (
                            subscribe_idx NUMBER PRIMARY KEY,
                            mem_idx NUMBER NOT NULL ,
-                           news_idx NUMBER NOT NULL ,
+                           reporter_idx NUMBER NOT NULL ,
                            CONSTRAINT fk_subscribe_member_idx FOREIGN KEY (mem_idx)
                                REFERENCES MEMBER (mem_idx) ON DELETE CASCADE,
-                           CONSTRAINT fk_subscribe_news_idx FOREIGN KEY (news_idx)
-                               REFERENCES NEWS (news_idx) ON DELETE CASCADE
+                           CONSTRAINT fk_subscribe_reporter_member_idx FOREIGN KEY (reporter_idx)
+                               REFERENCES MEMBER (mem_idx) ON DELETE CASCADE
 );
 
 

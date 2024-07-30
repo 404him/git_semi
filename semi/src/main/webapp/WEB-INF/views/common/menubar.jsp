@@ -7,7 +7,14 @@
 <meta charset="UTF-8">
 <title>Global Times</title>
 <style>
-
+	#content-wrap-area {
+		width: 100%;
+		min-height: calc(100vh - 260px);
+		margin-top: 40px;
+	}
+	footer {
+		height: 260px;
+	}
 </style>
 
 <!-- ajax & jquery -->
