@@ -221,11 +221,11 @@ public class NewsController {
 	 
 	  
 	  //  --------------- 구독----------------
+	  /*
 	  
 	  
-	  /**
-	     * 뉴스 좋아요한 사용자 조회
-	     */
+	     // 뉴스 좋아요한 사용자 조회
+	     
 	    @RequestMapping(value = "/news/check_member_is_subscribe.do",
 	            produces = "application/json; charset=utf-8;")
 	    @ResponseBody
@@ -235,9 +235,9 @@ public class NewsController {
 	        return (result > 0 ? "true" : "false");
 	    }
 	    
-	    /**
-	     * 뉴스 좋아요/취소 하기.
-	     */
+	    
+	     // 뉴스 좋아요/취소 하기.
+	     
 	    @RequestMapping(value = "/news/news_like_on_off.do",
 	            produces = "application/json; charset=utf-8;")
 	    @ResponseBody
@@ -248,7 +248,7 @@ public class NewsController {
 	        return String.valueOf(result);
 	    }
 	 
-
+*/
 
   	}
   	

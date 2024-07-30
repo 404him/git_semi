@@ -121,7 +121,7 @@
     <div style="display: inline-block;">기자 : ${vo.mem_name}</div>
 		<div class="customCheckBoxHolder">
 
-			<input type="checkbox" id="cCB1" class="customCheckBoxInput">
+			<input type="checkbox" id="cCB1" class="customCheckBoxInput" checked="checked">
 			<label for="cCB1" class="customCheckBoxWrapper">
 				<div class="customCheckBox">
 					<div class="inner">SUBSCRIBE</div>
@@ -184,6 +184,15 @@
             }
         })
     }
+    /* 
+    
+    // 좋아요 클릭 시 실행 될 함수
+    $("#cCb1").click(function () {
+    	
+    	//구독 checked로 유무 확인
+    	 let checked = $(this).attr('checked');
+
+    } */
 
 
     // 좋아요 클릭 시 실행 될 함수
