@@ -1,9 +1,11 @@
 package com.git.semi.news.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.git.semi.news.service.News1Service;
 import com.git.semi.news.vo.NewsLikeVo;
 import com.git.semi.news.vo.NewsVo;
 import com.git.semi.util.openApi.NewsApiService;
+import com.git.semi.util.openApi.NewsApiVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -135,12 +137,11 @@ public class News1Controller {
      * 외부 newsapi에서 top-headline news 호출
      */
     @RequestMapping("/news/top.do")
-    public String topHeadLine() {
+    public String topHeadLine(Model model)  {
 
         NewsApiService newsApiService = new NewsApiService();
-
-        newsApiService.getTopHeadLineNews();
-
+        List<NewsApiVo> topList = newsApiService.getTopHeadLineNews();
+        model.addAttribute("topList", topList);
 
         return "";
     }
