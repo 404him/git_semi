@@ -11,10 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.git.semi.news.service.NewsService;
 import com.git.semi.news.vo.CategoryVo;
+import com.git.semi.news.vo.NewsLikeVo;
 import com.git.semi.news.vo.NewsVo;
 import com.git.semi.util.uploadImage.ImageService;
 
@@ -211,19 +213,40 @@ public class NewsController {
        	
        	
        	int result = newsService.update(vo);
-    	
-       	
-
-	  
-	  
-		
-		
 		ra.addAttribute("news_idx", vo.getNews_idx());
 		
 		
 		return "redirect:detail.do";
 	  }
 	 
+	  
+	  //  --------------- 구독----------------
+	  
+	  
+	  /**
+	     * 뉴스 좋아요한 사용자 조회
+	     */
+	    @RequestMapping(value = "/news/check_member_is_subscribe.do",
+	            produces = "application/json; charset=utf-8;")
+	    @ResponseBody
+	    public String check_member_isSubscribe(NewsLikeVo vo) {
+
+	        int result = newsService.checkMemberIsSubscribe(vo);
+	        return (result > 0 ? "true" : "false");
+	    }
+	    
+	    /**
+	     * 뉴스 좋아요/취소 하기.
+	     */
+	    @RequestMapping(value = "/news/news_like_on_off.do",
+	            produces = "application/json; charset=utf-8;")
+	    @ResponseBody
+	    public String subscribe_on_off(String heartColor, int mem_idx, int news_idx) {
+
+	        int result = newsService.subscribe_on_off(heartColor, mem_idx, news_idx);
+
+	        return String.valueOf(result);
+	    }
 	 
 
 
