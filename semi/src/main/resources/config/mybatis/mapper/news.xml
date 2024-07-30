@@ -40,5 +40,15 @@
     <select id="news_modify_select_one" resultType="news" parameterType="int">
         select * from news where news_idx=#{news_idx}
     </select>
+    
+    <!-- 수정하기 -->
+  <update id="news_update"  parameterType="news">
+      update news set news_title = #{news_title},
+						news_thumbnail_image = #{news_thumbnail_image},
+						news_content = #{news_content},
+						news_updateAt = sysdate,
+						category_idx = #{category_idx}
+      where news_idx=#{news_idx}                   
+  </update>
    
 </mapper>

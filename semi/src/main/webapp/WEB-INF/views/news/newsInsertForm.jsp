@@ -142,7 +142,7 @@ img {
 		</form>
 		<br>
 		<form class="post">
-				<div id="url_sum" style="display: none;" >{vo.</div>
+				<div id="url_sum" style="display: none;" ></div>
 			<div id="box">
 				<!-- Bootstrap Panel -->
 				<div class="panel panel-primary">

@@ -20,27 +20,25 @@ public class NewsService {
 	        this.newsDao = newsDao;
 	    }
 	 
-	 public int insert(NewsVo vo) {
-		 
+	public int insert(NewsVo vo) {
 		 return newsDao.insert(vo);
-		
 	}
 	 
 	public List<CategoryVo> category_list() {
-		
 		return newsDao.category_list();
-		
-		
 	}
 
 	public int delete(int news_idx) {
-		
 		return newsDao.delete(news_idx);
 	}
 	
     public NewsVo selectOne(int news_idx) {
         return newsDao.selectOne(news_idx);
     }
+
+	public int update(NewsVo vo) {
+		return newsDao.update(vo);
+	}
 	 
 	 
 }

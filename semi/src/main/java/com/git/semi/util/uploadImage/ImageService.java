@@ -20,6 +20,13 @@ public interface ImageService {
 
     // db에 뉴스 이미지등 조회(FK)
     List<String> getFileUrlByNewsIdx(int news_idx);
+    
+    // member에 이미지 수정 ( 기존 url은 있음 )
+    int saveMemIdx(String mem_img_url,int mem_idx);
+    
+    // member에 이미지 삭제
+    int deleteByMemIdx(int mem_idx);
+    
 
     /**
      * S3 Service

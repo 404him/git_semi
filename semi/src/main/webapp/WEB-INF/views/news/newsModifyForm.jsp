@@ -82,7 +82,7 @@ img {
 		let thumbnail = document.getElementById('url_sum');
 		let children = thumbnail.children;
 		
-		let category_idx = f.category_idx.value
+		let category_idx = f.category_idx.value;
 		
 		//let news_thumbnail_image = children[0];
 		//console.log("썸네일 : " + news_thumbnail_image);
@@ -142,8 +142,11 @@ img {
 		</form>
 		<br>
 		<form class="post">
+			<input type="hidden"  name="news_idx"  value="${ vo.news_idx }">
 				<div id="url_sum" style="display: none;" >
-						<%-- <img src=${vo.asdasd _ idx }  for --%>
+						<c:forEach var="img" items="${ s3AttechmentList }">
+							<input type="hidden" name="url" value="${img}" /> 
+						</c:forEach>
 					</div>
 			<div id="box">
 				<!-- Bootstrap Panel -->

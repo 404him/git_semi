@@ -41,4 +41,10 @@ public class NewsDao {
     public NewsVo selectOne(int news_idx) {
         return sqlSession.selectOne("news.news_modify_select_one", news_idx);
     }
+
+
+	public int update(NewsVo vo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("news.news_update", vo);
+	}
 }
