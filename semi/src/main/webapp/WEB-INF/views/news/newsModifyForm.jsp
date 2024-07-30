@@ -195,7 +195,7 @@ img {
 						<div style="margin-top: 10px;">
 							<input class="btn btn-info" type="button" value="목록보기"
 								onclick="location.href='list.do'"> <input
-								class="btn btn-primary" type="button" value="글올리기"
+								class="btn btn-primary" type="button" value="수정하기"
 								onclick="send(this.form);">
 						</div>
 
