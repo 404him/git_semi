@@ -165,7 +165,7 @@ CREATE TABLE SUBSCRIBE (
                            reporter_idx NUMBER NOT NULL ,
                            CONSTRAINT fk_subscribe_member_idx FOREIGN KEY (mem_idx)
                                REFERENCES MEMBER (mem_idx) ON DELETE CASCADE,
-                           CONSTRAINT fk_subscribe_reporter_member_idx FOREIGN KEY (reporter_idx)
+                           CONSTRAINT fk_subscribe_reporter_idx FOREIGN KEY (reporter_idx)
                                REFERENCES MEMBER (mem_idx) ON DELETE CASCADE
 );
 

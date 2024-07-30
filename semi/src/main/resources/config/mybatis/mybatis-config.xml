@@ -15,6 +15,7 @@
 		<typeAlias type="com.git.semi.reply.vo.ReplyVo" alias="reply"/>
 		<typeAlias type="com.git.semi.report.vo.ReportVo" alias="report"/>
 		<typeAlias type="com.git.semi.news.vo.CategoryVo" alias="category"/>
+		<typeAlias type="com.git.semi.news.vo.SubscribeVo" alias="subscribe"/>
 
 
 

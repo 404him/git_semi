@@ -51,4 +51,31 @@
       where news_idx=#{news_idx}                   
   </update>
    
+   <!-- 			구독 				-->
+   
+   <!-- 구독 확인 -->
+    <select id="check_subscribe" resultType="int" parameterType="subscribe">
+        SELECT COUNT(*) FROM subscribe
+        WHERE mem_idx = #{mem_idx}
+          AND reporter_idx = #{reporter_idx}
+    </select>
+    <!-- 구독 추가 -->
+     <insert id="insert_subscribe" parameterType="hashMap">
+        INSERT INTO subscribe
+        VALUES (
+                seq_news_like_idx.nextval,
+                #{mem_idx},
+                #{reporter_idx}
+               )
+    </insert>
+    
+     <!-- 구독 취소 ㅠ -->
+    <delete id="delete_subscribe" parameterType="hashMap">
+        DELETE FROM subscribe
+         WHERE mem_idx = #{mem_idx}
+           AND reporter_idx = #{reporter_idx}
+    </delete>
+    
+    
+   
 </mapper>
