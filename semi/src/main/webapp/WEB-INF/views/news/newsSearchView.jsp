@@ -9,7 +9,7 @@
     <style>
         .highlight {
             display: inline;
-            background-color: #D9FCDB;
+            background-color: #aefdb4;
             /*-10px은 highlight의 두께*/
         }
 
@@ -53,6 +53,9 @@
 
     <div id="news-content-area">
         <div class="news-box-area">
+            <div style="margin-left: 20px; font-weight: bold; font-size: 32px;">
+                <span># ${news_search_text}</span>
+            </div>
             <c:choose>
                 <c:when test="${ empty searchNewsList }">
                     <div style="text-align: center"><h3>검색한 뉴스가 없습니다.</h3></div>
