@@ -10,15 +10,7 @@
 }
 
 
-.footer{  
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  padding-block: 1rem;
-  background-color: #000000;
-  color: #666873;
-  
-}
+
 
 .footer-container{
   width: 100%;
@@ -27,6 +19,8 @@
   padding: 0;
   overflow: hidden;
   resize: none;
+  background-color: #000000;
+  color: #666873;
 }
 
 .footer-top{

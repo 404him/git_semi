@@ -23,8 +23,8 @@
 	href="${pageContext.request.contextPath}/resources/main/css/footer.css">
 
 
-<footer class="footer">
-	<div class="footer-container">
+<body>
+	<div class="footer-container" style="background-color: black;color: #666873;">
 		<div class="footer-text-area">
 			<div style="width: 20%; display: inline-block;"></div>
 
@@ -60,6 +60,6 @@
 			</ul>
 		</div>
 	</div>
-</footer>
+
 </body>
 </html>
