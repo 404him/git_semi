@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
 <head>
@@ -127,8 +128,10 @@
     <div class="main-blank-area"></div>
 
     <div id="news-content-area">
-        <div style="font-size: 28px; font-weight: bold;">[${vo.category_name}] ${vo.news_title}</div>
-
+        <div style="display: inline-block; font-size: 28px; font-weight: bold;">[${vo.category_name}] ${vo.news_title}</div>
+        <div style="display: inline-block; float: right; margin-right: 10px;">
+            <span>${fn:substring(vo.news_createAt,0,10)} 작성됨</span>
+        </div>
 
         <hr>
         <div style="margin : auto; overflow: hidden; display:inline-block; border-radius: 70%;">
@@ -151,23 +154,31 @@
         <div style="text-align: center"><img src="${vo.news_thumbnail_image}" width="600px;" height="300px;"></div>
         <br><hr><br>
         <div>${vo.news_content}</div>
-        <div>조회 수 : ${vo.news_count}</div>
-        <div><c:out value="${vo.news_updateAt}" default="${vo.news_createAt}"/></div>
-        <div>카테고리 : ${vo.category_name}</div>
-        <div>
-            <svg style="cursor:pointer" xmlns="http://www.w3.org/2000/svg" id="heart" width="1.5em" height="1em" fill="white" stroke="red"
-                 stroke-width="50" viewBox="0 0 512 512">
-                <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
-            </svg>
-            : <span id="newsLikeCount"></span>
+        <br><hr><br>
+        <input type="button" value="목록으로"  />
+        <div style="font-size: 18px; text-align: right; margin-right: 20px;">
+            <span>조회 수 : ${vo.news_count} ㅣ </span>
+            <span>
+                <svg style="cursor:pointer" xmlns="http://www.w3.org/2000/svg" id="heart" width="1.3em" height="1.1em" fill="white" stroke="red"
+                     stroke-width="50" viewBox="0 0 512 512">
+                    <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
+                </svg>
+                : <span id="newsLikeCount"></span>
+            </span>
         </div>
-        <br>
+        <br><hr><br>
+
+        <!-- TODO : 댓글 쓰는 곳!!!! -->
+        <div>
+            1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>
+        </div>
+
+
     </div>
     <!-- TODO : 사이드바 작업할 것. -->
     <div class="main-side-area"></div>
 
 </div>
-<!-- TODO : 푸터바 -->
 <jsp:include page="../common/footer.jsp"/>
 
 <script>
@@ -260,7 +271,7 @@
         $.ajax({
             url: "check_member_isLike_news.do",
             data: {
-                "mem_idx": ${user.mem_idx} , 
+                "mem_idx": ${user.mem_idx} ,
                 "news_idx": ${vo.news_idx}
             },
             dataType: "json",
