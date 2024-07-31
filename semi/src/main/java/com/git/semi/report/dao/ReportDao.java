@@ -1,6 +1,8 @@
 package com.git.semi.report.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +35,14 @@ public class ReportDao {
 
     public List<ReportVo> getAllReports() {
         return sqlSession.selectList("ReportMapper.getAllReports");
+    }
+
+    public int checkReportByIdx(Map<String, Object> map) {
+        return sqlSession.selectOne("ReportMapper.checkReportByIdx", map);
+    }
+
+
+    public int insertReport(Map<String, Object> map) {
+        return sqlSession.insert("ReportMapper.insertReport", map);
     }
 }

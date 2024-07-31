@@ -5,9 +5,17 @@
 
 <mapper namespace="ReportMapper">
 
-    <insert id="insertReport" parameterType="com.git.semi.report.vo.ReportVo">
-        INSERT INTO REPORT (rep_idx, rep_reporter_idx, rep_type, news_idx, mem_idx, rpy_idx)
-        VALUES (seq_report_idx.NEXTVAL, #{rep_reporter_idx}, #{rep_type}, #{news_idx}, #{mem_idx}, #{rpy_idx})
+	<!-- 신고 타입에 따른 신고 내역 추가. -->
+    <insert id="insertReport" parameterType="HashMap">
+		<if test='rep_type == "뉴스"'>
+			INSERT INTO REPORT VALUES (seq_report_idx.NEXTVAL, #{mem_idx}, #{rep_type}, #{idx}, null, null)
+		</if>
+		<if test='rep_type == "회원"'>
+			INSERT INTO REPORT VALUES (seq_report_idx.NEXTVAL, #{mem_idx}, #{rep_type}, null, #{idx}, null)
+		</if>
+		<if test='rep_type == "댓글"'>
+			INSERT INTO REPORT VALUES (seq_report_idx.NEXTVAL, #{mem_idx}, #{rep_type}, null, null, #{idx})
+		</if>
     </insert>
 
     <select id="getReportCountByMember" parameterType="int" resultType="int">
@@ -21,21 +29,50 @@
     
     </delete>
 
+	<!-- 신고 타입에 따른 참조 idx와 참조 idx의 카운트 높은 순으로 조회 -->
     <select id="getAllReports" resultType="report">
-		 select distinct rr.*
-		   from (select  r.rep_type, r.mem_idx as idx, (select count( * ) from report where mem_idx = r.mem_idx ) as count
-		  		   from report r
-		  		  where r.mem_idx is not null) rr
-		  union
-		 select distinct rr.*
-		   from (select  r.rep_type, r.news_idx as idx, (select count( * ) from report where news_idx = r.news_idx ) as count
-		  		   from report r
-		  		  where r.news_idx is not null) rr
-		  union
-		 select distinct rr.*
-		   from (select  r.rep_type, r.rpy_idx as idx, (select count( * ) from report where news_idx = r.rpy_idx ) as count
-		  		   from report r
-		  		  where r.rpy_idx is not null) rr
+		select *
+		from (select distinct rr.*
+			   from (select r.rep_type,
+							r.mem_idx as idx,
+							(select count(*) from report where mem_idx = r.mem_idx) as count
+					 from report r
+					 where r.mem_idx is not null) rr
+			   union
+			   select distinct rr.*
+			   from (select r.rep_type,
+							r.news_idx as idx,
+							(select count(*) from report where news_idx = r.news_idx) as count
+					 from report r
+					 where r.news_idx is not null) rr
+			   union
+			   select distinct rr.*
+			   from (select r.rep_type,
+							r.rpy_idx as idx,
+							(select count(*) from report where rpy_idx = r.rpy_idx) as count
+					 from report r
+					 where r.rpy_idx is not null) rr)
+		order by count desc
     </select>
+
+	<!-- 신고 시 해당 신고 내역이 있는지 카운트 조회 -->
+	<select id="checkReportByIdx" resultType="int" parameterType="HashMap">
+		select count(*)
+		  from report
+		 where rep_type = #{rep_type}
+		   and rep_reporter_idx = #{mem_idx}
+	<choose>
+	   <when test='rep_type == "회원"'>
+		   and mem_idx = #{idx}
+	   </when>
+		<when test='rep_type == "뉴스"'>
+		   and news_idx = #{idx}
+		</when>
+		<when test='rep_type == "댓글"'>
+		   and rpy_idx = #{idx}
+		</when>
+	</choose>
+	</select>
+
 
 </mapper>

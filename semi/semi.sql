@@ -234,6 +234,7 @@ select * from report;
 
 
  -- 신고 한방 조회
+ select * from (
  select distinct rr.*
  from (select  r.rep_type, r.mem_idx as idx, 
 (select count( * ) from report where mem_idx = r.mem_idx ) as count
@@ -250,7 +251,8 @@ select * from report;
  from (select  r.rep_type, r.rpy_idx as idx, 
 (select count( * ) from report where news_idx = r.rpy_idx ) as count
   from report r
-  where r.rpy_idx is not null) rr;
+  where r.rpy_idx is not null) rr )
+ order by count desc;
   
 
 

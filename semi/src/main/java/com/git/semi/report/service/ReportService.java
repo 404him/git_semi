@@ -1,6 +1,8 @@
 package com.git.semi.report.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,5 +58,26 @@ public class ReportService {
 
     public List<ReportVo> getAllReports() {
         return reportDao.getAllReports();
+    }
+
+    // 이미 신고했는지 체크용 메소드
+    public int checkReportByIdx(int idx, int mem_idx, String rep_type) {
+
+        // 넘기기전 map에 담기.
+        Map<String, Object> map = new HashMap<>();
+        map.put("idx", idx);
+        map.put("mem_idx", mem_idx);
+        map.put("rep_type", rep_type);
+
+        return  reportDao.checkReportByIdx(map);
+    }
+
+    public int InsertReportByIdx(int idx, int mem_idx, String rep_type) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("idx", idx);
+        map.put("mem_idx", mem_idx);
+        map.put("rep_type", rep_type);
+
+        return reportDao.insertReport(map);
     }
 }
