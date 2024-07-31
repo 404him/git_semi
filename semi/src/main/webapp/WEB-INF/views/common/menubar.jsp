@@ -45,11 +45,24 @@
              alt="main_logo" onclick="location.href='${pageContext.request.contextPath}/main.do'">
     </h1>
     <span class="r_posi">
+			<c:if test="${ empty user.mem_idx }">
 			<ul class="r_info">
-				<li class="r_li"><a href="#" class="r__button">회원가입</a></li>
-				<li class="r_li"><a href="#" class="r__button">로그인</a></li>
+				<li class="r_li"><a href="${pageContext.request.contextPath}/member/insert_form.do" class="r__button">회원가입</a></li>
+				<li class="r_li"><a href="${pageContext.request.contextPath}/member/login_form.do" class="r__button">로그인</a></li>
                 <!-- <li class="r_li"><a href="#" class="r__button">신문구독</a></li> -->
 			</ul>
+			</c:if>
+			
+			<c:if test="${ !empty user.mem_idx }">
+				<ul class="r_info">
+				<li class="r_li" style="font-size:22px; text-align: right; margin-right:5px;">
+				<span><b>${ user.mem_nickname }</b> 님 환영합니다!</span>
+				</li>
+				<li class="r_li"><a href="${pageContext.request.contextPath}/member/profile.do?mem_idx=${ user.mem_idx }" class="r__button">마이페이지</a></li>
+				<li class="r_li"><a href="#" onclick="logout();" class="r__button">로그아웃</a></li>
+				<%-- <li class="r_li"><a href="${pageContext.request.contextPath}/member/logout.do" class="r__button">로그아웃</a></li> --%>
+			</ul>
+			</c:if>
 		</span>
 </header>
 
@@ -89,6 +102,17 @@
         location.href="${pageContext.request.contextPath}/news/news_search.do?news_search_text="+newsSearchText;
 
     });
+    
+    // 로그아웃 클릭시 로그아웃 확인 절차
+    function logout(){
+
+    	if (confirm("정말 로그아웃 하시겠습니까?") == false) {
+			return;
+		}
+    	
+    	location.href="${pageContext.request.contextPath}/member/logout.do";
+    }
+    
 </script>
 </body>
 </html>

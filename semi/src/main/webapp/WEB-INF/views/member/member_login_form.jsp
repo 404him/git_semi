@@ -80,6 +80,9 @@
 
 </head>
 <body>
+<jsp:include page="../common/menubar.jsp"/>
+<hr>
+<div id="content-wrap-area">
 	<form>
 		<div class="main_box">
 			<div class="login_box">
@@ -112,8 +115,11 @@
 			</div>
 		</div>
 	</form>
+<br><br><br><br>
+</div>
 
-
+<!-- TODO : 푸터바 -->
+<jsp:include page="../common/footer.jsp"/>
 
 </body>
 </html>

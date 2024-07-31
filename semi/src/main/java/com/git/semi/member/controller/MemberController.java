@@ -38,13 +38,6 @@ public class MemberController {
 		this.imageService = imageService;
 	}
 	
-	// 임시 메인페이지
-	@RequestMapping("test_list.do")
-	public String test_list() {
-		
-		return "member/member_test_list";
-	}
-	
 	// 아이디 중복체크 json
 	@RequestMapping(value = "check_id.do",
 					produces="application/json; charset=utf-8;" )
@@ -146,7 +139,7 @@ public class MemberController {
 		// 로그인처리: 현재 로그인된 객체(user)정보를 session저장
 		session.setAttribute("user", user);
 
-		return "redirect:test_list.do";
+		return "redirect:../main.do";
 
 	}//end:로그인
 	
@@ -199,7 +192,7 @@ public class MemberController {
 		
 		int res = member_dao.insert(vo);
 		
-		return "redirect:test_list.do";
+		return "redirect:../main.do";
 	}//end:회원가입
 	
 	
@@ -322,8 +315,16 @@ public class MemberController {
 		
 		
 		
-		return "redirect:test_list.do";
+		return "redirect:../main.do";
 	}
 	
+	// 로그아웃
+	@RequestMapping("logout.do")
+	public String logout() {
+		
+		session.removeAttribute("user");
+		
+		return "redirect:../main.do";
+	}
 	
 }

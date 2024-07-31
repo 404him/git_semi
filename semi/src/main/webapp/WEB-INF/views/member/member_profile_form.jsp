@@ -278,6 +278,9 @@
 
 </head>
 <body>
+<jsp:include page="../common/menubar.jsp"/>
+<hr>
+<div id="content-wrap-area">
     <div class="profile_update_box">
         <h1>프로필 수정</h1>
     
@@ -348,5 +351,10 @@
             </div>
         </form>
     </div>
+    </div>
+
+<br><br><br><br>
+<!-- TODO : 푸터바 -->
+<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
