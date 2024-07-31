@@ -174,11 +174,11 @@ CREATE TABLE SUBSCRIBE (
 
 -- REPLY
 CREATE TABLE REPLY (
-                       rpy_idx      NUMBER PRIMARY KEY ,						-- 댓글 고유값
+                       rpy_idx      NUMBER PRIMARY KEY ,					-- 댓글 고유값
                        rpy_content  varchar2(2000) not null,				-- 댓글 내용
                        rpy_regdate  date default sysdate not null,			-- 댓글 등록일
                        rpy_modify	date default sysdate not null,			-- 댓글 수정일
-                       mem_idx		NUMBER NOT NULL ,							-- 참조 회원 고유값
+                       mem_idx		NUMBER NOT NULL ,						-- 참조 회원 고유값
                        news_idx		number not null,						-- 참조 뉴스 고유값
                        constraint fk_reply_member_idx foreign key(mem_idx)
                            references member(mem_idx) on delete CASCADE ,

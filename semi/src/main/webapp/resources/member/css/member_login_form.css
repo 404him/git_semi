@@ -95,11 +95,12 @@
         color: #4a6bfb;
     }
 
-	hr{
+	.or_hr{
 		display:inline-block;
 		border-top: 2px solid #c8bfbf !important;
+		border: 2px solid ;
 		width: 35%;
-		position: space-between;
+		margin: revert-layer;
 	}
 	
 	.or{

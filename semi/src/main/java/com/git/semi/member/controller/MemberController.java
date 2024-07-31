@@ -209,6 +209,7 @@ public class MemberController {
 			
 		}
 		
+		
 		MemberVo vo = member_dao.selectProfile(mem_idx);
 		
 		model.addAttribute("vo",vo);
@@ -234,8 +235,11 @@ public class MemberController {
 								 Model model) {
 		
 		MemberVo user = (MemberVo) session.getAttribute("user");
-		
+
+		// 세션만료 시 수정하지 않고 로그인 폼 이동
 		if (user == null) {
+				
+			ra.addAttribute("reason","session_timeout");
 			
 			return "redirect:login_form.do";
 			
@@ -263,9 +267,18 @@ public class MemberController {
 	@RequestMapping(value = "member_img_update.do", 
 			produces = "application/json; charset=utf-8;")
 	@ResponseBody
-	public String member_img_update(MultipartFile image) {
+	public String member_img_update(MultipartFile image,RedirectAttributes ra) {
 		
 			MemberVo userMember = (MemberVo)session.getAttribute("user");
+			
+			if (userMember == null) {
+				
+				ra.addAttribute("reason","session_timeout");
+				
+				return "redirect:login_form.do";
+				
+			}
+			
 			int mem_idx = userMember.getMem_idx();
 			
 		// 1. db에서 이미지 url을 가져와서 default image인지 비교한다.
@@ -294,7 +307,9 @@ public class MemberController {
 		MemberVo user = (MemberVo) session.getAttribute("user");
 		
 		if (user == null) {
-
+				
+			ra.addAttribute("reason","session_timeout");
+				
 			return "redirect:login_form.do";
 
 		}

@@ -3,8 +3,52 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="">
-    <!-- TODO : write to namespace -->
+<mapper namespace="reply">
 
-
+   <!-- 조회 -->
+   <select id="reply_list"  parameterType="int"  resultType="reply">
+      select * from reply where news_idx=#{ b_idx }
+      order by rpy_idx desc
+   </select>
+   
+   <!-- Paging조회 -->
+   <select id="reply_page_list"  parameterType="Map"  resultType="reply">
+        select * from
+	   (
+			select
+				rank() over(order by rpy_idx desc) as no,
+				c.*
+			from 
+			(
+			  select * from reply where news_idx=#{news_idx}
+			) c
+	    )
+	    where no between #{start} and #{end}
+   
+   </select>
+   
+   <!-- b_idx의 총 댓글의 갯수 -->
+   <select id="reply_row_total" parameterType="int"  resultType="int">
+       select nvl(count(*),0) from reply where news_idx=#{ news_idx }
+   </select>
+   
+   
+   
+   <!-- 추가 -->
+   <insert id="reply_insert"  parameterType="reply">
+      insert into replyb values(
+           seq_reply_idx.nextVal,
+           #{ rpy_content },
+           #{ rpy_idx },
+           sysdate,
+           #{ news_idx },
+           #{ mem_idx },
+      )
+   </insert>
+   
+   <!-- 삭제 -->
+   <delete id="reply_delete"  parameterType="int">
+      delete from reply  where rpy_idx=#{ rpy_idx }
+   </delete>
+    
 </mapper>

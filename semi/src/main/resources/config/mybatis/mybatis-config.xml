@@ -16,6 +16,7 @@
 		<typeAlias type="com.git.semi.report.vo.ReportVo" alias="report"/>
 		<typeAlias type="com.git.semi.news.vo.CategoryVo" alias="category"/>
 		<typeAlias type="com.git.semi.news.vo.SubscribeVo" alias="subscribe"/>
+		<typeAlias type="com.git.semi.reply.vo.ReplyVo" alias="reply"/>
 
 
 
@@ -31,6 +32,7 @@
 		<mapper resource="config/mybatis/mapper/reply.xml" />
 		<mapper resource="config/mybatis/mapper/report.xml" />
 		<mapper resource="config/mybatis/mapper/s3attechment.xml" />
+		<mapper resource="config/mybatis/mapper/reply.xml" />
 
 
 	</mappers>

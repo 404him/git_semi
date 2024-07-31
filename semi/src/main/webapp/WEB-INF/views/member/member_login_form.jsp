@@ -35,6 +35,7 @@
 	   }
 	   	   
 	   
+	   f.method="POST";
 	   f.action="login.do";  
 	   f.submit();
 	   
@@ -103,7 +104,7 @@
 				</div>
 				
                 <div class="or_box">
-				<hr>&nbsp;&nbsp;&nbsp;<span class="or">OR</span>&nbsp;&nbsp;&nbsp;<hr>
+				<hr class="or_hr">&nbsp;&nbsp;&nbsp;<span class="or">OR</span>&nbsp;&nbsp;&nbsp;<hr class="or_hr">
                 </div>
 				<div class="sign_up_box">
 					<span>계정이 없으신가요?</span><a href="insert_form.do" class="sign_up"> 가입하기 </a>

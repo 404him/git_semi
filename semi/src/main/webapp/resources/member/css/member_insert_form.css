@@ -10,7 +10,8 @@ img{
     margin: auto;
     margin-top: 45px;
     margin-bottom: 50px;
-    padding-left: 47px;
+    padding-left: 52px;
+    margin-left: 20px;
 }
 
 
@@ -59,7 +60,7 @@ img{
     margin: auto;
     margin-left: 57px;
     border: 1px solid rgb(199, 199, 199);
-    width: 26%;
+    width: 28%;
     height: 40px;
     font-weight: bold;
     font-size: 16px;
@@ -73,7 +74,7 @@ img{
     margin: auto;
     margin-left: 17px;
     border: 1px solid rgb(199, 199, 199);
-    width: 26%;
+    width: 27%;
     height: 40px;
     font-weight: bold;
     font-size: 16px;
@@ -133,8 +134,8 @@ img{
 .login_insert_birth{
     margin: auto;
     border: 1px solid rgb(199, 199, 199);
-    width: 78%;
-    height: 40px;
+    width: 80%;
+    height: 48px;
     font-weight: bold;
     font-size: 16px;
     padding-left: 10px;
@@ -156,9 +157,9 @@ img{
 }
 
 .s_grade{
-	width: 78%;
+	width: 77%;
     padding: 10px;
-    margin-left: 65px;
+    margin-left: 68px;
 	font-weight: bold;
 	border-radius: 10px;
 	
