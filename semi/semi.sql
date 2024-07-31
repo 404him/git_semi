@@ -230,13 +230,46 @@ CREATE TABLE REPORT (
                             references REPLY (rpy_idx) on delete CASCADE
 );
 
+select * from report;
+
+
+ -- 신고 한방 조회
+ select distinct rr.*
+ from (select  r.rep_type, r.mem_idx as idx, 
+(select count( * ) from report where mem_idx = r.mem_idx ) as count
+  from report r
+  where r.mem_idx is not null) rr
+   union
+  select distinct rr.*
+ from (select  r.rep_type, r.news_idx as idx, 
+(select count( * ) from report where news_idx = r.news_idx ) as count
+  from report r
+  where r.news_idx is not null) rr
+   union
+    select distinct rr.*
+ from (select  r.rep_type, r.rpy_idx as idx, 
+(select count( * ) from report where news_idx = r.rpy_idx ) as count
+  from report r
+  where r.rpy_idx is not null) rr;
+  
+
 
 -- 더미 데이터 라인 --
 
+-- 댓글 더미 데이터
+insert into REPLY values(seq_reply_idx.nextval,'댓글1',default,default,5,4);
 
+-- 신고 더미 데이터
+select * from report;
 
+insert into report values(seq_report_idx.nextval, 1, '회원',null,4,null);
+insert into report values(seq_report_idx.nextval, 1, '뉴스',1,null,null);
+insert into report values(seq_report_idx.nextval, 2, '댓글',null,null,1);
+insert into report values(seq_report_idx.nextval, 1, '회원',null,2,null);
+insert into report values(seq_report_idx.nextval, 1, '회원',null,5,null);
+insert into report values(seq_report_idx.nextval, 2, '회원',null,5,null);
 
-
+select * from report;
 
 
 

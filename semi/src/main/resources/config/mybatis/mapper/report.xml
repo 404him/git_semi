@@ -3,8 +3,39 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="">
-    <!-- TODO : write to namespace -->
+<mapper namespace="ReportMapper">
 
+    <insert id="insertReport" parameterType="com.git.semi.report.vo.ReportVo">
+        INSERT INTO REPORT (rep_idx, rep_reporter_idx, rep_type, news_idx, mem_idx, rpy_idx)
+        VALUES (seq_report_idx.NEXTVAL, #{rep_reporter_idx}, #{rep_type}, #{news_idx}, #{mem_idx}, #{rpy_idx})
+    </insert>
+
+    <select id="getReportCountByMember" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM REPORT WHERE mem_idx = #{mem_idx}
+    </select>
+
+    <delete id="deleteMember" parameterType="int">
+    	
+        DELETE FROM MEMBER WHERE mem_idx = #{mem_idx}
+    
+    
+    </delete>
+
+    <select id="getAllReports" resultType="report">
+		 select distinct rr.*
+		   from (select  r.rep_type, r.mem_idx as idx, (select count( * ) from report where mem_idx = r.mem_idx ) as count
+		  		   from report r
+		  		  where r.mem_idx is not null) rr
+		  union
+		 select distinct rr.*
+		   from (select  r.rep_type, r.news_idx as idx, (select count( * ) from report where news_idx = r.news_idx ) as count
+		  		   from report r
+		  		  where r.news_idx is not null) rr
+		  union
+		 select distinct rr.*
+		   from (select  r.rep_type, r.rpy_idx as idx, (select count( * ) from report where news_idx = r.rpy_idx ) as count
+		  		   from report r
+		  		  where r.rpy_idx is not null) rr
+    </select>
 
 </mapper>
