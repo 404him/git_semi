@@ -7,25 +7,10 @@
 
    <!-- 조회 -->
    <select id="reply_list"  parameterType="int"  resultType="reply">
-      select * from reply where news_idx=#{ b_idx }
+      select * from reply where news_idx=#{ news_idx }
       order by rpy_idx desc
    </select>
    
-   <!-- Paging조회 -->
-   <select id="reply_page_list"  parameterType="Map"  resultType="reply">
-        select * from
-	   (
-			select
-				rank() over(order by rpy_idx desc) as no,
-				c.*
-			from 
-			(
-			  select * from reply where news_idx=#{news_idx}
-			) c
-	    )
-	    where no between #{start} and #{end}
-   
-   </select>
    
    <!-- b_idx의 총 댓글의 갯수 -->
    <select id="reply_row_total" parameterType="int"  resultType="int">

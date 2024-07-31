@@ -33,9 +33,6 @@ public class ReplyController {
 			
 			List<ReplyVo> list = reply_dao.selectList(news_idx);
 			
-						
-			
-			
 			
 			model.addAttribute("list", list);
 					

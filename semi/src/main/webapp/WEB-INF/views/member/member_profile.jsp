@@ -68,6 +68,8 @@
 			const img_update = document.getElementById('img_update');
 			const photo_upload = document.getElementById('photo_upload'); */
 
+			
+			
 		let image = $('#photo_upload')[0].files[0];
 
 		var formData = new FormData();
