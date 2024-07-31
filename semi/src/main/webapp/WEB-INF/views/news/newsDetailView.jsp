@@ -130,22 +130,27 @@
         <div style="font-size: 28px; font-weight: bold;">[${vo.category_name}] ${vo.news_title}</div>
 
 
-        <div style="display: inline-block;">
-            <div style=" overflow: hidden; display:inline-block; border-radius: 70%;"><img src="${vo.mem_img_url}" width="24px;" height="24px;"></div>
+        <hr>
+        <div style="margin : auto; overflow: hidden; display:inline-block; border-radius: 70%;">
+            <img src="${vo.mem_img_url}" width="30px;" height="30px;">
+        </div>
+        <div style=" display:inline-block;">
             <span>${vo.mem_name}</span>
             <span style="font-size: 13px;">기자</span>
         </div>
-            <div class="customCheckBoxHolder">
-                <input type="checkbox" id="cCB1" class="customCheckBoxInput" checked="checked">
-                <label for="cCB1" class="customCheckBoxWrapper">
-                    <div class="customCheckBox">
-                        <div class="inner">SUBSCRIBE</div>
-                    </div>
-                </label>
-            </div>
-
-        <div>뉴스 썸네일 : <img src="${vo.news_thumbnail_image}"></div>
-        <div>뉴스 내용 : ${vo.news_content}</div>
+        <div class="customCheckBoxHolder">
+            <input type="checkbox" id="cCB1" class="customCheckBoxInput" checked="checked">
+            <label for="cCB1" class="customCheckBoxWrapper">
+                <div class="customCheckBox">
+                    <div class="inner">SUBSCRIBE</div>
+                </div>
+            </label>
+        </div>
+        <hr>
+        <br>
+        <div style="text-align: center"><img src="${vo.news_thumbnail_image}" width="600px;" height="300px;"></div>
+        <br><hr><br>
+        <div>${vo.news_content}</div>
         <div>조회 수 : ${vo.news_count}</div>
         <div><c:out value="${vo.news_updateAt}" default="${vo.news_createAt}"/></div>
         <div>카테고리 : ${vo.category_name}</div>
@@ -218,11 +223,10 @@
     // 좋아요 클릭 시 실행 될 함수
     $("#heart").click(function () {
 
-        // TODO :  비회원일 경우 좋아요 기능 제한하기.
-        <%--if('${user}' == '') {--%>
-        <%--    alert("로그인 후 이용 가능합니다.");--%>
-        <%--    return;--%>
-        <%--}--%>
+        if('${user}' == '') {
+            alert("로그인 후 이용 가능합니다.");
+            return;
+        }
 
 
         // 좋아요 통합 구현. 좋아요 <--> 좋아요 취소
@@ -234,7 +238,7 @@
             url : "news_like_on_off.do",
             data : {
                 "heartColor" : heartColor,
-                "mem_idx" : 1, // TODO : 로그인한 사용자 고유값으로 변경할 것.
+                "mem_idx" : ${user.mem_idx} ,
                 "news_idx" : ${vo.news_idx}
             },
             success : function (data) {
@@ -256,7 +260,7 @@
         $.ajax({
             url: "check_member_isLike_news.do",
             data: {
-                "mem_idx": 1, // TODO : 로그인한 사용자 고유값으로 변경할 것.
+                "mem_idx": ${user.mem_idx} , 
                 "news_idx": ${vo.news_idx}
             },
             dataType: "json",
