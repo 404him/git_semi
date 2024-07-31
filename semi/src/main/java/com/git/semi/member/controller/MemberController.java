@@ -272,8 +272,6 @@ public class MemberController {
 	@ResponseBody
 	public String member_img_update(MultipartFile image) {
 		
-		System.out.println(image);
-		
 			MemberVo userMember = (MemberVo)session.getAttribute("user");
 			int mem_idx = userMember.getMem_idx();
 			
@@ -298,7 +296,7 @@ public class MemberController {
 	
 	// 회원 삭제
 	@RequestMapping("member_delete.do")
-	public String member_delete(int mem_idx,RedirectAttributes ra) {
+	public String member_delete(int mem_idx,RedirectAttributes ra, MultipartFile image) {
 		
 		MemberVo user = (MemberVo) session.getAttribute("user");
 		
@@ -306,6 +304,14 @@ public class MemberController {
 
 			return "redirect:login_form.do";
 
+		}
+		
+		// 1. db에서 이미지 url을 가져와서 default image인지 비교한다.
+		String mem_image_url = member_dao.selectImageUrlByMemIdx(mem_idx);
+		
+		if(!mem_image_url.equals("https://goss-s3-test-bucket.s3.ap-northeast-2.amazonaws.com/images/default/default_member_image.jpg")) {
+			// s3 삭제
+			imageService.deleteImageFromS3(mem_image_url);
 		}
 		
 		int res = member_dao.deleteOneMember(mem_idx);
