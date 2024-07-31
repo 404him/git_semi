@@ -153,7 +153,10 @@
     <div id="news-content-area">
         <div style="display: inline-block; font-size: 28px; font-weight: bold;">[${vo.category_name}] ${vo.news_title}</div>
         <div style="display: inline-block; float: right; margin-right: 10px;">
-            <span>${fn:substring(vo.news_createAt,0,10)} 작성됨</span>
+            <span>${fn:substring(vo.news_createAt,0,10)} 작성됨</span><br>
+            <c:if test="${user.mem_idx eq vo.mem_idx }">
+            <input type="button" value="수정하기" onclick="location.href='${pageContext.request.contextPath}/news/modify_form.do?news_idx=${ vo.news_idx }'">
+            </c:if>
         </div>
 
         <hr>
@@ -192,7 +195,7 @@
         <br><hr><br>
 
         <!-- TODO : 댓글 쓰는 곳!!!! -->
-      	<jsp:include page="../reply/reply_list.jsp" />
+      	<jsp:include page="../reply/reply_view.jsp" />
 
 
     </div>
@@ -211,6 +214,7 @@
             checkMemberLike();
             checkSubscribe();
         }
+        
         newsLikeCount();
     });
 
@@ -348,9 +352,6 @@
     });
 
     // 회원이 구독한 뉴스인지 체크하는 함수.
-    function checkSubscribe() {
-    	
-		
 
        
         $.ajax({
@@ -372,9 +373,7 @@
                 alert("구독 ajax 요청 실패");
             }
         });
-    	console.log("구독체크2 : " +$("#cCB1").prop("checked"));
     }
-
 
 </script>
 </body>

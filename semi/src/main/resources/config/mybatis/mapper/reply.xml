@@ -21,19 +21,19 @@
    
    <!-- 추가 -->
    <insert id="reply_insert"  parameterType="reply">
-      insert into replyb values(
+      insert into reply values(
            seq_reply_idx.nextVal,
            #{ rpy_content },
-           #{ rpy_idx },
            sysdate,
-           #{ news_idx },
-           #{ mem_idx },
+           sysdate,
+           #{mem_idx},
+           #{news_idx}
       )
    </insert>
    
    <!-- 삭제 -->
    <delete id="reply_delete"  parameterType="int">
-      delete from reply  where rpy_idx=#{ rpy_idx }
+      delete from reply where rpy_idx=#{ rpy_idx }
    </delete>
     
 </mapper>

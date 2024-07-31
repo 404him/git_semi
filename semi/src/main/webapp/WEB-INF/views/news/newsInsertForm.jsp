@@ -92,7 +92,7 @@ img {
 		var imagechangeArray = news_content.match(regexr)
 			console.log("어레이 이미지 : " + imagechangeArray[0]);
 		for (let i = 0; i <= imagechangeArray.length-1; i++) {
-			$("#url_sum").append("<input type='hidden' name='url' value='" + imagechangeArray[i]);
+			$("#url_sum").append("<input type='hidden' name='url' value='" + imagechangeArray[i] + "'/>");
 		}
 		
 		
@@ -116,7 +116,7 @@ img {
 			return;
 		}
 		
-		
+		f.method = "POST";
 		f.action = "insert.do";
 		f.submit(); //
 		
@@ -246,7 +246,7 @@ img {
 				console.log(data.imageUrl);
 				// imageUrl_return = imageUrl;
 				//$("#b_content").append("<br>"+"<img src='"+ data.imageUrl +"'/>");
-				window.navigator.clipboard.writeText("<img src='"+ data.imageUrl +"'/>").then(() => {
+				window.navigator.clipboard.writeText("<img src='" + data.imageUrl + "' width='600px;' height='300px;'/>").then(() => {
 			        // 복사가 완료되면 호출된다.
 			       alert("이미지 url 복사완료");
 			       //$("#b_content").append(navigator.clipboard.readText());

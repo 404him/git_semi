@@ -56,5 +56,19 @@ public class ReplyController {
 			return json.toString();
 		}
 		
+		@RequestMapping(value="delete.do" , produces="application/json; charset=utf-8;")
+		@ResponseBody
+		public String delete(int rpy_idx) {
+			
+			System.out.println(rpy_idx);
+			int res = reply_dao.delete(rpy_idx);
+			
+			JSONObject json = new JSONObject();
+			json.put("result", res==1); // {"result": true } or {"result": false }
+			
+			
+			return json.toString();
+		}
+		
 	}
 	
