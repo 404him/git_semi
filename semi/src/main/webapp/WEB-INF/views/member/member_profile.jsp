@@ -16,79 +16,104 @@
 
 <script type="text/javascript">
 	
-	function update_profile(f){
-		
+	
+	function btn_change() {
+
+		// 토글 할 버튼 선택 (btn1)
+
+		const btn_change = document.getElementById('btn_change');
+		const img_update = document.getElementById('img_update');
+		const photo_upload = document.getElementById('photo_upload');
+
+		// btn1 숨기기 (display: none)
+
+		if (btn_change.style.display !== 'none') {
+
+			btn_change.style.display = 'none';
+
+			img_update.style.display = 'block';
+
+			photo_upload.style.display = 'block';
+		}
+
+	}//end:btn_change()
+	
+
+	function update_profile(f) {
+
 		let mem_idx = f.mem_idx.value;
+
+		location.href = 'profile_update_form.do?mem_idx=' + mem_idx
+
+	}//end:update_profile(f)
+
+	
+	function update_photo() {
+
+	/* 	const btn_change = document.getElementById('btn_change');
+		const img_update = document.getElementById('img_update');
+		const photo_upload = document.getElementById('photo_upload'); */
+
+		let image = $('#photo_upload')[0].files[0];
+
+		var formData = new FormData();
+
+		formData.append('image', image);
+
+		console.log("수정할 이미지 : " + image);
+
+		$.ajax({
+
+			type : "POST",
+			url : "member_img_update.do",
+			enctype : 'multipart/form-data',
+			data : formData,
+			processData : false,
+			contentType : false,
+			success : function(res_data) {
+				if (res_data == '1') {
+
+					alert("이미지가 수정되었습니다!");
+					
+				/* 	// btn1 숨기기 (display: none)
+
+					if (btn_change.style.display == 'none') {
+
+						btn_change.style.display = 'block';
+
+						img_update.style.display = 'none';
+
+						photo_upload.style.display = 'none';
+					} */
+					
+					
+				}
+			},
+			error : function(err) {
+				alert("잠시후 다시 시도해주세요")
+			}
+
+		});
 		
 		
-		location.href='profile_update_form.do?mem_idx=' + mem_idx
-	
-	}
-	
-
-
-	
-	
-	
-
-
-	
-
 		
 		
-	
-	
-	
-	
-	function update_photo(){
+
+	}//end:update_photo()
+
+	function del() {
 
 		let image = $('#photo_upload')[0].files[0];
 		
-		var formData = new FormData();
-		
-		formData.append('image', image);
-		
-		console.log("수정할 이미지 : "+image);
-		
-		$.ajax({
-
-			type		:	"POST",
-			url			:	"member_img_update.do",
-			enctype 	:	'multipart/form-data',
-			data		:	formData,
-			processData : false,
-			contentType : false,
-			success		:	function(res_data){
-				if(res_data == '1') {
-					alert("이미지가 수정되었습니다!");
-				}
-			},
-			error		:	function(err){
-				alert("잠시후 다시 시도해주세요")
-			}
-		
-		});
-		
-	} 
-	
-	
-	
-	
-	function del(){
-
-		
-		if(confirm("정말 탈퇴 하시겟습니까?\n확인을 누르면 탈퇴가 진행됩니다") == false){
+		if (confirm("정말 탈퇴 하시겟습니까?\n확인을 누르면 탈퇴가 진행됩니다") == false) {
 			return;
 		}
-		
+
 		alert("탈퇴 되었습니다.")
-		
-		location.href="member_delete.do?mem_idx=" + ${ vo.mem_idx }
-		
-	}
 
+		location.href = "member_delete.do?mem_idx=" + ${ vo.mem_idx } + "&image=" + image
 
-
+	}//end:del()
 </script>
 
 
@@ -110,12 +135,15 @@
 					<div class="memp_nickname_box">
 						<span class="memp_nickname"> ${ vo.mem_nickname } </span>
 					</div>
-					<div class="memp_img_update_box">
-						<input type="file" id="photo_upload" name="image" value="사진선택" onchange="get_photo();"> <br>
-						<input class="memp_img_update" type="button" value="사진수정"
-							onclick="update_photo()">
-					</div>
 			</div>
+					<div class="memp_img_update_box">
+						<input type="file" class="img_preview" id="photo_upload" name="image" 
+						 value="사진선택" onchange="get_photo();">
+						<input class="memp_img_update1" type="button" value="사진수정"
+							id="btn_change" onclick="btn_change()">
+						<input class="memp_img_update" type="button" value="사진수정"
+							id="img_update" onclick="update_photo()">
+					</div>
 			<div class="memp_profile_box">
 				<div class="memp_profile">
 					<span class="s_profile">Name.</span><span class="memp_profile_name">${ vo.mem_name }</span>
@@ -152,7 +180,7 @@
 				<hr>
 				<div class="memp_profile">
 					<span class="s_profile">가입일.</span><span
-						class="memp_profile_regdate">${ vo.mem_regdate }</span>
+						class="memp_profile_regdate">${ fn:substring(vo.mem_regdate,0,16) }</span>
 				</div>
 				<hr>
 
@@ -192,7 +220,6 @@
 		reader.onload = function() {
 			$("#profile_img_get").attr('src', reader.result);
 		}
-		
 		
 	}
 	</script>
