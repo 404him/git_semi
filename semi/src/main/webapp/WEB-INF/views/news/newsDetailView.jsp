@@ -185,7 +185,10 @@
 
     // 화면 로딩 시 실행 될 함수
     $(function () {
-        checkMemberLike();
+        // 로그인한 회원일 경우에만 호출하기.
+        if('${user}' != '') {
+            checkMemberLike();
+        }
         newsLikeCount();
     });
 
@@ -231,6 +234,7 @@
     } */
 
 
+
     // 좋아요 클릭 시 실행 될 함수
     $("#heart").click(function () {
 
@@ -249,7 +253,7 @@
             url : "news_like_on_off.do",
             data : {
                 "heartColor" : heartColor,
-                "mem_idx" : ${user.mem_idx} ,
+                "mem_idx" : '${user.mem_idx}' ,
                 "news_idx" : ${vo.news_idx}
             },
             success : function (data) {
@@ -271,7 +275,7 @@
         $.ajax({
             url: "check_member_isLike_news.do",
             data: {
-                "mem_idx": ${user.mem_idx} ,
+                "mem_idx": '${user.mem_idx}' ,
                 "news_idx": ${vo.news_idx}
             },
             dataType: "json",
