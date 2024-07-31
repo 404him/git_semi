@@ -192,11 +192,8 @@
         <br><hr><br>
 
         <!-- TODO : 댓글 쓰는 곳!!!! -->
-      
-	    <div class="reply">
-	        <textarea name="reply_area" id="reply_area"></textarea>
-	        <button class="rpy_submit" type="button" onclick="alert('댓글이 작성되었습니다.')">작성</button>
-	    </div>
+      	<jsp:include page="../reply/reply_list.jsp" />
+
 
     </div>
     <!-- TODO : 사이드바 작업할 것. -->
