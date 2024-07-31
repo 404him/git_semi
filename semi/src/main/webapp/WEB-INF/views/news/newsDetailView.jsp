@@ -155,7 +155,7 @@
         <br><hr><br>
         <div>${vo.news_content}</div>
         <br><hr><br>
-        <input type="button" value="목록으로"  />
+        <input type="button" value="목록으로" onclick="history.back();"/>
         <div style="font-size: 18px; text-align: right; margin-right: 20px;">
             <span>조회 수 : ${vo.news_count} ㅣ </span>
             <span>
