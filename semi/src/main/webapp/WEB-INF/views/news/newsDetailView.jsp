@@ -113,6 +113,11 @@
 .customCheckBoxWrapper .customCheckBox:hover .inner {
 	transform: translateY(-2px);
 }
+
+#news-content-area > div {
+    margin-bottom: 5px;
+}
+
 </style>
 </head>
 <body>
@@ -122,11 +127,15 @@
     <div class="main-blank-area"></div>
 
     <div id="news-content-area">
-        <div>뉴스 idx : ${vo.news_idx}</div>
-        <div>뉴스 제목 : ${vo.news_title}</div>
-        <div style="display: inline-block;">기자 : ${vo.mem_name}</div>
-            <div class="customCheckBoxHolder">
+        <div style="font-size: 28px; font-weight: bold;">[${vo.category_name}] ${vo.news_title}</div>
 
+
+        <div style="display: inline-block;">
+            <div style=" overflow: hidden; display:inline-block; border-radius: 70%;"><img src="${vo.mem_img_url}" width="24px;" height="24px;"></div>
+            <span>${vo.mem_name}</span>
+            <span style="font-size: 13px;">기자</span>
+        </div>
+            <div class="customCheckBoxHolder">
                 <input type="checkbox" id="cCB1" class="customCheckBoxInput" checked="checked">
                 <label for="cCB1" class="customCheckBoxWrapper">
                     <div class="customCheckBox">
@@ -134,10 +143,11 @@
                     </div>
                 </label>
             </div>
+
         <div>뉴스 썸네일 : <img src="${vo.news_thumbnail_image}"></div>
         <div>뉴스 내용 : ${vo.news_content}</div>
         <div>조회 수 : ${vo.news_count}</div>
-        <div>뉴스 작성일 : <c:out value="${vo.news_updateAt}" default="${vo.news_createAt}"/></div>
+        <div><c:out value="${vo.news_updateAt}" default="${vo.news_createAt}"/></div>
         <div>카테고리 : ${vo.category_name}</div>
         <div>
             <svg style="cursor:pointer" xmlns="http://www.w3.org/2000/svg" id="heart" width="1.5em" height="1em" fill="white" stroke="red"

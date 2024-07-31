@@ -39,7 +39,7 @@
 
     <!-- 뉴스 상세 조회 -->
     <select id="news_one" resultType="news" parameterType="int">
-        SELECT nn.*, m.mem_name, c.category_name
+        SELECT nn.*, m.mem_name, m.mem_img_url, c.category_name
         FROM (SELECT *
               FROM (SELECT * FROM news) n,
                    (SELECT count(*) news_like_count

@@ -51,7 +51,7 @@ public class News1Controller {
 
         model.addAttribute("newsList", newsList);
 
-        return "news/newsListView";
+        return "news/newsCategoryListView";
     }
 
     /**

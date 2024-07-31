@@ -11,10 +11,19 @@ public class NewsVo {
     String news_updateAt;
     int mem_idx;
     String mem_name;
+    String mem_img_url;
     int category_idx;
     String category_name;
     int news_like_count;
 
+
+    public String getMem_img_url() {
+        return mem_img_url;
+    }
+
+    public void setMem_img_url(String mem_img_url) {
+        this.mem_img_url = mem_img_url;
+    }
 
     public String getNews_thumbnail_image() {
         return news_thumbnail_image;

@@ -98,24 +98,15 @@
 							<img src="${news.news_thumbnail_image}" width="160px;" height="120px;" />
 						</div>
 						<div style="width : 75%; display: inline-block; margin-left: 20px;">
-							<span style="font-weight: bold;">[${news.category_name}] ${news.news_title}</span>
-
-
+							<span style="font-weight: bold; font-size: 24px;">[${news.category_name}] ${news.news_title}</span>
 							<span style="float: right">${fn:substring(news.news_createAt,0,10)}</span>
-							<br>
-							<c:if test="${fn:length(news.news_content) > 20 }" >
-								<span>${fn:substring(news.news_content,0,20)}...</span>
-							</c:if>
-							<c:if test="${fn:length(news.news_content) <= 20 }" >
-								<span>${news.news_content}</span>
-							</c:if>
 							<br>
 							<span style="float: right;">&nbsp;기자</span>
 							<span style="float: right; font-weight: bold;">${news.mem_name}</span>
 						</div>
-						<div style="text-align: right; padding-right: 80px;">
+						<div style="text-align: right; padding-right: 20px;">
 							<span style="font-size: 14px;">
-								조회수 : ${news.news_count}
+								조회수 : ${news.news_count} ㅣ 좋아요수 : ${news.news_like_count}
 							</span>
 						</div>
 					</div>

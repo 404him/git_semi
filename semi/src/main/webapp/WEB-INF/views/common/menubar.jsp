@@ -65,7 +65,7 @@
         </ul>
         <div style="text-align: right;">
             <span style=" width: 100px;height: 50px; margin: 0">검색 :
-                <input id="newsSearchText" style="height: 30px" type="text" placeholder="${news_search_text != null ? news_search_text : '검색어를 입력해주세요'}">
+                <input id="newsSearchText" style="height: 30px" type="text" placeholder="검색어를 입력해주세요"  value="${news_search_text != null ? news_search_text : ''}" />
                 <svg id="newsSearch" style="cursor:pointer" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 512 550">
                 <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
