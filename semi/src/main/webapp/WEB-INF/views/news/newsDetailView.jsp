@@ -119,6 +119,29 @@
     margin-bottom: 5px;
 }
 
+.reply{
+    margin: 0;
+    padding: 0;
+}
+
+#reply_area{
+    width: 600px;
+    height: 100px;
+    resize: none;
+    border: 3px solid;
+}
+
+.rpy_submit{
+    background-color: #66a5f7;
+    border: 2px solid #66a5f7;
+    color: #f6f6f6;
+    width: 50px;
+    height: 30px;
+    font-size: 12px;
+    position: relative;
+    top: -10px;
+}
+
 </style>
 </head>
 <body>
@@ -169,10 +192,11 @@
         <br><hr><br>
 
         <!-- TODO : 댓글 쓰는 곳!!!! -->
-        <div>
-            1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>
-        </div>
-
+      
+	    <div class="reply">
+	        <textarea name="reply_area" id="reply_area"></textarea>
+	        <button class="rpy_submit" type="button" onclick="alert('댓글이 작성되었습니다.')">작성</button>
+	    </div>
 
     </div>
     <!-- TODO : 사이드바 작업할 것. -->
