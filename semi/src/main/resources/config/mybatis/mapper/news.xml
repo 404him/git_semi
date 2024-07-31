@@ -22,8 +22,8 @@
 						0,
 						default,
 						null,
-						1, <!-- 멤버 idx 추후 변경필요(mem_idx) -->
-						1 <!-- 카테고리 idx 추후변경필요(category_idx) -->
+						#{mem_idx},
+						#{category_idx}
 			)
 		<selectKey resultType="int" keyProperty="news_idx" order="AFTER">
     		SELECT seq_news_idx.CURRVAL from dual

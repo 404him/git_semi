@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.git.semi.news.dao.NewsDao;
 import com.git.semi.news.vo.CategoryVo;
-import com.git.semi.news.vo.NewsLikeVo;
 import com.git.semi.news.vo.NewsVo;
+import com.git.semi.news.vo.SubscribeVo;
 
 @Service
 public class NewsService {
@@ -40,22 +40,19 @@ public class NewsService {
 	public int update(NewsVo vo) {
 		return newsDao.update(vo);
 	}
-	
-	   public int checkMemberIsSubscribe(NewsLikeVo vo) {
-	        return newsDao.checkMemberIsSubscribe(vo);
-	    }
 
-	    public int subscribe_on_off(String heartColor, int mem_idx, int reporter_idx) {
-	        // 좋아요한 뉴스일 경우 - 좋아요 취소
-	        if(heartColor.equals("red")) {
-	            return newsDao.deleteSubscribe(mem_idx, reporter_idx);
-	        }else {
-	            // 뉴스를 좋아요할 경우 - 좋아요
-	            return newsDao.insertSubscribe(mem_idx, reporter_idx);
-	        }
+	public int checkMemberIsSubscribe(SubscribeVo vo) {
+		return newsDao.checkMemberIsSubscribe(vo);
+	}
 
-	    }
-	
-	 
+	public int subscribe_on_off(String subscribe_checked, int mem_idx, int reporter_idx) {
+		// 구독한 기자일 경우 - 구독 취소
+		if (subscribe_checked.equals("checked")) {
+			return newsDao.deleteSubscribe(mem_idx, reporter_idx);
+		} else {
+			// 기자를 구독할 경우 - 구독활성화
+			return newsDao.insertSubscribe(mem_idx, reporter_idx);
+		}
+	}
 	 
 }

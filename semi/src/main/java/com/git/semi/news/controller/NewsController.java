@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.git.semi.member.vo.MemberVo;
 import com.git.semi.news.service.NewsService;
 import com.git.semi.news.vo.CategoryVo;
-import com.git.semi.news.vo.NewsLikeVo;
 import com.git.semi.news.vo.NewsVo;
+import com.git.semi.news.vo.SubscribeVo;
 import com.git.semi.util.uploadImage.ImageService;
 
 @Controller
@@ -25,15 +26,14 @@ public class NewsController {
 
     private final NewsService newsService;
     private final ImageService imageService;
+    private final HttpSession session;
     
-
-    @Autowired
-	HttpSession session;
     
     @Autowired
-    public NewsController(NewsService newsService, ImageService imageService) {
+    public NewsController(NewsService newsService, ImageService imageService, HttpSession session) {
         this.newsService = newsService;
 		this.imageService = imageService;
+		this.session = session;
     }
     
     @RequestMapping("/news/insert_form.do")
@@ -49,16 +49,16 @@ public class NewsController {
     @RequestMapping("/news/insert.do")
     public String insert(NewsVo vo, @RequestParam(name="url") List<String> list ,RedirectAttributes ra) {
     	
-		/*
+		
 		 MemberVo user = (MemberVo) session.getAttribute("user");
 		 
 		 if(user==null) {
 		 
 		 ra.addAttribute("reason", "session_timeout");
 		 
-		 return "redirect:../member/member_login_form.do"; } //사용자정보 vo에 등록
-		 vo.setMem_idx(user.getMem_idx()); vo.setMem_name(user.getMem_name());
-		 */
+		 return "redirect:../member/login_form.do"; } //사용자정보 vo에 등록
+		 vo.setMem_idx(user.getMem_idx());
+		
     	
     	
     	
@@ -67,18 +67,8 @@ public class NewsController {
 		
 		String news_thumbnail_image = (String) list.get(0);
 		vo.setNews_thumbnail_image(news_thumbnail_image);
-		//System.out.println(news_thumbnail_image);
-    	
-    	//System.out.println("vo : " + vo.getNews_title());
-    	//System.out.println("vo : " + vo.getNews_thumbnail_image());
-    	//System.out.println("vo : " + vo.getNews_content());
-    	//System.out.println("vo : " + vo.getNews_createAt());
-    	//System.out.println("vo : " + vo.getCategory_idx());
-    	//System.out.println("vo : " + vo.getCategory_name());
-    	
     	int result = newsService.insert(vo);
     	
-    	System.out.println("insert 후 가져온 news_idx : "+vo.getNews_idx());
 		
     	//DB insert
     	if(result > 0 && !list.isEmpty()) {
@@ -88,7 +78,7 @@ public class NewsController {
     		}
     	}
 
-    	return "redirect:/news/list.do";
+    	return "redirect:/main.do";
     }
     
     
@@ -112,7 +102,7 @@ public class NewsController {
     	// news 테이블 삭제.
     	newsService.delete(news_idx);
     	
-    	return "redirect:/news/list.do";
+    	return "redirect:/main.do";
     }
     
     
@@ -182,9 +172,7 @@ public class NewsController {
 		List<String> newNoneMatchList = newList.stream().filter(n -> oldList.stream()
 				.noneMatch(Predicate.isEqual(n))).collect(Collectors.toList());
 
-		System.out.println(oldNoneMatchList.toString());		// [1,2]
-		System.out.println(newNoneMatchList.toString());		// [5,6]
-	
+		
 		
 		System.out.println("현재 뉴스 idx : " + vo.getNews_idx());
 		
@@ -221,34 +209,33 @@ public class NewsController {
 	 
 	  
 	  //  --------------- 구독----------------
-	  /*
 	  
 	  
-	     // 뉴스 좋아요한 사용자 조회
-	     
-	    @RequestMapping(value = "/news/check_member_is_subscribe.do",
-	            produces = "application/json; charset=utf-8;")
+	  
+	    // 구독여부 확인/news/check_Subscribe.do
+	  
+	  	@RequestMapping(value = "/news/check_Subscribe.do", produces = "application/json; charset=utf-8;")
 	    @ResponseBody
-	    public String check_member_isSubscribe(NewsLikeVo vo) {
+	    public String check_Subscribe(SubscribeVo vo) {
 
 	        int result = newsService.checkMemberIsSubscribe(vo);
 	        return (result > 0 ? "true" : "false");
 	    }
-	    
-	    
-	     // 뉴스 좋아요/취소 하기.
+
+	  
+	  
+	    // 뉴스 좋아요/취소 하기.
 	     
-	    @RequestMapping(value = "/news/news_like_on_off.do",
+	    @RequestMapping(value = "/news/news_subscribe_on_off.do",
 	            produces = "application/json; charset=utf-8;")
 	    @ResponseBody
-	    public String subscribe_on_off(String heartColor, int mem_idx, int news_idx) {
+	    public String subscribe_on_off(String subscribe_checked, int mem_idx, int reporter_idx) {
 
-	        int result = newsService.subscribe_on_off(heartColor, mem_idx, news_idx);
+	        int result = newsService.subscribe_on_off(subscribe_checked, mem_idx, reporter_idx);
 
 	        return String.valueOf(result);
 	    }
-	 
-*/
-
+	    
+	    
   	}
   	

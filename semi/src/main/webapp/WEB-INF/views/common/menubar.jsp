@@ -60,7 +60,9 @@
 				</li>
 				<li class="r_li"><a href="${pageContext.request.contextPath}/member/profile.do?mem_idx=${ user.mem_idx }" class="r__button">마이페이지</a></li>
 				<li class="r_li"><a href="#" onclick="logout();" class="r__button">로그아웃</a></li>
-				<%-- <li class="r_li"><a href="${pageContext.request.contextPath}/member/logout.do" class="r__button">로그아웃</a></li> --%>
+				<c:if test="${user.mem_grade eq '기자'}">
+				<li class="r_li"><a href="${pageContext.request.contextPath}/news/insertform.do?" class="r__button">기사등록</a></li>
+				</c:if>
 			</ul>
 			</c:if>
 		</span>
@@ -105,7 +107,6 @@
     
     // 로그아웃 클릭시 로그아웃 확인 절차
     function logout(){
-
     	if (confirm("정말 로그아웃 하시겠습니까?") == false) {
 			return;
 		}

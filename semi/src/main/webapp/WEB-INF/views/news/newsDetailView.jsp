@@ -90,7 +90,7 @@
 	display: none;
 }
 
-.customCheckBoxInput:checked+.customCheckBoxWrapper .customCheckBox {
+.customCheckBoxInput:checked.customCheckBoxWrapper .customCheckBox {
 	background-color: #2d6737;
 	color: white;
 	box-shadow: rgba(0, 0, 0, 0.23) 0px -4px 1px 0px inset,
@@ -98,12 +98,12 @@
 		2px 4px 1px;
 }
 
-.customCheckBoxInput:checked+.customCheckBoxWrapper .customCheckBox .inner
+.customCheckBoxInput:checked.customCheckBoxWrapper .customCheckBox .inner
 	{
 	transform: translateY(-2px);
 }
 
-.customCheckBoxInput:checked+.customCheckBoxWrapper .customCheckBox:hover
+.customCheckBoxInput:checked.customCheckBoxWrapper .customCheckBox:hover
 	{
 	background-color: #34723f;
 	box-shadow: rgba(0, 0, 0, 0.26) 0px -4px 1px 0px inset,
@@ -165,7 +165,7 @@
             <span style="font-size: 13px;">기자</span>
         </div>
         <div class="customCheckBoxHolder">
-            <input type="checkbox" id="cCB1" class="customCheckBoxInput" checked="checked">
+            <input type="checkbox" id="cCB1" class="customCheckBoxInput" >
             <label for="cCB1" class="customCheckBoxWrapper">
                 <div class="customCheckBox">
                     <div class="inner">SUBSCRIBE</div>
@@ -209,6 +209,7 @@
         // 로그인한 회원일 경우에만 호출하기.
         if('${user}' != '') {
             checkMemberLike();
+            checkSubscribe();
         }
         newsLikeCount();
     });
@@ -244,17 +245,8 @@
             }
         })
     }
-    /* 
+   
     
-    // 좋아요 클릭 시 실행 될 함수
-    $("#cCb1").click(function () {
-    	
-    	//구독 checked로 유무 확인
-    	 let checked = $(this).attr('checked');
-
-    } */
-
-
 
     // 좋아요 클릭 시 실행 될 함수
     $("#heart").click(function () {
@@ -316,6 +308,74 @@
     }
 
 
+
+
+</script>
+
+
+
+<script>
+		/* 구독 SUBSCRIBE 스크립트 */
+  // 구독 클릭 시 실행 될 함수
+    $("#cCb1").click(function () {
+    	
+    	
+        
+        if('${user}' == '') {
+           alert("로그인 후 기자 구독이 가능합니다.");
+           return;
+        }
+
+
+        // 구독 / 구독취소 요청하는 ajax.
+        $.ajax({
+            url : "news_subscribe_on_off.do",
+            data : {
+                "subscribe_checked" : subscribe_checked,
+                "mem_idx" : 1, // TODO : 멤버 기능적용 후 {user.mem_idx}
+                "reporter_idx" : ${vo.mem_idx} // 뉴스 등록한 기자의 mem_idx
+            },
+            success : function (data) {
+                if(data > 0) {
+                    checkMemberLike();
+                }
+            },
+            error : function () {
+                alert("좋아요/취소 ajax 요청 실패");
+            }
+        });
+
+    });
+
+    // 회원이 구독한 뉴스인지 체크하는 함수.
+    function checkSubscribe() {
+    	
+    	//구독 checked로 유무 확인
+   	 	let subscribe_checked = $("#cCB1").prop('checked');
+			console.log(subscribe_checked);
+       // TODO :  비회원일 경우 좋아요 기능 제한하기.
+
+        $.ajax({
+            url: "check_Subscribe.do",
+            data: {
+                "mem_idx": '${user.mem_idx}' ,
+                "reporter_idx": ${vo.mem_idx}
+            },
+            dataType: "json",
+            success: function (data) {
+                // 상세 조회한 사용자가 해당 뉴스등록한 기자를 구독 눌렀을 경우
+                if (data == true) {
+                	$("#cCB1").prop("checked", true); // 선택
+                } else {
+                	$("#cCB1").prop("checked", false); // 해제
+                }
+            },
+            error: function () {
+                alert("구독 ajax 요청 실패");
+            }
+        });
+
+    }
 
 
 </script>

@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.git.semi.news.vo.CategoryVo;
-import com.git.semi.news.vo.NewsLikeVo;
 import com.git.semi.news.vo.NewsVo;
+import com.git.semi.news.vo.SubscribeVo;
 
 @Repository
 public class NewsDao {
@@ -53,7 +53,7 @@ public class NewsDao {
 	
 //	 -------구독---------
 //	구독확인
-    public int checkMemberIsSubscribe(NewsLikeVo vo) {
+	public int checkMemberIsSubscribe(SubscribeVo vo) {
         return sqlSession.selectOne("news.check_subscribe",vo);
     }
 //  구독 추가

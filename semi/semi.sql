@@ -62,8 +62,8 @@ CREATE TABLE MEMBER (
                         mem_addr 	  VARCHAR2(200) NOT NULL,			-- 회원 주소
                         mem_birth 	  VARCHAR2(100) NOT NULL,			-- 회원 생년월일
                         mem_lockcount INT DEFAULT 0 NOT NULL,			-- 계정잠금 카운트
-                        mem_use		  CHAR(1) DEFAULT 'y' NOT NULL CHECK(mem_use IN ('y','n')) , 	-- 계정 활성화 상태
-                        mem_grade 	  CHAR(10) DEFAULT '일반' NOT NULL CHECK(mem_grade IN ('일반','기자','관리자')) , 	-- 회원 등급
+                        mem_use		  varchar2(1) DEFAULT 'y' NOT NULL CHECK(mem_use IN ('y','n')) , 	-- 계정 활성화 상태
+                        mem_grade 	  varchar2(10) DEFAULT '일반' NOT NULL CHECK(mem_grade IN ('일반','기자','관리자')) , 	-- 회원 등급
                         mem_regdate   DATE DEFAULT SYSDATE   NOT NULL	-- 회원가입 날짜
 );
 
@@ -218,7 +218,7 @@ CREATE TABLE REPLY_UNLIKE (
 CREATE TABLE REPORT (
                         rep_idx				NUMBER PRIMARY KEY ,  										-- 신고 고유값
                         rep_reporter_idx 	NUMBER ,														-- 신고한 회원 고유값
-                        rep_type 			char(10) not null check (rep_type IN ('뉴스', '회원', '댓글')) ,	-- 신고 유형
+                        rep_type 			varchar2(10) not null check (rep_type IN ('뉴스', '회원', '댓글')) ,	-- 신고 유형
                         news_idx 			NUMBER ,														-- 참조 뉴스 고유값
                         mem_idx 			NUMBER ,														-- 참조 회원 고유값
                         rpy_idx				NUMBER ,														-- 참조 댓글 고유값
