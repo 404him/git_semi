@@ -47,7 +47,7 @@ public class NewsService {
 
 	public int subscribe_on_off(String subscribe_checked, int mem_idx, int reporter_idx) {
 		// 구독한 기자일 경우 - 구독 취소
-		if (subscribe_checked.equals("checked")) {
+		if (subscribe_checked.equals("false")) {
 			return newsDao.deleteSubscribe(mem_idx, reporter_idx);
 		} else {
 			// 기자를 구독할 경우 - 구독활성화

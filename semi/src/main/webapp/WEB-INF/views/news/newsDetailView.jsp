@@ -90,7 +90,7 @@
 	display: none;
 }
 
-.customCheckBoxInput:checked.customCheckBoxWrapper .customCheckBox {
+.customCheckBoxInput:checked+.customCheckBoxWrapper .customCheckBox {
 	background-color: #2d6737;
 	color: white;
 	box-shadow: rgba(0, 0, 0, 0.23) 0px -4px 1px 0px inset,
@@ -98,12 +98,12 @@
 		2px 4px 1px;
 }
 
-.customCheckBoxInput:checked.customCheckBoxWrapper .customCheckBox .inner
+.customCheckBoxInput:checked+.customCheckBoxWrapper .customCheckBox .inner
 	{
 	transform: translateY(-2px);
 }
 
-.customCheckBoxInput:checked.customCheckBoxWrapper .customCheckBox:hover
+.customCheckBoxInput:checked+.customCheckBoxWrapper .customCheckBox:hover
 	{
 	background-color: #34723f;
 	box-shadow: rgba(0, 0, 0, 0.26) 0px -4px 1px 0px inset,
@@ -317,16 +317,17 @@
 <script>
 		/* 구독 SUBSCRIBE 스크립트 */
   // 구독 클릭 시 실행 될 함수
-    $("#cCb1").click(function () {
     	
-    	
-        
-        if('${user}' == '') {
-           alert("로그인 후 기자 구독이 가능합니다.");
-           return;
-        }
+    	$("#cCB1").click(function () {
 
+            if('${user}' == '') {
+                alert("로그인 후 이용 가능합니다.");
+                return;
+            }
 
+        	let subscribe_checked = $("#cCB1").prop("checked");
+			console.log("구독체크1 : " + subscribe_checked);
+			
         // 구독 / 구독취소 요청하는 ajax.
         $.ajax({
             url : "news_subscribe_on_off.do",
@@ -341,7 +342,7 @@
                 }
             },
             error : function () {
-                alert("좋아요/취소 ajax 요청 실패");
+                alert("구독 ajax 요청 실패");
             }
         });
 
@@ -350,11 +351,9 @@
     // 회원이 구독한 뉴스인지 체크하는 함수.
     function checkSubscribe() {
     	
-    	//구독 checked로 유무 확인
-   	 	let subscribe_checked = $("#cCB1").prop('checked');
-			console.log(subscribe_checked);
-       // TODO :  비회원일 경우 좋아요 기능 제한하기.
+		
 
+       
         $.ajax({
             url: "check_Subscribe.do",
             data: {
@@ -374,7 +373,7 @@
                 alert("구독 ajax 요청 실패");
             }
         });
-
+    	console.log("구독체크2 : " +$("#cCB1").prop("checked"));
     }
 
 

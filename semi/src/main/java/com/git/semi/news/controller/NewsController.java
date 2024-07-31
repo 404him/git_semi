@@ -230,9 +230,13 @@ public class NewsController {
 	            produces = "application/json; charset=utf-8;")
 	    @ResponseBody
 	    public String subscribe_on_off(String subscribe_checked, int mem_idx, int reporter_idx) {
-
+	    		
+	    	
+	    	System.out.println("reporter_idx : " + subscribe_checked);
+	    	System.out.println("mem_idx : " + mem_idx);
+	    	System.out.println("reporter_idx : " + reporter_idx);
 	        int result = newsService.subscribe_on_off(subscribe_checked, mem_idx, reporter_idx);
-
+	        
 	        return String.valueOf(result);
 	    }
 	    
