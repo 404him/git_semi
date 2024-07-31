@@ -326,15 +326,14 @@
             }
 
         	let subscribe_checked = $("#cCB1").prop("checked");
-			console.log("구독체크1 : " + subscribe_checked);
 			
         // 구독 / 구독취소 요청하는 ajax.
         $.ajax({
             url : "news_subscribe_on_off.do",
             data : {
                 "subscribe_checked" : subscribe_checked,
-                "mem_idx" : 1, // TODO : 멤버 기능적용 후 {user.mem_idx}
-                "reporter_idx" : ${vo.mem_idx} // 뉴스 등록한 기자의 mem_idx
+                "mem_idx" : '${user.mem_idx}',
+                "reporter_idx" : '${vo.mem_idx}' // 뉴스 등록한 기자의 mem_idx
             },
             success : function (data) {
                 if(data > 0) {
@@ -358,7 +357,7 @@
             url: "check_Subscribe.do",
             data: {
                 "mem_idx": '${user.mem_idx}' ,
-                "reporter_idx": ${vo.mem_idx}
+                "reporter_idx": '${vo.mem_idx}'
             },
             dataType: "json",
             success: function (data) {
