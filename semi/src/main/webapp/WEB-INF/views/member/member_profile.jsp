@@ -16,16 +16,32 @@
 
 <script type="text/javascript">
 	
-	
+
+	$(document).ready(function() {
+
+		//showMessage();
+		setTimeout(showMessage, 100);//0.1초후에 메시지 띄워라
+
+	});
+
+	function showMessage() {
+
+		// /member/login_form.do?reason=session_timeout
+		if ("${ param.reason == 'session_timeout'}" == "true") {
+			alert("로그아웃되었습니다\n로그인을 다시 해주세요");
+		}
+
+	}
+
 	function btn_change() {
 
-		// 토글 할 버튼 선택 (btn1)
+		// 토글 할 버튼 선택 (btn)
 
 		const btn_change = document.getElementById('btn_change');
 		const img_update = document.getElementById('img_update');
 		const photo_upload = document.getElementById('photo_upload');
 
-		// btn1 숨기기 (display: none)
+		// btn 숨기기 (display: none)
 
 		if (btn_change.style.display !== 'none') {
 
@@ -37,7 +53,6 @@
 		}
 
 	}//end:btn_change()
-	
 
 	function update_profile(f) {
 
@@ -47,12 +62,11 @@
 
 	}//end:update_profile(f)
 
-	
 	function update_photo() {
 
-	/* 	const btn_change = document.getElementById('btn_change');
-		const img_update = document.getElementById('img_update');
-		const photo_upload = document.getElementById('photo_upload'); */
+		/* 	const btn_change = document.getElementById('btn_change');
+			const img_update = document.getElementById('img_update');
+			const photo_upload = document.getElementById('photo_upload'); */
 
 		let image = $('#photo_upload')[0].files[0];
 
@@ -74,19 +88,18 @@
 				if (res_data == '1') {
 
 					alert("이미지가 수정되었습니다!");
-					
-				/* 	// btn1 숨기기 (display: none)
 
-					if (btn_change.style.display == 'none') {
+					/* 	// btn1 숨기기 (display: none)
 
-						btn_change.style.display = 'block';
+						if (btn_change.style.display == 'none') {
 
-						img_update.style.display = 'none';
+							btn_change.style.display = 'block';
 
-						photo_upload.style.display = 'none';
-					} */
-					
-					
+							img_update.style.display = 'none';
+
+							photo_upload.style.display = 'none';
+						} */
+
 				}
 			},
 			error : function(err) {
@@ -94,24 +107,24 @@
 			}
 
 		});
-		
-		
-		
-		
 
 	}//end:update_photo()
 
 	function del() {
 
 		let image = $('#photo_upload')[0].files[0];
-		
+
 		if (confirm("정말 탈퇴 하시겟습니까?\n확인을 누르면 탈퇴가 진행됩니다") == false) {
 			return;
 		}
 
 		alert("탈퇴 되었습니다.")
 
-		location.href = "member_delete.do?mem_idx=" + ${ vo.mem_idx } + "&image=" + image
+		location.href = "member_delete.do?mem_idx=" + $
+		{
+			vo.mem_idx
+		}
+		+"&image=" + image
 
 	}//end:del()
 </script>
@@ -186,8 +199,7 @@
 
 				<c:if test="${ vo.mem_grade eq '기자' }">
 					<div class="memp_profile">
-						<span class="s_profile">작성한 기사 수.</span><span
-							class="memp_profile_news"></span>
+						<span class="s_profile">작성한 기사 수.</span><span class="memp_profile_news">5 건</span>
 					</div>
 				</c:if>
 

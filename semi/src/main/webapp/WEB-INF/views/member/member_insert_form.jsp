@@ -118,7 +118,9 @@
         
         
         if(mem_pw == mem_pw2){
-            alert("입력하신 비밀번호가 일치합니다. \n현재 입력하신 비밀번호를 사용하시겠습니까?.");
+            if(confirm("입력하신 비밀번호가 일치합니다. \n현재 입력하신 비밀번호를 사용하시겠습니까?.") == false){
+				return;
+            }
             $("#pwd_check").prop("disabled",true);
             $("#mem_pw1").prop("disabled",true);
             $("#mem_pw2").prop("disabled",true);
@@ -319,7 +321,7 @@
 			$("#mem_nickname1").prop("disabled", false);
 			$("#mem_phone1").prop("disabled", false);
 			
-			
+			f.method="POST";
 			f.action="insert.do";
 			f.submit();
 		} else {
@@ -335,6 +337,10 @@
 
 </head>
 <body>
+<jsp:include page="../common/menubar.jsp"/>
+<hr>
+<div id="content-wrap-area">
+
     <form>
         <div class="login_insert_main">
             <div class="login_insert_title">
@@ -414,6 +420,10 @@
 
 
     </form>
+</div>
 
+<br><br><br><br>
+<!-- TODO : 푸터바 -->
+<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

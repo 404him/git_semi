@@ -18,6 +18,22 @@
 		let pw = 0;
 		let phone = 0;
 		
+		 $(document).ready(function(){
+			  
+			  //showMessage();
+			  setTimeout(showMessage,100);//0.1초후에 메시지 띄워라
+			  
+		  });
+		  
+		  function showMessage(){
+			  
+			  // /member/login_form.do?reason=session_timeout
+			  if("${ param.reason == 'session_timeout'}" == "true"){
+				  alert("로그아웃되었습니다\n로그인을 다시 해주세요");
+			  }	
+			  
+		  }
+		
 		// 닉네임 변경 클릭시 활성화
 		function nickname_update(){
 
@@ -265,6 +281,8 @@
 			return;
 		}
 			 */
+			 
+			f.method="POST";
 			f.action="profile_update.do";
 			f.submit();
 		
