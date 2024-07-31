@@ -32,6 +32,7 @@
 					<th>신고 유형</th>
 					<th>회원 번호</th>
 					<th>신고 횟수</th>
+					<th width="120px"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -42,14 +43,15 @@
 							<td><c:out value="${report.rep_type}" /></td>
 							<td><c:out value="${report.idx}" /></td>
 							<td><c:out value="${report.count}" /></td>
+							<td style="text-align: center">
+								<button type="button" class="btn btn-danger">삭제하기</button>
+							</td>
 						</tr>
 					</c:if>
 				</c:forEach>
 			</tbody>
 		</table>
-		<form action="/deleteMember" method="post" class="mt-4">
-			<button type="submit" class="btn btn-danger">삭제하기</button>
-		</form>
+
 		<br>
 		<h3>뉴스 신고 목록</h3>
 		<table class="table table-bordered table-striped">
@@ -58,6 +60,7 @@
 					<th>신고 유형</th>
 					<th>뉴스 번호</th>
 					<th>신고 횟수</th>
+					<th width="120px"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -68,14 +71,12 @@
 							<td><c:out value="${report.rep_type}" /></td>
 							<td><c:out value="${report.idx}" /></td>
 							<td><c:out value="${report.count}" /></td>
+							<td style="text-align: center"><button type="button" class="btn btn-danger">삭제하기</button></td>
 						</tr>
 					</c:if>
 				</c:forEach>
 			</tbody>
 		</table>
-		<form action="/deleteMember" method="post" class="mt-4">
-			<button type="submit" class="btn btn-danger">삭제하기</button>
-		</form>
 		<br>
 		<h3>댓글 신고 목록</h3>
 		<table class="table table-bordered table-striped">
@@ -84,6 +85,7 @@
 					<th>신고 유형</th>
 					<th>댓글 번호</th>
 					<th>신고 횟수</th>
+					<th width="120px"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -93,14 +95,12 @@
 							<td><c:out value="${report.rep_type}" /></td>
 							<td><c:out value="${report.idx}" /></td>
 							<td><c:out value="${report.count}" /></td>
+							<td style="text-align: center"><button type="button" class="btn btn-danger">삭제하기</button></td>
 						</tr>
 					</c:if>
 				</c:forEach>
 			</tbody>
 		</table>
-		<form action="/deleteMember" method="post" class="mt-4">
-			<button type="submit" class="btn btn-danger">삭제하기</button>
-		</form>
 	</div>
 </body>
 </html>
