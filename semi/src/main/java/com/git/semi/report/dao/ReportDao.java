@@ -45,4 +45,8 @@ public class ReportDao {
     public int insertReport(Map<String, Object> map) {
         return sqlSession.insert("ReportMapper.insertReport", map);
     }
+
+    public int deleteRep_typeDataByIdx(Map<String, Object> map) {
+        return sqlSession.delete("ReportMapper.deleteRep_typeDataByIdx", map);
+    }
 }

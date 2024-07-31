@@ -144,7 +144,7 @@ CREATE TABLE NEWS_LIKE (
                            CONSTRAINT fk_likes_news_idx FOREIGN KEY (news_idx)
                                REFERENCES NEWS (news_idx) ON DELETE CASCADE ,
                            CONSTRAINT fk_likes_member_idx FOREIGN KEY (mem_idx)
-                               REFERENCES MEMBER (mem_idx)
+                               REFERENCES MEMBER (mem_idx) on delete cascade
 );
 
 -- 뉴스 좋아요 더미 데이터
@@ -236,19 +236,19 @@ select * from report;
  -- 신고 한방 조회
  select * from (
  select distinct rr.*
- from (select  r.rep_type, r.mem_idx as idx, 
+ from (select  r.rep_type, r.mem_idx as idx,
 (select count( * ) from report where mem_idx = r.mem_idx ) as count
   from report r
   where r.mem_idx is not null) rr
    union
   select distinct rr.*
- from (select  r.rep_type, r.news_idx as idx, 
+ from (select  r.rep_type, r.news_idx as idx,
 (select count( * ) from report where news_idx = r.news_idx ) as count
   from report r
   where r.news_idx is not null) rr
    union
     select distinct rr.*
- from (select  r.rep_type, r.rpy_idx as idx, 
+ from (select  r.rep_type, r.rpy_idx as idx,
 (select count( * ) from report where news_idx = r.rpy_idx ) as count
   from report r
   where r.rpy_idx is not null) rr )

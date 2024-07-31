@@ -111,5 +111,26 @@ public class ReportController {
 
     }
 
+    /**
+     * 신고된 타입의 db에서 idx로 해당 data 삭제하기.
+     * @param idx : 타입에 관한 data의 고유 번호
+     * @param rep_type : 신고 타입
+     * @return : 신고 조회 페이지
+     */
+    @RequestMapping(value = "/deleteReport.do")
+    public String deleteReport(@RequestParam("idx") int idx,@RequestParam("rep_type") String rep_type) {
+
+        // rep_type에 해당하는 테이블에 idx인 데이터 삭제.
+        int result = reportService.deleteRep_typeDataByIdx(idx, rep_type);
+
+        if (result > 0) {
+            return "redirect:/report.do";
+        }else {
+            return "신고된 데이터 삭제 실패!";
+
+        }
+
+    }
+
 
 }

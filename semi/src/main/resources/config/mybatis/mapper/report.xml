@@ -74,5 +74,20 @@
 	</choose>
 	</select>
 
+	<!-- 신고 유형 테이블에서 해당 idx인 데이터 삭제 -->
+	<delete id="deleteRep_typeDataByIdx" parameterType="HashMap" >
+		delete from
+			<choose>
+			<when test='rep_type == "회원"'>
+				member where mem_idx = #{idx}
+			</when>
+			<when test='rep_type == "뉴스"'>
+				news where news_idx = #{idx}
+			</when>
+			<when test='rep_type == "댓글"'>
+				reply where rpy_idx = #{idx}
+			</when>
+		</choose>
+	</delete>
 
 </mapper>

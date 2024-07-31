@@ -80,4 +80,12 @@ public class ReportService {
 
         return reportDao.insertReport(map);
     }
+
+    public int deleteRep_typeDataByIdx(int idx, String rep_type) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("idx", idx);
+        map.put("rep_type", rep_type);
+        return reportDao.deleteRep_typeDataByIdx(map);
+
+    }
 }

@@ -25,79 +25,31 @@
 			style="text-align: center; text-shadow: 1px 1px 1px black;">신고
 			관리 페이지(관리자용)</h1>
 		<br> <br>
-		<h3>회원 신고 목록</h3>
+		<h3>통합 신고 목록</h3>
+		<br>
+		<span style="font-weight: bold;">&nbsp; ※ 삭제 시 하위 데이터도 같이 삭제됩니다.( 예. 회원 삭제 시 회원이 쓴 댓글도 삭제됩니다.)</span>
+		<br><br>
+
 		<table class="table table-bordered table-striped">
 			<thead class="thead-dark">
 				<tr>
 					<th>신고 유형</th>
-					<th>회원 번호</th>
+					<th>신고된 유형의 번호</th>
 					<th>신고 횟수</th>
 					<th width="120px"></th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="report" items="${reports}">
-					<c:if test="${report.rep_type eq '회원' }">
-
 						<tr>
 							<td><c:out value="${report.rep_type}" /></td>
 							<td><c:out value="${report.idx}" /></td>
 							<td><c:out value="${report.count}" /></td>
 							<td style="text-align: center">
-								<button type="button" class="btn btn-danger">삭제하기</button>
+							<button type="button" class="btn btn-danger"
+							onclick="location.href='${pageContext.request.contextPath}/deleteReport.do?idx=${report.idx}&rep_type=${report.rep_type}'">삭제하기</button>
 							</td>
 						</tr>
-					</c:if>
-				</c:forEach>
-			</tbody>
-		</table>
-
-		<br>
-		<h3>뉴스 신고 목록</h3>
-		<table class="table table-bordered table-striped">
-			<thead class="thead-dark">
-				<tr>
-					<th>신고 유형</th>
-					<th>뉴스 번호</th>
-					<th>신고 횟수</th>
-					<th width="120px"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="report" items="${reports}">
-					<c:if test="${report.rep_type eq '뉴스' }">
-
-						<tr>
-							<td><c:out value="${report.rep_type}" /></td>
-							<td><c:out value="${report.idx}" /></td>
-							<td><c:out value="${report.count}" /></td>
-							<td style="text-align: center"><button type="button" class="btn btn-danger">삭제하기</button></td>
-						</tr>
-					</c:if>
-				</c:forEach>
-			</tbody>
-		</table>
-		<br>
-		<h3>댓글 신고 목록</h3>
-		<table class="table table-bordered table-striped">
-			<thead class="thead-dark">
-				<tr>
-					<th>신고 유형</th>
-					<th>댓글 번호</th>
-					<th>신고 횟수</th>
-					<th width="120px"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="report" items="${reports}">
-					<c:if test="${report.rep_type eq '댓글' }">
-						<tr>
-							<td><c:out value="${report.rep_type}" /></td>
-							<td><c:out value="${report.idx}" /></td>
-							<td><c:out value="${report.count}" /></td>
-							<td style="text-align: center"><button type="button" class="btn btn-danger">삭제하기</button></td>
-						</tr>
-					</c:if>
 				</c:forEach>
 			</tbody>
 		</table>
