@@ -106,83 +106,7 @@
     background-color: #0056B3;
 }
 </style>
-<script type="text/javascript">
-	 /* 댓글쓰기 기능  */
-	   function reply_insert(f){
-		   console.log("1");
-		 
-		  console.log(news_idx);
-		   //로그인이 안되었으면
-		   if("${user}" == ""){
-			   if(confirm("로그인후 댓글쓰기가 가능합니다\n로그인 하시겠습니까?")) {
-					return;
-			   }else {
-				   // 로그인폼으로 이동
-				   location.href="${pageContext.request.contextPath}/member/login_form.do";
-				}
-		   }
-		   
-		   
-		   // 댓글쓰기 작성
-		   let rpy_content = $("#rpy_content").value.trim();
-		  
-		   if(rpy_content==''){
-			   alert("댓글내용을 입력하세요!!");
-			   $("#rpy_content").val("");
-			   $("#rpy_content").focus();
-			   return;
-		   }
-		   console.log("2");
-		   //Ajax통해서 댓글 등록
-		   $.ajax({
-			   url		:	"../news/insert.do",
-			   data		:	{
-				              "rpy_content": rpy_content,
-				              "news_idx":news_idx,
-				              "mem_idx":"${user.mem_idx}"
-				            },
-			   dataType	:	"json",
-			   success	:	function(res_data){
-				   // res_data = {"result": true }
-				  
-				   //작성했던 댓글 입력창에서 지우기
-				   $("#rpy_content").val("");
-				  
-				  
-				   if(res_data.result==false){
-					   alert("댓글등록 실패!!");
-					   return;
-				   }
-				  
-				   //reply_list();
-				  
-			   },
-			   error	:	function(err){
-				   alert(err.responseText);
-			   }
-		   });
-		   console.log("3"); 
-	   }//end:comment_insert()
-	  
-	  
-	   
-	   	function reply_delete(rpy_idx){
-		if(confirm("정말 삭제하시겠습니까?")==false)return;
-		
-		$.ajax({
-			url			:		"../reply/delete.do",
-			data		:		{"rpy_idx" : rpy_idx},
-			dataType	:		"json",
-			success		:		function(res_data){
-						},
-				error : function(err) {
-					alert("잠시후 다시 시도해주세요")
-				}
-			});
-		}
-	   
-	 
-</script>
+
 </head>
 <body>
 <%-- <!-- Page Menu -->
@@ -232,13 +156,93 @@
         		<input type="hidden" name="news_idx" value="${ vo.news_idx }">
                 <input type="hidden" name="mem_idx" value="${ user.mem_idx }">
         <div class="reply_input">
-            <textarea placeholder="댓글을 입력하세요" name="rpy_content" class="reply_textarea"></textarea>
+            <textarea placeholder="댓글을 입력하세요" id="rpy_content" name="rpy_content" class="reply_textarea"></textarea>
         </div>
         <div class="reply_btn">
-            <button class="button" onclick="reply_insert(this.form);">댓글등록</button>
+            <button class="button" type="button" onclick="reply_insert(this.form);">댓글등록</button>
          </div>
          </form>
           </div>
     </div>
+
+
+
+<script type="text/javascript">
+    /* 댓글쓰기 기능  */
+    function reply_insert(f){
+        console.log("1");
+
+        console.log('user : ${user}');
+        //로그인이 안되었으면
+        if("${user}" == ""){
+            if(confirm("로그인후 댓글쓰기가 가능합니다\n로그인 하시겠습니까?")) {
+                // 로그인폼으로 이동
+                location.href="${pageContext.request.contextPath}/member/login_form.do";
+            }else {
+                return;
+            }
+        }
+
+
+        // 댓글쓰기 작성
+        let rpy_content = $("#rpy_content").value.trim();
+
+        if(rpy_content==''){
+            alert("댓글내용을 입력하세요!!");
+            $("#rpy_content").val("");
+            $("#rpy_content").focus();
+            return;
+        }
+        console.log("2");
+        //Ajax통해서 댓글 등록
+        $.ajax({
+            url		:	"../news/insert.do",
+            data		:	{
+                "rpy_content": rpy_content,
+                "news_idx":news_idx,
+                "mem_idx":"${user.mem_idx}"
+            },
+            dataType	:	"json",
+            success	:	function(res_data){
+                // res_data = {"result": true }
+
+                //작성했던 댓글 입력창에서 지우기
+                $("#rpy_content").val("");
+
+
+                if(res_data.result==false){
+                    alert("댓글등록 실패!!");
+                    return;
+                }
+
+                //reply_list();
+
+            },
+            error	:	function(err){
+                alert(err.responseText);
+            }
+        });
+        console.log("3");
+    }//end:comment_insert()
+
+
+
+    function reply_delete(rpy_idx){
+        if(confirm("정말 삭제하시겠습니까?")==false)return;
+
+        $.ajax({
+            url			:		"../reply/delete.do",
+            data		:		{"rpy_idx" : rpy_idx},
+            dataType	:		"json",
+            success		:		function(res_data){
+            },
+            error : function(err) {
+                alert("잠시후 다시 시도해주세요")
+            }
+        });
+    }
+
+
+</script>
 </body>
 </html>
