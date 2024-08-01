@@ -61,7 +61,10 @@
 				<li class="r_li"><a href="${pageContext.request.contextPath}/member/profile.do?mem_idx=${ user.mem_idx }" class="r__button">마이페이지</a></li>
 				<li class="r_li"><a href="#" onclick="logout();" class="r__button">로그아웃</a></li>
 				<c:if test="${user.mem_grade eq '기자'}">
-				<li class="r_li"><a href="${pageContext.request.contextPath}/news/insert_form.do" class="r__button">기사등록</a></li>
+					<li class="r_li"><a href="${pageContext.request.contextPath}/news/insert_form.do" class="r__button">기사등록</a></li>
+				</c:if>
+				<c:if test="${user.mem_id eq 'admin'}">
+					<li class="r_li"><a href="${pageContext.request.contextPath}/report.do" class="r__button">신고목록</a></li>
 				</c:if>
 			</ul>
 			</c:if>

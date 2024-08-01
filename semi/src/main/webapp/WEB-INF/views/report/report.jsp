@@ -53,7 +53,7 @@
 		<br> <br>
 		<h3>통합 신고 목록</h3>
 		<br>
-		<span style="font-weight: bold;">&nbsp; ※ 삭제 시 하위 데이터도 같이 삭제됩니다.( 주의. 회원 삭제 시 회원이 쓴 댓글도 삭제됩니다.) ※ 신고받은 건들은 직접 확인하고 삭제 합시다. </span>
+		<span style="font-weight: bold;">&nbsp; ※ 삭제 시 하위 데이터도 같이 삭제됩니다.( 주의. 회원 삭제 시 회원이 쓴 댓글도 삭제됩니다.)&nbsp; ※ 신고받은 건들은 직접 확인하고 삭제 합시다. </span>
 		<br><br>
 
 		<table class="table table-bordered table-striped">
