@@ -98,7 +98,6 @@
 		                }
 						$("#nickname_check").prop("disabled", true)
 						$("#mem_nickname1").prop("disabled", true)
-		                nickname = nickname + 1;
 		
 					} else {
 		                if(confirm("현재 사용중인 닉네임 입니다")){
@@ -179,7 +178,6 @@
 						alert("인증되었습니다.")
 						$("#phone_check1").prop("disabled", true)
 						$("#mem_phone1").prop("disabled", true)
-						phone = phone + 1;
 						return;
 					}
 					
@@ -259,30 +257,38 @@
 			return;
 		}
 
+	
 		
-		/* if(nickname == 1){
-			$("#mem_nickname1").prop("disabled", false);
-		} else{
-			if(confirm("닉네임 중복확인을 체크하세요"));
+		
+		// 닉네임을 인증하지 않고 바로 수정버튼 클릭시 경고창
+		if (!$("#mem_nickname1").prop("disabled")) {
+			alert("닉네임 중복확인을 해주세요");
 			return;
-		} */
+		}
+		
+		// 비밀번호 인증을 하지 않고 바로 수정버튼을 누를시 경고창
+		if (!$("#mem_phone1").prop("disabled")) {
+			alert("전화번호를 인증을 해주세요");
+			return;
+		}
+		
+		
+		
+		
+		
 		
 		if(pw == 1){
 			$("#mem_pw2").prop("disabled", false);
 			$("#mem_nickname1").prop("disabled", false);
-			$("#mem_phone1").prop("disabled", false);
 		} else{
-			if(confirm("비밀번호를 확인하세요"));
+			if(alert("비밀번호를 확인하세요"));
 			return;
 		}
 		
-	/* 	if(phone == 1){
+		
+			$("#mem_nickname1").prop("disabled",false);
 			$("#mem_phone1").prop("disabled", false);
-		} else{
-			if(confirm("전화번호 인증을 확인하세요"));
-			return;
-		}
-			 */
+	
 			 
 			f.method="POST";
 			f.action="profile_update.do";
@@ -305,16 +311,16 @@
         <h1>프로필 수정</h1>
     
         <form>
-        <input type="hidden" name="mem_idx" value="${ user.mem_idx }">
+        <input type="hidden" name="mem_idx" value="${ vo.mem_idx }">
             <hr>
             <div class="profile_update">
                 <span class="s_box">ID</span>
-                <input class="profile_update_id" type="text" value="${ user.mem_id }" disabled="disabled">
+                <input class="profile_update_id" type="text" value="${ vo.mem_id }" disabled="disabled">
             </div>
             <hr>
             <div class="profile_update">
                 <span class="s_box">이름</span>
-                <input class="profile_update_name" type="text" value="${ user.mem_name }" disabled="disabled">
+                <input class="profile_update_name" type="text" value="${ vo.mem_name }" disabled="disabled">
             </div>
             <hr>
             <div class="profile_update">
@@ -348,17 +354,17 @@
             <hr>
             <div class="profile_update">
                 <span class="s_box">생년월일</span>
-                 <input class="profile_update_birth" type="text" value="${ user.mem_birth }" disabled="disabled">
+                 <input class="profile_update_birth" type="text" value="${ vo.mem_birth }" disabled="disabled">
              </div>
              <hr>
             <div class="profile_update_zipcode_box">
                 <span class="s_box">우편번호</span>
-                <input class="profile_update_zipcode" type="text" id="mem_zipcode1" name="mem_zipcode" value="${ user.mem_zipcode }" disabled="disabled">
+                <input class="profile_update_zipcode" type="text" id="mem_zipcode1" name="mem_zipcode" value="${ vo.mem_zipcode }" disabled="disabled">
              <!--    <input class="profile_update_zipcode_btn" type="button" value="찾기" onclick="send_zipcode()"> -->
             </div>
             <div class="profile_update_addr_box">
                <span class="s_box">상세주소</span>
-                <input class="profile_update_addr" type="text" name="mem_addr" value="${ user.mem_addr }" disabled="disabled">
+                <input class="profile_update_addr" type="text" name="mem_addr" value="${ vo.mem_addr }" disabled="disabled">
             </div>
             <hr>
             <div class="profile_update">

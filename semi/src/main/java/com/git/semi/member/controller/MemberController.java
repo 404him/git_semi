@@ -214,7 +214,6 @@ public class MemberController {
 			
 		}
 		
-		
 		MemberVo vo = member_dao.selectProfile(mem_idx);
 		
 		model.addAttribute("vo",vo);
@@ -226,7 +225,7 @@ public class MemberController {
 	
 	// 회원 프로필 수정폼 이동
 	@RequestMapping("profile_update_form.do")
-	public String profile_update_form(RedirectAttributes ra) {
+	public String profile_update_form(int mem_idx,RedirectAttributes ra,Model model) {
 		
 		if (session.getAttribute("user") == null) {
 			
@@ -234,6 +233,9 @@ public class MemberController {
 			return "redirect:login_form.do";
 		}
 		
+		MemberVo vo = member_dao.selectProfile(mem_idx);
+		
+		model.addAttribute("vo",vo);
 		
 		return "member/member_profile_form";
 	}
@@ -245,10 +247,9 @@ public class MemberController {
 								 RedirectAttributes ra,
 								 Model model) {
 		
-		MemberVo user = (MemberVo) session.getAttribute("user");
-
+	
 		// 세션만료 시 수정하지 않고 로그인 폼 이동
-		if (user == null) {
+		if (session.getAttribute("user") == null) {
 				
 			ra.addAttribute("reason","session_timeout");
 			
@@ -258,18 +259,14 @@ public class MemberController {
 		
 		int res = member_dao.selectProfileUpdate(vo);
 		
-		if (res > 0 ) {
-			session.removeAttribute("user");
-			session.setAttribute("user", vo);
-			
-		}
 		
+		  if (res > 0 ) {
+			  session.removeAttribute("user"); 
+			  session.setAttribute("user",vo);
+		  
+		  }
+		 
 		ra.addAttribute("mem_idx", mem_idx);
-		
-		MemberVo member = member_dao.selectProfile(mem_idx);
-		
-		model.addAttribute("vo",member);
-		
 		
 		return "redirect:profile.do";
 	}
@@ -315,9 +312,8 @@ public class MemberController {
 	@RequestMapping("member_delete.do")
 	public String member_delete(int mem_idx,RedirectAttributes ra, MultipartFile image) {
 		
-		MemberVo user = (MemberVo) session.getAttribute("user");
 		
-		if (user == null) {
+		if (session.getAttribute("user") == null) {
 				
 			ra.addAttribute("reason","session_timeout");
 				

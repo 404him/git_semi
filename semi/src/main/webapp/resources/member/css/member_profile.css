@@ -205,26 +205,28 @@
 
     .memp_update{
         padding: 5px;
-        width: 200px;
-        height: 40px;
+        width: 48%;
+        height: 50px;
         background-color: rgb(82, 186, 255);
         color: #ffffff;
         border: 1px solid rgb(82, 186, 255);
         border-radius: 7px;
         transition: all 0.7s;
         font-size: 18px;
+        font-weight: bold;
     }
 
     .memp_delete{
         padding: 5px;
-        width: 200px;
-        height: 40px;
+        width: 48%;
+        height: 50px;
         background-color: rgb(255, 103, 103);
         color: #ffffff;
         border: 1px solid rgb(255, 103, 103);
         border-radius: 7px;
         transition: all 0.7s;
         font-size: 18px;
+        font-weight: bold;
     }
 
     .memp_update:hover{

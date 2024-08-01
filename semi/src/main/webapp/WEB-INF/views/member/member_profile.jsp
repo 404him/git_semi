@@ -54,22 +54,9 @@
 
 	}//end:btn_change()
 
-	function update_profile(f) {
-
-		let mem_idx = f.mem_idx.value;
-
-		location.href = 'profile_update_form.do?mem_idx=' + mem_idx
-
-	}//end:update_profile(f)
 
 	function update_photo() {
 
-		/* 	const btn_change = document.getElementById('btn_change');
-			const img_update = document.getElementById('img_update');
-			const photo_upload = document.getElementById('photo_upload'); */
-
-			
-			
 		let image = $('#photo_upload')[0].files[0];
 
 		var formData = new FormData();
@@ -87,21 +74,9 @@
 			processData : false,
 			contentType : false,
 			success : function(res_data) {
+				
 				if (res_data == '1') {
-
 					alert("이미지가 수정되었습니다!");
-
-					/* 	// btn1 숨기기 (display: none)
-
-						if (btn_change.style.display == 'none') {
-
-							btn_change.style.display = 'block';
-
-							img_update.style.display = 'none';
-
-							photo_upload.style.display = 'none';
-						} */
-
 				}
 			},
 			error : function(err) {
@@ -122,13 +97,34 @@
 
 		alert("탈퇴 되었습니다.")
 
-		location.href = "member_delete.do?mem_idx=" + $
-		{
-			vo.mem_idx
-		}
-		+"&image=" + image
+		location.href = "member_delete.do?mem_idx=" + ${vo.mem_idx}+"&image=" + image
 
 	}//end:del()
+	
+	
+	function update_profile(f) {
+
+			let mem_idx		 = f.mem_idx.value;
+			let mem_id		 = f.mem_id.value.trim();
+			let mem_name	 = f.mem_name.value.trim();
+		 	let mem_nickname = f.mem_nickname.value.trim();
+			let mem_phone    = f.mem_phone.value;
+			let mem_pwd 	 = f.mem_pwd.value.trim();
+			let mem_birth	 = f.mem_birth.value.trim();
+			let mem_zipcode  = f.mem_zipcode.value.trim();
+			let mem_addr 	 = f.mem_addr.value.trim();
+			let mem_grade	 = f.mem_grade.value.trim();
+
+			
+			f.method="POST";
+			f.action="profile_update_form.do";
+			f.submit();
+			
+			
+
+	}//end:update_profile(f)
+	
+	
 </script>
 
 
@@ -154,12 +150,23 @@
 					<div class="memp_img_update_box">
 						<input type="file" class="img_preview" id="photo_upload" name="image" 
 						 value="사진선택" onchange="get_photo();">
-						<input class="memp_img_update1" type="button" value="사진수정"
+						<input class="memp_img_update1" type="button" value="사진선택"
 							id="btn_change" onclick="btn_change()">
 						<input class="memp_img_update" type="button" value="사진수정"
 							id="img_update" onclick="update_photo()">
 					</div>
 			<div class="memp_profile_box">
+			<form>
+			<input type="hidden" name="mem_idx" value="${ vo.mem_idx }">
+			<input type="hidden" name="mem_id" value="${ vo.mem_id }">
+			<input type="hidden" name="mem_name" value="${ vo.mem_name }">
+			<input type="hidden" name="mem_nickname" value="${ vo.mem_nickname }">
+			<input type="hidden" name="mem_pwd" value="${ vo.mem_pwd }">
+			<input type="hidden" name="mem_phone" value="${ vo.mem_phone }">
+			<input type="hidden" name="mem_birth" value="${ vo.mem_birth }">
+			<input type="hidden" name="mem_zipcode" value="${ vo.mem_zipcode }">
+			<input type="hidden" name="mem_addr" value="${ vo.mem_addr }">
+			<input type="hidden" name="mem_grade" value="${ vo.mem_grade }">
 				<div class="memp_profile">
 					<span class="s_profile">Name.</span><span class="memp_profile_name">${ vo.mem_name }</span>
 				</div>
@@ -203,9 +210,7 @@
 						<span class="s_profile">작성한 기사 수.</span><span class="memp_profile_news">5 건</span>
 					</div>
 				</c:if> --%>
-
-				<form>
-					<input type="hidden" name="mem_idx" value="${ vo.mem_idx }">
+				
 					<div class="memp_button_box">
 						<input class="memp_update" type="button" value="회원정보 수정"
 							onclick="update_profile(this.form)"> <input
