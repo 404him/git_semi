@@ -125,5 +125,30 @@
 <!-- TODO : 푸터바 -->
 <jsp:include page="../common/footer.jsp"/>
 
+
+<!-- 회원 프로필 페이지에서 .do?mem_idx=1 이런식으로 비정상 접근 시도시 차단 -->
+<script type="text/javascript">
+
+	$(document).ready(function() {
+
+		
+		setTimeout(showMessage, 100);
+
+	});
+
+	function showMessage() {
+
+		
+		if ("${ param.reason == 'session_timeout'}" == "true") {
+			alert("로그아웃되었습니다\n로그인을 다시 해주세요");
+		}
+
+		if ("${ param.reason == 'no_idx' }" == "true") {
+			alert("비정상적인 접근입니다.")
+		}
+
+	}
+</script>
+
 </body>
 </html>

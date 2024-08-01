@@ -116,24 +116,6 @@ public class MemberController {
 	public String login(String mem_id,
 						String mem_pwd,
 						RedirectAttributes ra) {
-
-		/*
-		 * MemberVo user = member_dao.selectMemId(mem_id);
-		 * 
-		 * if (user == null) {
-		 * 
-		 * // RedirectAttributes=> redirect시 parameter로 이용된다 ra.addAttribute("reason",
-		 * "fail_id");
-		 * 
-		 * return "redirect:login_form.do"; }
-		 * 
-		 * // 비밀번호가 틀린경우 if (user.getMem_pwd().equals(mem_pwd) == false) {
-		 * 
-		 * ra.addAttribute("reason", "fail_pwd"); ra.addAttribute("mem_id", mem_id);
-		 * 
-		 * return "redirect:login_form.do"; }
-		 */
-
 		
 		//계정 잠금 로직
 		
@@ -255,6 +237,15 @@ public class MemberController {
 			
 		}
 		
+		// 세션에 있는 유저의 idx와 현재 페이지의 idx가 다르면 비정상 접근으로 튕김
+		if (user.getMem_idx() != mem_idx) {
+			
+			ra.addAttribute("reason","no_idx");
+			
+			return "redirect:../main.do";
+			
+		}
+		
 		MemberVo vo = member_dao.selectProfile(mem_idx);
 		
 		model.addAttribute("vo",vo);
@@ -268,11 +259,23 @@ public class MemberController {
 	@RequestMapping("profile_update_form.do")
 	public String profile_update_form(int mem_idx,RedirectAttributes ra,Model model) {
 		
+		MemberVo user = (MemberVo) session.getAttribute("user");
+		
 		if (session.getAttribute("user") == null) {
 			
 			ra.addAttribute("reason","session_timeout");
 			return "redirect:login_form.do";
 		}
+		
+		// 세션에 있는 유저의 idx와 현재 페이지의 idx가 다르면 비정상 접근으로 튕김
+		if (user.getMem_idx() != mem_idx) {
+
+			ra.addAttribute("reason", "no_idx");
+
+			return "redirect:../main.do";
+
+		}
+		
 		
 		MemberVo vo = member_dao.selectProfile(mem_idx);
 		

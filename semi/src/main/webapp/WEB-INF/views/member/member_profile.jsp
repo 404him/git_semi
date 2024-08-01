@@ -31,6 +31,11 @@
 			alert("로그아웃되었습니다\n로그인을 다시 해주세요");
 		}
 
+		if ("${ param.reason == 'no_idx' }" == "true"){
+			alert("비정상적인 접근입니다.")
+		}
+		
+		
 	}
 
 	function btn_change() {
@@ -77,6 +82,7 @@
 				
 				if (res_data == '1') {
 					alert("이미지가 수정되었습니다!");
+					location.href="profile.do?mem_idx=" + "${ vo.mem_idx }"
 				}
 			},
 			error : function(err) {
@@ -97,7 +103,7 @@
 
 		alert("탈퇴 되었습니다.")
 
-		location.href = "member_delete.do?mem_idx=" + ${vo.mem_idx}+"&image=" + image
+		location.href = "member_delete.do?mem_idx=" + ${vo.mem_idx} + "&image=" + image
 
 	}//end:del()
 	
