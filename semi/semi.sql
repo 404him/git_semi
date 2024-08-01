@@ -13,15 +13,11 @@ DROP SEQUENCE seq_news_like_idx;
 DROP SEQUENCE seq_category_idx;
 DROP SEQUENCE seq_subscribe_idx;
 DROP SEQUENCE seq_reply_idx;
-DROP SEQUENCE seq_reply_like_idx;
-DROP SEQUENCE seq_reply_unlike_idx;
 DROP SEQUENCE seq_report_idx;
 
 -- Drop Table Line --
 
 DROP TABLE REPORT;
-DROP TABLE REPLY_LIKE;
-DROP TABLE REPLY_UNLIKE;
 DROP TABLE REPLY;
 DROP TABLE SUBSCRIBE;
 DROP TABLE NEWS_LIKE;
@@ -42,8 +38,6 @@ CREATE SEQUENCE seq_news_like_idx;
 CREATE SEQUENCE seq_category_idx;
 CREATE SEQUENCE seq_subscribe_idx;
 CREATE SEQUENCE seq_reply_idx;
-CREATE SEQUENCE seq_reply_like_idx;
-CREATE SEQUENCE seq_reply_unlike_idx;
 CREATE SEQUENCE seq_report_idx;
 
 
