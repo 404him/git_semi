@@ -77,8 +77,8 @@
 					<c:if test="${ top.title != 'null' and top.url != 'null' }">
 						<div class="hot-news" onclick="location.href='${top.url}'">
 								<div  style="display: inline-block;">
-									<c:set var="noImage" value="${pageContext.request.contextPath}/resources/main/noImage.png" />
-									<img src="${ top.urlToImage != 'null' ? top.urlToImage : noImage }" width="160px;" height="120px;" onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/resources/main/noImage.png';" />
+									<c:set var="noImage" value="${pageContext.request.contextPath}/resources/main/noImage1.png" />
+									<img src="${ top.urlToImage != 'null' ? top.urlToImage : noImage }" width="140px;" height="100px;" onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/resources/main/noImage1.png';" />
 								</div>
 							<div style="display: inline-block; width: 60%;">${top.title}</div>
 						</div>

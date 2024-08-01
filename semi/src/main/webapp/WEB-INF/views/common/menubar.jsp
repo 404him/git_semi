@@ -42,7 +42,7 @@
     <h1 class="header_h1">
         <img class="main_logo"
              src="${pageContext.request.contextPath}/resources/member/세미로고.png"
-             alt="main_logo" onclick="location.href='${pageContext.request.contextPath}/main.do'">
+             alt="main_logo" onclick="location.href='${pageContext.request.contextPath}/'" />
     </h1>
     <span class="r_posi">
 			<c:if test="${ empty user.mem_idx }">
