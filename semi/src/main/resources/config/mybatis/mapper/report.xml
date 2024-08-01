@@ -90,4 +90,11 @@
 		</choose>
 	</delete>
 
+	<!-- 회원 잠금 해제. -->
+	<update id="unlockMember" parameterType="int" >
+		UPDATE member SET mem_use = 'y',mem_lockcount = 0
+		WHERE mem_idx = #{mem_idx}
+	</update>
+
+
 </mapper>

@@ -107,6 +107,9 @@
 		UPDATE member SET mem_use = 'n'
 					  WHERE mem_id = #{mem_id}
 	</update>
-	
+
+	<select id="member_lock_mem" resultType="member">
+		select * from member where mem_use = 'n'
+	</select>
 	
 </mapper>

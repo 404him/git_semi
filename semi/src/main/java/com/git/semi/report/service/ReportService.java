@@ -88,4 +88,8 @@ public class ReportService {
         return reportDao.deleteRep_typeDataByIdx(map);
 
     }
+
+    public int unlockMember(int mem_idx) {
+        return reportDao.unlockMember(mem_idx);
+    }
 }

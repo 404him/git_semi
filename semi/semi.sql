@@ -245,7 +245,7 @@ COMMIT;
 
 
 
-
+select * from member;
 
 
 

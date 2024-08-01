@@ -79,6 +79,71 @@
 				</c:forEach>
 			</tbody>
 		</table>
+	<br><br><br>
+
+		<h3>잠긴 회원 목록</h3>
+		<br>
+		<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+			<tr>
+				<th>계정 아이디</th>
+				<th>사용자 이름</th>
+				<th>전화번호</th>
+				<th>회원 분류</th>
+				<th>가입 일자</th>
+				<th width="120px"></th>
+			</tr>
+			</thead>
+			<tbody>
+			<c:if test="${empty lockMemList}">
+					<td colspan="6" style="text-align: center; font-size: 24px;">잠긴 회원이 없습니다~!</td>
+			</c:if>
+			<c:forEach var="m" items="${lockMemList}">
+				<tr>
+					<td><c:out value="${m.mem_id}" /></td>
+					<td><c:out value="${m.mem_name}" /></td>
+					<td><c:out value="${m.mem_phone}" /></td>
+					<td><c:out value="${m.mem_grade}" /></td>
+					<td><c:out value="${m.mem_regdate}" /></td>
+					<td style="text-align: center">
+						<button type="button" class="btn btn-danger"
+								onclick="unlockMember('${m.mem_idx}');">잠금 해제</button>
+					</td>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
 	</div>
+
+<script>
+	function unlockMember(mem_idx) {
+		// 잠금 해제 함수.
+		$.ajax({
+			url:'${pageContext.request.contextPath}/unlockMember.do',
+			type: 'POST',
+			data: {
+				"mem_idx" : mem_idx
+				},
+			success: function(result) {
+				if(result > 0){
+					alert("잠금이 해제되었습니다.");
+					location.href='${ pageContext.request.contextPath }/report.do';
+				} else {
+					alert("잠금 해제가 안되었어요ㅠㅠ");
+				}
+			},
+			error: function() {
+				alert("잠금 해제 실패! 오류 발생");
+			}
+
+		});
+
+
+	}
+
+</script>
+
+
+
 </body>
 </html>

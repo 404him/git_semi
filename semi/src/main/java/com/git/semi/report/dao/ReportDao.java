@@ -49,4 +49,8 @@ public class ReportDao {
     public int deleteRep_typeDataByIdx(Map<String, Object> map) {
         return sqlSession.delete("ReportMapper.deleteRep_typeDataByIdx", map);
     }
+
+    public int unlockMember(int mem_idx) {
+        return sqlSession.update("ReportMapper.unlockMember", mem_idx);
+    }
 }

@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.git.semi.member.dao.MemberDao;
+import com.git.semi.member.service.MemberService;
 import com.git.semi.member.vo.MemberVo;
 
 import org.json.JSONObject;
@@ -21,54 +23,29 @@ import com.git.semi.report.vo.ReportVo;
 public class ReportController {
 
     private final ReportService reportService;
+    private final MemberDao memberDao;
 
     @Autowired
-    public ReportController(ReportService reportService) {
+    public ReportController(ReportService reportService, MemberDao memberDao) {
         this.reportService = reportService;
+        this.memberDao = memberDao;
     }
-
-    @PostMapping("/reportNews")
-    public String reportNews(@RequestParam("newsId") int newsId, HttpSession session, RedirectAttributes redirectAttributes) {
-        
-    	// 이미 신고가 되었는지 판단하기 위해 db에 접근해 select하기.
-
-    	int reporterId = (int) session.getAttribute("userId");
-        reportService.reportNews(reporterId, newsId);
-        redirectAttributes.addFlashAttribute("message", "뉴스가 신고되었습니다.");
-        return "redirect:/home";
-    }
-
-    @PostMapping("/reportMember")
-    public String reportMember(@RequestParam("memberId") int memberId, HttpSession session, RedirectAttributes redirectAttributes) {
-        int reporterId = (int) session.getAttribute("userId");
-        reportService.reportMember(reporterId, memberId);
-        redirectAttributes.addFlashAttribute("message", "회원이 신고되었습니다.");
-        return "redirect:/home";
-    }
-
-    @PostMapping("/reportReply")
-    public String reportReply(@RequestParam("replyId") int replyId, HttpSession session, RedirectAttributes redirectAttributes) {
-        int reporterId = (int) session.getAttribute("userId");
-        reportService.reportReply(reporterId, replyId);
-        redirectAttributes.addFlashAttribute("message", "댓글이 신고되었습니다.");
-        return "redirect:/home";
-    }
-
-    @PostMapping("/deleteMember")
-    public String deleteMember(@RequestParam("mem_idx") int mem_idx, RedirectAttributes redirectAttributes) {
-        reportService.deleteMember(mem_idx);
-        redirectAttributes.addFlashAttribute("message", "회원이 삭제되었습니다.");
-        return "redirect:/report";
-    }
-
 
     /**
-     * 신고 리스트 조회
+     * 신고 리스트 조회 & 잠긴 회원 리스트 조회
      */
     @GetMapping("/report.do")
     public String viewReports(Model model) {
+
+        // 신고 리스트 조회
         List<ReportVo> reports = reportService.getAllReports();
         model.addAttribute("reports", reports);
+
+        // 잠긴 회원 리스트 조회
+        List<MemberVo> lockMemList = memberDao.selectLockMem();
+        model.addAttribute("lockMemList", lockMemList);
+
+
         return "report/report";
     }
 
@@ -141,5 +118,18 @@ public class ReportController {
 
     }
 
+    /**
+     * 사용자 잠금 해제.
+     */
+    @RequestMapping(value="unlockMember.do",
+            produces = "application/json; charset=utf-8;")
+    @ResponseBody
+    public String unlockMember(@RequestParam("mem_idx") int mem_idx) {
+
+        int result = reportService.unlockMember(mem_idx);
+
+        return String.valueOf(result);
+
+    }
 
 }

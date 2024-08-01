@@ -102,7 +102,13 @@ public class MemberDaoImp implements MemberDao {
 		return sqlSession.selectOne("member.member_user_pw",mem_idx);
 	}
 
-	
+	// 잠긴 회원 리스트 조회
+	@Override
+	public List<MemberVo> selectLockMem() {
+		return sqlSession.selectList("member.member_lock_mem");
+	}
+
+
 	public String selectImageUrlByMemIdx(int mem_idx) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("member.member_image_url",mem_idx);
