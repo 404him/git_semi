@@ -8,6 +8,28 @@
 	<select id="news_category" resultType="category">
 		select * from CATEGORY
 	</select>
+	
+	<!-- 구독 기자 조회 -->
+	<select id="news_subscribe_list" resultType="subscribe">
+		SELECT 
+			    n.news_idx,
+			    n.news_title,
+			    n.news_thumbnail_image,
+			    n.news_content,
+			    n.news_count,
+			    n.news_createAt,
+			    n.news_updateAt,
+			    m.mem_idx AS reporter_mem_idx,
+			    m.mem_name AS reporter_name,
+			    m.mem_nickname AS reporter_nickname
+			FROM 
+			    MEMBER u
+			    JOIN SUBSCRIBE s ON u.mem_idx = s.mem_idx
+			    JOIN NEWS n ON s.reporter_idx = n.mem_idx
+			    JOIN MEMBER m ON n.mem_idx = m.mem_idx
+			WHERE 
+			    u.mem_idx = #{mem_idx};
+	</select>
 
     <!-- 뉴스 등록 -->
     

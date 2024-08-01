@@ -36,6 +36,23 @@ public class NewsController {
 		this.session = session;
     }
     
+    
+    
+    // 구독한 기자 뉴스 리스트 조회
+    @RequestMapping("/news/subscribe_list.do")
+    public String subscribe_list(int mem_idx, Model model){
+    	
+    	
+    	
+    	List<SubscribeVo> newsList = newsService.selectAllBySubscribeIdx(mem_idx);
+
+         model.addAttribute("newsList", newsList);
+
+         return "news/newsSubscribeListView";
+    }
+    
+
+    
     @RequestMapping("/news/insert_form.do")
     public String newsInsertForm(Model model) {
     	

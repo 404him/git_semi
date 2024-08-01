@@ -21,6 +21,14 @@ public class NewsService {
 	        this.newsDao = newsDao;
 	    }
 	 
+	 
+	 // 구독 기자 조회
+	 
+	 public List<SubscribeVo> selectAllBySubscribeIdx(int mem_idx) {
+		 return newsDao.selectAllBySubscribeIdx(mem_idx);
+		
+	}
+	 
 	public int insert(NewsVo vo) {
 		 return newsDao.insert(vo);
 	}

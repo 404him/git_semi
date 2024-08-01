@@ -8,9 +8,23 @@ public class ReplyVo {
 	String rpy_modify;
 	int mem_idx;
 	int news_idx;
+	String mem_nickname;
+	String mem_img_url;
 	
 	
 	
+	public String getMem_nickname() {
+		return mem_nickname;
+	}
+	public void setMem_nickname(String mem_nickname) {
+		this.mem_nickname = mem_nickname;
+	}
+	public String getMem_img_url() {
+		return mem_img_url;
+	}
+	public void setMem_img_url(String mem_img_url) {
+		this.mem_img_url = mem_img_url;
+	}
 	public int getRpy_idx() {
 		return rpy_idx;
 	}

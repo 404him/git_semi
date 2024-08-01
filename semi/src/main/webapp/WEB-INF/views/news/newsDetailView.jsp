@@ -161,9 +161,15 @@
         <div style="display: inline-block; font-size: 28px; font-weight: bold;">[${vo.category_name}] ${vo.news_title}</div>
 
         <div style="display: inline-block; float: right; margin-right: 10px;">
-            <span>${fn:substring(vo.news_createAt,0,10)} 작성됨</span><br>
+            <c:if test="${ empty vo.news_updateAt}">
+            <span>${fn:substring(vo.news_createAt,0,10)} 작성</span><br>
+            </c:if>
+            <c:if test="${ !empty vo.news_updateAt}">
+            <span>${fn:substring(vo.news_createAt,0,10)} 작성/</span>
+            <span>${fn:substring(vo.news_updateAt,0,10)} 수정</span><br>
+            </c:if>
             <c:if test="${user.mem_idx eq vo.mem_idx }">
-            <input type="button" value="수정하기" onclick="location.href='${pageContext.request.contextPath}/news/modify_form.do?news_idx=${ vo.news_idx }'">
+            <input style="float: right;" type="button" value="수정하기" onclick="location.href='${pageContext.request.contextPath}/news/modify_form.do?news_idx=${ vo.news_idx }'">
             </c:if>
         </div>
 
@@ -226,8 +232,9 @@
         <br><hr><br>
 
         <!-- TODO : 댓글 쓰는 곳!!!! -->
+        <div style=" width: 100%;">
       	<jsp:include page="../reply/reply_view.jsp" />
-
+		</div>
 
 
     </div>

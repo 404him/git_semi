@@ -7,11 +7,17 @@
 
    <!-- 조회 -->
    <select id="reply_list"  parameterType="int"  resultType="reply">
-      select * 
-        from reply r
-      
-      where news_idx=#{ news_idx }
-      order by rpy_idx desc
+	     SELECT ar.*, m.mem_nickname, m.mem_img_url
+			FROM (SELECT *
+			      FROM reply r
+			               LEFT OUTER JOIN (SELECT rpy_idx as ri, count(rpy_idx) rpy_like_count
+			                                  FROM reply_like
+			                                 GROUP BY rpy_idx) rl
+			                                    ON rl.ri = r.rpy_idx) ar
+			         JOIN MEMBER m
+			              ON ar.mem_idx = m.mem_idx
+			              	WHERE news_idx=#{ news_idx }
+			      order by rpy_idx desc
    </select>
    
 

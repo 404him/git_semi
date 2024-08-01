@@ -49,7 +49,6 @@
 			<ul class="r_info">
 				<li class="r_li"><a href="${pageContext.request.contextPath}/member/insert_form.do" class="r__button">회원가입</a></li>
 				<li class="r_li"><a href="${pageContext.request.contextPath}/member/login_form.do" class="r__button">로그인</a></li>
-                <!-- <li class="r_li"><a href="#" class="r__button">신문구독</a></li> -->
 			</ul>
 			</c:if>
 			
@@ -63,8 +62,12 @@
 				<c:if test="${user.mem_grade eq '기자'}">
 					<li class="r_li"><a href="${pageContext.request.contextPath}/news/insert_form.do" class="r__button">기사등록</a></li>
 				</c:if>
-				<c:if test="${user.mem_id eq 'admin'}">
+				<c:if test="${user.mem_id eq 'admin' || user.mem_grade eq '관리자'}">
 					<li class="r_li"><a href="${pageContext.request.contextPath}/report.do" class="r__button">신고목록</a></li>
+				</c:if>
+				<c:if test="${ user.mem_grade eq '일반' }">
+                <br><br><li class="r_li"><a href="${pageContext.request.contextPath}/news/subscribe_list.do?mem_idx=${user.mem_idx}" class="r__button" style="width: 200px;">구독기자 뉴스보기</a></li>
+                
 				</c:if>
 			</ul>
 			</c:if>
@@ -76,7 +79,6 @@
 <div class="nav_wrapper">
     <nav class="nav_container">
         <ul class="nav_ul_form">
-            <!-- TODO : 카테고리 포이치 설정필요 -->
             <c:forEach var="c" items="${categoryList}">
                 <li class="dropdown"><a href="${pageContext.request.contextPath}/news/category/list.do?category_idx=${c.category_idx}" class="nav_title">${c.category_name}</a></li>
             </c:forEach>

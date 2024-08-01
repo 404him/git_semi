@@ -32,9 +32,15 @@
 					onclick="reply_delete('${vo.rpy_idx}');" width="20px"	height="20px" style="cursor:pointer;"><br>
 			</div>
 		</c:if>
-		<div>${ vo.mem_idx }</div>
-		<div>${ vo.rpy_content }</div>
-		<div>${ fn:substring(vo.rpy_regdate,0,16) }
+		<div>
+		<div style="display: inline-block; width: 50px; height: 50px; 
+				border: 1px solid rgb(209, 209, 209); border-radius: 100%; overflow: hidden; position: absolute;">
+			<img src="${ vo.mem_img_url }" style=" object-fit:cover; width: 50px; height: 50px;"/>
+		</div>
+		<div style="display: inline-block; margin-left: 55px;">${ vo.mem_nickname }</div><br>
+		<div style="display: inline-block; margin-left: 55px;">${ fn:substring(vo.rpy_regdate,0,16) }</div><br>
+		</div>
+		<div>${ vo.rpy_content }
 		        <span>
  	           <!-- 댓글 신고 버튼 -->
             <c:if test="${ user != null }">
@@ -47,6 +53,7 @@
             </c:if>
         </span>
 		</div>
+		<hr>
 </c:forEach>
 
 </body>

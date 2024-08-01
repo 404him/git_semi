@@ -56,7 +56,8 @@
   color: white;
 }
 .form{
-    display: inline-block;	
+    display: inline-block;
+    width: 100%;
 }
 .reply_comment{
     font-size: 14px;
@@ -80,10 +81,9 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: none;
-    width: 700px;
+    width: 100%;
 }
 .reply_input textarea {
-    width: 760px;
     height: 100px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -101,6 +101,7 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+	margin-top: 10px;
 }
 .comment-btn .button:hover {
     background-color: #0056B3;
