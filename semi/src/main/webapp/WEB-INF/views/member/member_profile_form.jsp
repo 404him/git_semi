@@ -14,9 +14,9 @@
 
 <script type="text/javascript">
 	
-		let nickname = 0;
+	//	let nickname = 0;
 		let pw = 0;
-		let phone = 0;
+	//	let phone = 0;
 		
 		 $(document).ready(function(){
 			  
@@ -57,6 +57,7 @@
 				  }
 			
 		}
+		
 		
 		// 닉네임 중복확인
 		function check_nickname(){
@@ -176,7 +177,7 @@
 
 					if (phoneNumberPattern.test(phone_check) == true) {
 						alert("인증되었습니다.")
-						$("#phone_check").prop("disabled", true)
+						$("#phone_check1").prop("disabled", true)
 						$("#mem_phone1").prop("disabled", true)
 						phone = phone + 1;
 						return;
@@ -219,7 +220,7 @@
 		let mem_phone    = f.mem_phone.value;
 		let mem_zipcode  = f.mem_zipcode.value.trim();
 		let mem_addr 	 = f.mem_addr.value.trim();
-		let mem_grade	 = f.mem_grade.value;
+		let mem_grade	 = f.mem_grade.value.trim();
 		let mem_idx		 = f.mem_idx.value;
 		
 		if(mem_nickname == ""){
@@ -269,6 +270,7 @@
 		if(pw == 1){
 			$("#mem_pw2").prop("disabled", false);
 			$("#mem_nickname1").prop("disabled", false);
+			$("#mem_phone1").prop("disabled", false);
 		} else{
 			if(confirm("비밀번호를 확인하세요"));
 			return;
@@ -319,6 +321,7 @@
                 <span class="s_box">*닉네임</span>
                 <input class="profile_update_nickname" type="text" id="mem_nickname1" name="mem_nickname" value="${ user.mem_nickname }"
                  placeholder="닉네임을 입력해 주세요" disabled="disabled">
+                 
                	<div class="nickname_btn_box">
                 <input class="profile_update_nickname_btn" type="button" id="nick_update" value="닉네임 변경" onclick="nickname_update()">
                 <input class="profile_update_check_btn" type="button" id="nick_check" value="중복확인" onclick="check_nickname()">
@@ -326,10 +329,14 @@
             </div>
             <hr>
             <div class="profile_update">
-                <span class="s_box">전화번호</span>
+                <span class="s_box">*전화번호</span>
                 <input class="profile_update_phone" type="text" id="mem_phone1" name="mem_phone" value="${ user.mem_phone }"
                  disabled="disabled">
-               <!--  <input class="profile_update_phone_btn" type="button" value="인증" onclick="check_phone()"> -->
+                 
+                 <div class="phone_update_btn_box">
+                 <input class="phone_btn" type="button" id="phone_update1" value="변경" onclick="phone_update()">
+   	             <input class="profile_update_phone_btn" id="phone_check1" type="button" value="인증" onclick="check_phone()">
+            	 </div>
             </div>
             <hr>
             <div class="profile_update">
@@ -374,5 +381,26 @@
 <br><br><br><br>
 <!-- TODO : 푸터바 -->
 <jsp:include page="../common/footer.jsp"/>
+
+<script type="text/javascript">
+
+
+	//휴대폰 변경 버튼 클릭시 활성화
+	function phone_update() {
+		$("#mem_phone1").prop("disabled", false);
+
+		// 토글 할 버튼 선택 (btn1)
+		const phone_update_btn = document.getElementById('phone_update1');
+		const phone_check_btn = document.getElementById('phone_check1');
+
+		// btn1 숨기기 (display: none)
+		if (phone_update_btn.style.display !== 'none') {
+			phone_update_btn.style.display = 'none';
+			phone_check_btn.style.display = 'block';
+		}
+	}
+	
+</script>
+
 </body>
 </html>

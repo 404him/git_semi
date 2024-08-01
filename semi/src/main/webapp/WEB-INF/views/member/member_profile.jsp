@@ -105,7 +105,7 @@
 				}
 			},
 			error : function(err) {
-				alert("잠시후 다시 시도해주세요")
+				alert("사진을 선택해 주세요")
 			}
 
 		});
@@ -170,8 +170,7 @@
 				</div>
 				<hr>
 				<div class="memp_profile">
-					<span class="s_profile">Member.</span><span
-						class="memp_profile_member">${ vo.mem_grade }</span>
+					<span class="s_profile">Member.</span><span class="memp_profile_member">${ vo.mem_grade }</span>
 				</div>
 				<hr>
 				<div class="memp_profile">
@@ -199,11 +198,11 @@
 				</div>
 				<hr>
 
-				<c:if test="${ vo.mem_grade eq '기자' }">
+				<%-- <c:if test="${ vo.mem_grade eq '기자' }">
 					<div class="memp_profile">
 						<span class="s_profile">작성한 기사 수.</span><span class="memp_profile_news">5 건</span>
 					</div>
-				</c:if>
+				</c:if> --%>
 
 				<form>
 					<input type="hidden" name="mem_idx" value="${ vo.mem_idx }">

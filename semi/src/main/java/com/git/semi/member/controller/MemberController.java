@@ -185,6 +185,10 @@ public class MemberController {
 	@RequestMapping("insert.do")
 	public String insert(MemberVo vo) {
 		
+		String mem_grade = vo.getMem_grade().trim();
+		vo.setMem_grade(mem_grade);
+				
+		
 		// 이미지 추가 안 했을 경우 
 		if(vo.getMem_img_url() == null) {
 			vo.setMem_img_url("https://goss-s3-test-bucket.s3.ap-northeast-2.amazonaws.com/images/default/default_member_image.jpg");
@@ -199,12 +203,13 @@ public class MemberController {
 	
 	// 회원 프로필 페이지
 	@RequestMapping("profile.do")
-	public String profile(Model model,int mem_idx) {
+	public String profile(Model model,int mem_idx,RedirectAttributes ra) {
 		
 		MemberVo user = (MemberVo) session.getAttribute("user");
 		
 		if (user == null) {
 			
+			ra.addAttribute("reason","session_timeout");
 			return "redirect:login_form.do";
 			
 		}
@@ -221,7 +226,13 @@ public class MemberController {
 	
 	// 회원 프로필 수정폼 이동
 	@RequestMapping("profile_update_form.do")
-	public String profile_update_form() {
+	public String profile_update_form(RedirectAttributes ra) {
+		
+		if (session.getAttribute("user") == null) {
+			
+			ra.addAttribute("reason","session_timeout");
+			return "redirect:login_form.do";
+		}
 		
 		
 		return "member/member_profile_form";
@@ -271,7 +282,7 @@ public class MemberController {
 		
 			MemberVo userMember = (MemberVo)session.getAttribute("user");
 			
-			if (userMember == null) {
+			if (session.getAttribute("user") == null) {
 				
 				ra.addAttribute("reason","session_timeout");
 				

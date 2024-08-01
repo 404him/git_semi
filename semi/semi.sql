@@ -64,7 +64,7 @@ CREATE TABLE MEMBER (
                         mem_lockcount INT DEFAULT 0 NOT NULL,			-- 계정잠금 카운트
                         mem_use		  varchar2(1) DEFAULT 'y' NOT NULL CHECK(mem_use IN ('y','n')) , 	-- 계정 활성화 상태
                         mem_grade 	  varchar2(10) DEFAULT '일반' NOT NULL CHECK(mem_grade IN ('일반','기자','관리자')) , 	-- 회원 등급
-                        mem_regdate   DATE DEFAULT SYSDATE   NOT NULL	-- 회원가입 날짜
+						mem_regdate   DATE DEFAULT SYSDATE   NOT NULL	-- 회원가입 날짜
 );
 
 -- 회원 더미 데이터
@@ -277,7 +277,6 @@ select * from report;
 
 
 COMMIT;
-
 
 
 

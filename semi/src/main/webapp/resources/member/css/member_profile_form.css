@@ -102,8 +102,7 @@
 	
 	.profile_update_pw_btn,
 	.profile_update_nickname_btn,
-	.profile_update_zipcode_btn,
-	.profile_update_phone_btn{
+	.profile_update_zipcode_btn{
 	    width: 100px;
 	    height: 33px;
 	    margin-left: 10px;
@@ -126,11 +125,35 @@
 	    transition: all 0.5s;
 	}
 	
+	.profile_update_phone_btn{
+		display:none;
+		width: 100px;
+	    height: 33px;
+	    margin-left: 10px;
+	    background-color: #56778d;
+	    border: none;
+	    color: white;
+	    border-radius: 5px;
+	    transition: all 0.5s;
+	}
+	
+	.phone_btn{
+		width: 100px;
+	    height: 33px;
+	    margin-left: 10px;
+	    background-color: #56778d;
+	    border: none;
+	    color: white;
+	    border-radius: 5px;
+	    transition: all 0.5s;
+	}
+	
 	.profile_update_zipcode_btn:hover,
 	.profile_update_pw_btn:hover,
 	.profile_update_nickname_btn:hover,
 	.profile_update_phone_btn:hover,
-	.profile_update_check_btn:hover{
+	.profile_update_check_btn:hover,
+	.phone_btn:hover{
 	    background-color: #3e5870;
 	    cursor: pointer;
 	}
@@ -139,6 +162,14 @@
 	.profile_update_btn_box{
 	    text-align: center;
 	}
+	
+	.phone_update_btn_box{
+		display:inline-block;
+		text-align: center;
+	}
+	
+	
+	
 	
 	.profile_update_btn {
 	    padding: 8px 12px;

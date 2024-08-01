@@ -228,7 +228,7 @@
 				}
 			},
 			error	:	function(err){
-				alert("다시한번 시도해 주세요.");
+				alert("다른 전화번호를 사용해 주세요.");
 			}
 		});
 		
@@ -258,7 +258,8 @@
 		let mem_zipcode  = f.mem_zipcode.value.trim();
 		let mem_addr 	 = f.mem_addr.value.trim();
 		let mem_birth	 = f.mem_birth.value;
-		let mem_grade	 = f.mem_grade.value;
+		let mem_grade	 = f.mem_grade.value.trim();
+		
 		
 		if(mem_name == ""){
 			alert("이름을 입력하세요");
@@ -412,8 +413,6 @@
             <div class="sign_up_box">
                 <input id="btn_signup" class="sign_up" type="button" value="Sign Up" onclick="send_signup(this.form)">
             </div>
-
-			
 
             </div>
         </div>

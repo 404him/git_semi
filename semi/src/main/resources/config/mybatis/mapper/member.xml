@@ -53,6 +53,7 @@
 	<!-- 회원 프로필 수정 -->
 	<update id="member_profile_update" parameterType="member">
 		UPDATE member SET mem_nickname = #{ mem_nickname },
+						  mem_phone	= #{ mem_phone },
 						  mem_pwd = #{ mem_pwd },
 						  mem_grade = #{ mem_grade }
 						  WHERE mem_idx = #{ mem_idx }
