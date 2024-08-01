@@ -117,27 +117,68 @@ public class MemberController {
 						String mem_pwd,
 						RedirectAttributes ra) {
 
-		MemberVo user = member_dao.selectMemId(mem_id);
+		/*
+		 * MemberVo user = member_dao.selectMemId(mem_id);
+		 * 
+		 * if (user == null) {
+		 * 
+		 * // RedirectAttributes=> redirect시 parameter로 이용된다 ra.addAttribute("reason",
+		 * "fail_id");
+		 * 
+		 * return "redirect:login_form.do"; }
+		 * 
+		 * // 비밀번호가 틀린경우 if (user.getMem_pwd().equals(mem_pwd) == false) {
+		 * 
+		 * ra.addAttribute("reason", "fail_pwd"); ra.addAttribute("mem_id", mem_id);
+		 * 
+		 * return "redirect:login_form.do"; }
+		 */
 
-		if (user == null) {
+		
+		//계정 잠금 로직
+		
+		 MemberVo member = member_dao.account_lockCheck(mem_id);
 
-			// RedirectAttributes=> redirect시 parameter로 이용된다
-			ra.addAttribute("reason", "fail_id");
+	        if (member == null) {
+	        	// RedirectAttributes=> redirect시 parameter로 이용된다
+				ra.addAttribute("reason", "fail_id");
 
-			return "redirect:login_form.do";
-		}
+				return "redirect:login_form.do";
+	        }
 
-		// 비밀번호가 틀린경우
-		if (user.getMem_pwd().equals(mem_pwd) == false) {
+	        // member의 use 상태가 n 일경우
+	        if (member.getMem_use().equals("n")) {
+	        	
+	        	ra.addAttribute("reason", "lock_account");
+	        	
+	            return "redirect:login_form.do";
+	        }
 
-			ra.addAttribute("reason", "fail_pwd");
-			ra.addAttribute("mem_id", mem_id);
+	        // member의 pw가 일치하지 않을경우
+	        if (!member.getMem_pwd().equals(mem_pwd)) {
+	        	member_dao.fail_lockCount(mem_id);	// lock 카운트를 1씩 증가
+	          
+	        	// member에 해당하는 id를 조회해서 member에 저장
+	        	member = member_dao.account_lockCheck(mem_id);
+	        	// 확인된 lockcount가 5이상일 경우에는 계정상태를 y -> n 처리
+	            if (member.getMem_lockcount() >= 5) {
+	            	member_dao.account_lock(mem_id);
+	            	
+	            	ra.addAttribute("reason", "account_lock");
+	            	
+	                return "redirect:login_form.do";
+	            }
 
-			return "redirect:login_form.do";
-		}
+	            ra.addAttribute("reason", "fail_pwd");
 
+				return "redirect:login_form.do";
+	        }
+
+	        // 로그인에 성공 했을경우 해당 id의 카운트는 초기화
+	        member_dao.resetLockCount(mem_id);
+	    
 		// 로그인처리: 현재 로그인된 객체(user)정보를 session저장
-		session.setAttribute("user", user);
+		session.setAttribute("user", member);
 
 		return "redirect:../main.do";
 

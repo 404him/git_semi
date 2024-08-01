@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.git.semi.news.service.News1Service;
-import com.git.semi.news.vo.NewsLikeVo;
 import com.git.semi.reply.dao.ReplyDao;
 import com.git.semi.reply.service.ReplyService;
 import com.git.semi.reply.vo.ReplyLikeVo;

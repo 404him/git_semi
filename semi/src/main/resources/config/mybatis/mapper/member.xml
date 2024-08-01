@@ -84,6 +84,29 @@
 	<select id="member_photo_preview" resultType="member" parameterType="int">
 		UPDATE member SET mem_img_url = #{ mem_img_url } WHERE mem_idx = #{ mem_idx }
 	</select>
+
+	<!-- 로그인 실패시 카운트 증가 -->
+	<update id="member_fail_lockCount">
+		UPDATE member SET mem_lockcount = mem_lockcount + 1
+						  WHERE mem_id = #{mem_id}
+	</update>
+
+	<!-- 로그인 시도시 계정 잠금유무 확인 -->
+	<select id="member_acount_lockCheck" resultType="member">
+		SELECT *FROM member WHERE mem_id = #{mem_id}
+	</select>
+	
+	<!-- 로그인 성공시 카운트 초기화 -->
+	<update id="member_resetLockCount">
+		UPDATE member SET mem_lockcount = 0
+					  WHERE mem_id = #{mem_id}
+	</update>
+
+	<!-- 5번실패시 계정잠금 -->
+	<update id="member_account_lock">
+		UPDATE member SET mem_use = 'n'
+					  WHERE mem_id = #{mem_id}
+	</update>
 	
 	
 </mapper>

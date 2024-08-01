@@ -72,6 +72,15 @@
 		  alert("로그아웃되었습니다\n로그인을 다시 해주세요");
 	  }	
 	  
+	  if("${ param.reason == 'lock_account' }" == "true"){
+			alert("비밀번호 5회이상 실패로 계정이 잠겼습니다\n관리자에게 문의하세요")
+	  }
+	  
+	  if("${ param.reason == 'account_lock' }" == "true"){
+			alert("비밀번호를 5회이상 실패하셨습니다\n계정이 잠깁니다.")
+	  }
+	  
+	  
   }
 
 </script>

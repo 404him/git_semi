@@ -25,4 +25,6 @@ public interface MemberDao {
 	public int deleteOneMember(int mem_idx);
 	
 	public MemberVo selectMemPwd(int mem_idx);
+	
+	
 }
