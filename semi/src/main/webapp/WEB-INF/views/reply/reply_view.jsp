@@ -129,16 +129,16 @@
     <div id="reply_display"></div>
     	
 
-<script type="text/javascript">
+<script>
 
-
-// 댓글목록 요청
   //초기화 : 시작시
    $(document).ready(function(){
        
 	   //현재 게시물에 달린 댓글목록 출력
 	   reply_list();
+	    
    });
+   
    
 function reply_list(){
 	   
@@ -149,7 +149,6 @@ function reply_list(){
 		   success	:	function(res_data){
 			   
 			   $("#reply_display").html(res_data);
-			   
 			   
 		   },
 		   error	:	function(err){
@@ -217,21 +216,30 @@ function reply_list(){
     }//end:reply_insert()
 
 
+	function reply_delete(rpy_idx){
+		if(confirm("정말 삭제하시겠습니까")==false) return;
+		console.log("삭제 : " + rpy_idx);
+		$.ajax({
+			url		:	"../reply/delete.do",
+			data	:	{"rpy_idx": rpy_idx},
+			dataType:	"json",
+			success	:	function(res_data){
+				//res_data = {"result" : true} or {"result" : false}
+				if(res_data.result == false){
+					alert("삭제 실패");
+					return;
+				}
+				  reply_list();
+			},
+			error	:	function(err){
+				alert(err.responseText);
+			}
+			
+		});
+		
+	};
 
-    function reply_delete(rpy_idx){
-        if(confirm("정말 삭제하시겠습니까?")==false)return;
 
-        $.ajax({
-            url			:		"../reply/delete.do",
-            data		:		{"rpy_idx" : rpy_idx},
-            dataType	:		"json",
-            success		:		function(res_data){
-            },
-            error : function(err) {
-                alert("잠시후 다시 시도해주세요")
-            }
-        });
-    }
 
 
 </script>

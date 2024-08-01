@@ -47,5 +47,4 @@ private final SqlSession sqlSession;
 		// TODO Auto-generated method stub
 		return sqlSession.update("reply.reply_update", vo);
 	}
-	
 }

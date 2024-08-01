@@ -7,11 +7,14 @@
 
    <!-- 조회 -->
    <select id="reply_list"  parameterType="int"  resultType="reply">
-      select * from reply where news_idx=#{ news_idx }
+      select * 
+        from reply r
+      
+      where news_idx=#{ news_idx }
       order by rpy_idx desc
    </select>
    
-   
+
    
    
    <!-- 추가 -->
@@ -32,13 +35,5 @@
    </delete>
     
     
-    
-    <!-- 댓글 좋아요 -->
-    
-    
-    
-    
-    
-    
-    
+
 </mapper>

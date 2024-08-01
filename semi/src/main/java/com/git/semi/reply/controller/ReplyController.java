@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.git.semi.reply.dao.ReplyDao;
 import com.git.semi.reply.service.ReplyService;
-import com.git.semi.reply.vo.ReplyLikeVo;
 import com.git.semi.reply.vo.ReplyVo;
 
 @Controller
@@ -81,39 +80,6 @@ public class ReplyController {
 		}
 		
 		
-		
-//		댓글  좋아요  기능
-		
-		// 댓글 좋아요 여부 확인
-		@RequestMapping(value = "/reply/check_member_isLike_reply.do",
-	            produces = "application/json; charset=utf-8;")
-	    @ResponseBody
-	    public String check_member_isLike_news(ReplyLikeVo vo) {
-
-	        int result = replyService.checkMemberIsLikeReply(vo);
-	        return (result > 0 ? "true" : "false");
-	    }
-		
-		// 댓글 좋아요 하기 취소
-		@RequestMapping(value = "/reply/rpy_like_on_off.do",
-				produces = "application/json; charset=utf-8;")
-		@ResponseBody
-		public String news_like_on_off(String thumbsColor, int rpy_idx, int news_idx) {
-			
-			int result = replyService.rpy_like_on_off(thumbsColor, rpy_idx, news_idx);
-			
-			return String.valueOf(result);
-		}
-		
-		// 좋아요 갯수 카운트
-		@RequestMapping(value = "/reply/rpy_like_count.do",
-	            produces = "application/json; charset=utf-8;")
-	    @ResponseBody
-	    public int rpy_like_count(int rpy_idx) {
-	        int count = replyService.news_like_count(rpy_idx);
-
-	        return count;
-	    }
 		
 		
 	}
