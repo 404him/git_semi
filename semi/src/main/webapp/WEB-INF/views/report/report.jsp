@@ -15,6 +15,32 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+
+	//정말 삭제할건지 ajax
+	function deleteReport(idx, rep_type) {
+		if(confirm("정말 삭제하시겠습니까?")){
+			$.ajax({
+				url:'${pageContext.request.contextPath}/deleteReport.do',
+				type: 'POST',
+				data: {
+					idx: idx,
+					rep_type: rep_type},
+					
+				success: function(result) {
+						alert("삭제 성공!");		
+						location.href='${ pageContext.request.contextPath }/report.do';				
+				},
+				error: function() {
+					alert("삭제 실패! 오류 발생");
+				}
+					
+			});
+		}
+	}
+
+</script>
+
 
 
 
@@ -47,7 +73,7 @@
 							<td><c:out value="${report.count}" /></td>
 							<td style="text-align: center">
 							<button type="button" class="btn btn-danger"
-							onclick="location.href='${pageContext.request.contextPath}/deleteReport.do?idx=${report.idx}&rep_type=${report.rep_type}'">삭제하기</button>
+							onclick="deleteReport('${report.idx}', '${report.rep_type}')">삭제하기</button>
 							</td>
 						</tr>
 				</c:forEach>
