@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.amazonaws.regions.AwsSystemPropertyRegionProvider;
 import com.git.semi.member.vo.MemberVo;
 import com.git.semi.news.service.NewsService;
 import com.git.semi.news.vo.CategoryVo;
@@ -40,12 +41,10 @@ public class NewsController {
     
     // 구독한 기자 뉴스 리스트 조회
     @RequestMapping("/news/subscribe_list.do")
-    public String subscribe_list(int mem_idx, Model model){
+    public String subscribe_list(@RequestParam(name="mem_idx") int mem_idx, Model model){
     	
+    	List<NewsVo> newsList = newsService.selectAllBySubscribeIdx(mem_idx);
     	
-    	
-    	List<SubscribeVo> newsList = newsService.selectAllBySubscribeIdx(mem_idx);
-
          model.addAttribute("newsList", newsList);
 
          return "news/newsSubscribeListView";

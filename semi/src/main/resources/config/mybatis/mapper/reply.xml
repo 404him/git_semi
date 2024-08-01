@@ -7,7 +7,7 @@
 
    <!-- 조회 -->
    <select id="reply_list"  parameterType="int"  resultType="reply">
-	     SELECT ar.*, m.mem_nickname, m.mem_img_url
+	     SELECT ar.*, nvl(m.mem_nickname,0), nvl(m.mem_img_url,0)
 			FROM (SELECT *
 			      FROM reply r
 			               LEFT OUTER JOIN (SELECT rpy_idx as ri, count(rpy_idx) rpy_like_count

@@ -36,7 +36,7 @@ public class NewsDao {
 		
 	}
 	
-	public List<SubscribeVo> selectAllBySubscribeIdx(int mem_idx) {
+	public List<NewsVo> selectAllBySubscribeIdx(int mem_idx) {
 		return sqlSession.selectList("news.news_subscribe_list", mem_idx);
 	}
 	

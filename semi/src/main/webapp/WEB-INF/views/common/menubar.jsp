@@ -119,6 +119,8 @@
     	location.href="${pageContext.request.contextPath}/member/logout.do";
     }
     
+    
+    
 </script>
 </body>
 </html>

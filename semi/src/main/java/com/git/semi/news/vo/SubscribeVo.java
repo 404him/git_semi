@@ -1,12 +1,19 @@
 package com.git.semi.news.vo;
 
 public class SubscribeVo {
-
-    int reporter_idx;
+	
+	int subscribe_idx;
+	int reporter_idx;
     int mem_idx;
 
 
+    public int getSubscribe_idx() {
+		return subscribe_idx;
+	}
 
+	public void setSubscribe_idx(int subscribe_idx) {
+		this.subscribe_idx = subscribe_idx;
+	}
 
     public int getReporter_idx() {
 		return reporter_idx;

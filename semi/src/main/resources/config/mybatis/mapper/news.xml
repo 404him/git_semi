@@ -9,9 +9,9 @@
 		select * from CATEGORY
 	</select>
 	
-	<!-- 구독 기자 조회 -->
-	<select id="news_subscribe_list" resultType="subscribe">
-		SELECT 
+	<!-- 구독 기자 뉴스조회 -->
+	<select id="news_subscribe_list" resultType="news">
+					SELECT 
 			    n.news_idx,
 			    n.news_title,
 			    n.news_thumbnail_image,
@@ -19,16 +19,20 @@
 			    n.news_count,
 			    n.news_createAt,
 			    n.news_updateAt,
-			    m.mem_idx AS reporter_mem_idx,
-			    m.mem_name AS reporter_name,
-			    m.mem_nickname AS reporter_nickname
+			    n.category_idx,
+			    c.category_name,
+			    a.mem_idx AS author_idx,
+			    a.mem_name AS author_name
 			FROM 
-			    MEMBER u
-			    JOIN SUBSCRIBE s ON u.mem_idx = s.mem_idx
-			    JOIN NEWS n ON s.reporter_idx = n.mem_idx
-			    JOIN MEMBER m ON n.mem_idx = m.mem_idx
+			    NEWS n
+			JOIN 
+			    MEMBER a ON n.mem_idx = a.mem_idx
+			JOIN
+				CATEGORY c ON n.category_idx = c.category_idx
+			JOIN 
+			    SUBSCRIBE s ON a.mem_idx = s.reporter_idx
 			WHERE 
-			    u.mem_idx = #{mem_idx};
+			    s.mem_idx = #{mem_idx}
 	</select>
 
     <!-- 뉴스 등록 -->
