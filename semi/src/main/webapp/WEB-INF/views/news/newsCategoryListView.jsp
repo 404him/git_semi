@@ -55,12 +55,15 @@
             <h4>☞ ${categoryList[(param.category_idx-1)].category_name} 뉴스</h4>
             <c:forEach var="news" items="${newsList}">
                 <hr>
+                <br>
                 <div class="news" onclick="location.href='${pageContext.request.contextPath}/news/detail.do?news_idx=${news.news_idx}'">
                     <div style="width : 20%; display: inline-block;">
                         <img src="${news.news_thumbnail_image}" width="160px;" height="120px;" />
                     </div>
                     <div style="width : 75%; display: inline-block; margin-left: 20px;">
-                        <span style="font-weight: bold;font-size: 18px;">[${news.category_name}] ${news.news_title}</span>
+                        <div style="width: 350px;">
+                            <span style="font-weight: bold;font-size: 18px;">[${news.category_name}] ${news.news_title}</span>
+                        </div>
 
 
                         <span style="float: right">${fn:substring(news.news_createAt,0,10)}</span>
