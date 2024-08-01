@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.git.semi.member.vo.MemberVo;
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,22 +94,29 @@ public class ReportController {
         // 신고한 내역이 있는지 조회. 있으면 result > 0
         int result = reportService.checkReportByIdx(idx, mem_idx, rep_type);
 
+        System.out.println("result : "+result);
         // 신고 추가에 대한 결과값 초기화.
         int insertResult = 0;
 
+        JSONObject json = new JSONObject();
         if(result > 0) {
-            return "이미 신고하셨습니다.";
+            //return String.valueOf(0);
+            json.put("result", "이미 신고되었습니다.");
         }else {
             // 신고 내역이 없으므로 신고 테이블에 추가하기.
             insertResult = reportService.InsertReportByIdx(idx, mem_idx, rep_type);
+               
+	        System.out.println("insertResult : "+insertResult);
+	        // insert 후 결과값에 따른 리턴값 주기.
+	        if(insertResult > 0) {
+	            //return "312313";
+	        	json.put("result", "신고되었습니다.");
+	        } else {
+	        	json.put("result", "신고 실패!");
+	        }
         }
-
-        // insert 후 결과값에 따른 리턴값 주기.
-        if(insertResult > 0) {
-            return "신고가 접수되었습니다!";
-        }else {
-            return "신고 실패!";
-        }
+        
+        return json.toString();
 
     }
 

@@ -272,8 +272,9 @@ insert into report values(seq_report_idx.nextval, 1, '회원',null,5,null);
 insert into report values(seq_report_idx.nextval, 2, '회원',null,5,null);
 
 select * from report;
-
-
+select * from news where news_idx = 4;
+select * from member where mem_idx = 5;
+select * from reply;
 
 
 COMMIT;

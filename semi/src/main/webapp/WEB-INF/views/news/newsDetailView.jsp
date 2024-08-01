@@ -142,6 +142,13 @@
     top: -10px;
 }
 
+.reportNews{
+	width: 90px;
+	height: 40px;
+	padding: 0;
+	margin-left : 5px;
+}
+
 </style>
 </head>
 <body>
@@ -152,6 +159,7 @@
 
     <div id="news-content-area">
         <div style="display: inline-block; font-size: 28px; font-weight: bold;">[${vo.category_name}] ${vo.news_title}</div>
+
         <div style="display: inline-block; float: right; margin-right: 10px;">
             <span>${fn:substring(vo.news_createAt,0,10)} 작성됨</span><br>
             <c:if test="${user.mem_idx eq vo.mem_idx }">
@@ -175,14 +183,37 @@
                 </div>
             </label>
         </div>
+        <span>
+ 	           <!-- 기자 신고 버튼 -->
+            <c:if test="${ user != null }">
+	            <c:if test="${user.mem_idx ne vo.mem_idx }">
+	            	<input type="button" class="btn btn-danger reportNews" value="기자신고" id="reportNbtn" onclick="report('${vo.mem_idx}','회원');" />
+	            </c:if>
+            </c:if>
+            <c:if test="${ user == null }">
+            	<input type="button" class="btn btn-danger reportNews" value="기자신고" onclick="alert('로그인 후 이용가능합니다');">
+            </c:if>
+        </span>
+        
         <hr>
         <br>
         <div style="text-align: center"><img src="${vo.news_thumbnail_image}" width="600px;" height="300px;"></div>
         <br><hr><br>
         <div>${vo.news_content}</div>
         <br><hr><br>
-        <input type="button" value="목록으로" onclick="history.back();"/>
-        <div style="font-size: 18px; text-align: right; margin-right: 20px;">
+        <input type="button" class="btn btn-info" value="목록으로" onclick="history.back();"/>
+        <div style=" margin-right:50px; display: inline-block; float:right;">
+          <!-- 뉴스 신고 버튼 -->
+           <c:if test="${ user != null }">
+            <c:if test="${user.mem_idx ne vo.mem_idx }">
+            	<input type="button" class="btn btn-danger" value="뉴스신고" id="reportNbtn" onclick="report('${vo.news_idx}','뉴스');" />
+            </c:if>
+           </c:if>
+           <c:if test="${ user == null }">
+           	<input type="button"  class="btn btn-danger" value="뉴스신고" onclick="alert('로그인 후 이용가능합니다');">
+           </c:if>
+         </div>
+        <div style="font-size: 18px; text-align: center;">
             <span>조회 수 : ${vo.news_count} ㅣ </span>
             <span>
                 <svg style="cursor:pointer" xmlns="http://www.w3.org/2000/svg" id="heart" width="1.3em" height="1.1em" fill="white" stroke="red"
@@ -196,6 +227,7 @@
 
         <!-- TODO : 댓글 쓰는 곳!!!! -->
       	<jsp:include page="../reply/reply_view.jsp" />
+
 
 
     </div>
@@ -377,5 +409,33 @@
     }
 
 </script>
+
+<script>
+
+	// idx와 타입으로 판별해 신고하는 함수.
+	function report(idx, type) {
+		if(confirm('해당 '+type+'을/를 신고하시겠습니까?')){
+			
+			$.ajax({
+					url: "${pageContext.request.contextPath}/reportByIdx.do",  // 신고 처리 URL
+	                type: "post",
+	                dataType : "json",
+	                data: {
+	                   "idx": idx ,  		// 유형에 따른 신고할 대상의 idx
+	                   "rep_type" : type			// 유형(뉴스,회원,댓글)
+	                },
+	                success: function(data) {
+						alert(data.result);	                	
+	                },
+	                error: function(error) {
+	                	console.log(error);
+	                }
+			});
+		}
+	}
+
+</script>
+
+
 </body>
 </html>
