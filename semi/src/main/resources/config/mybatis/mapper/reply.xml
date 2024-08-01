@@ -12,11 +12,6 @@
    </select>
    
    
-   <!-- b_idx의 총 댓글의 갯수 -->
-   <select id="reply_row_total" parameterType="int"  resultType="int">
-       select nvl(count(*),0) from reply where news_idx=#{ news_idx }
-   </select>
-   
    
    
    <!-- 추가 -->
@@ -35,5 +30,15 @@
    <delete id="reply_delete"  parameterType="int">
       delete from reply where rpy_idx=#{ rpy_idx }
    </delete>
+    
+    
+    
+    <!-- 댓글 좋아요 -->
+    
+    
+    
+    
+    
+    
     
 </mapper>

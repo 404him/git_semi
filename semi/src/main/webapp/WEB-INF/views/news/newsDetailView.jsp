@@ -325,6 +325,7 @@
     	$("#cCB1").click(function () {
 
             if('${user}' == '') {
+            	$("#cCB1").prop("checked", false); // 해제
                 alert("로그인 후 이용 가능합니다.");
                 return;
             }
@@ -341,7 +342,7 @@
             },
             success : function (data) {
                 if(data > 0) {
-                    checkMemberLike();
+                	checkSubscribe();
                 }
             },
             error : function () {
@@ -353,7 +354,7 @@
 
     // 회원이 구독한 뉴스인지 체크하는 함수.
 
-       
+           function checkSubscribe() {
         $.ajax({
             url: "check_Subscribe.do",
             data: {
