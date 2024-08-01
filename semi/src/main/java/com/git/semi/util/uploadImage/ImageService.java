@@ -15,10 +15,10 @@ public interface ImageService {
     // db에 이미지 삭제(fileUrl)
     void deleteByUrl(String fileUrl);
 
-    // 이미지 db에 이미지 삭제(FK)
+    // db에 fk로 이미지 삭제(FK)
     int deleteByNewsIdx(int news_idx);
 
-    // db에 뉴스 이미지등 조회(FK)
+    // db에 fk로 이미지 리스트 조회(FK)
     List<String> getFileUrlByNewsIdx(int news_idx);
     
     /**

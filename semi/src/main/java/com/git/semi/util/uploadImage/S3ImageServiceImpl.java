@@ -21,7 +21,7 @@ import java.net.URLDecoder;
 import java.util.*;
 
 @Service
-public abstract class S3ImageServiceImpl implements ImageService {
+public abstract class S3ImageServiceImpl {
 
     // 저장할 버킷의 폴더
     private static final String BASE_DIR = "images/";
