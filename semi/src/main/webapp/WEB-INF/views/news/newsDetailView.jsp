@@ -374,7 +374,7 @@
                 alert("구독 ajax 요청 실패");
             }
         });
-    
+    }
 
 </script>
 </body>
