@@ -36,8 +36,7 @@ public class ReplyController {
 				
 		//  /reply/list.do?
 		@RequestMapping("list.do")
-		public String list(int news_idx,
-				              Model model) {
+		public String list(int news_idx, Model model) {
 			
 			
 			List<ReplyVo> list = replyService.selectList(news_idx);

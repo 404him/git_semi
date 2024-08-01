@@ -7,17 +7,10 @@
 
    <!-- 조회 -->
    <select id="reply_list"  parameterType="int"  resultType="reply">
-	     SELECT ar.*, nvl(m.mem_nickname,0), nvl(m.mem_img_url,0)
-			FROM (SELECT *
-			      FROM reply r
-			               LEFT OUTER JOIN (SELECT rpy_idx as ri, count(rpy_idx) rpy_like_count
-			                                  FROM reply_like
-			                                 GROUP BY rpy_idx) rl
-			                                    ON rl.ri = r.rpy_idx) ar
-			         JOIN MEMBER m
-			              ON ar.mem_idx = m.mem_idx
-			              	WHERE news_idx=#{ news_idx }
-			      order by rpy_idx desc
+			SELECT r.*, m.mem_img_url, m.mem_nickname
+			FROM REPLY r JOIN MEMBER m ON r.mem_idx = m.mem_idx
+				WHERE r.news_idx = #{news_idx}
+					ORDER BY r.rpy_idx DESC
    </select>
    
 
