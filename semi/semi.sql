@@ -76,7 +76,7 @@ INSERT INTO MEMBER values(seq_member_idx.nextval,'user2','1111','회원2','회�
 INSERT INTO MEMBER values(seq_member_idx.nextval,'user3','1111','회원3','회원삼번','010-1111-1111','https://goss-s3-test-bucket.s3.ap-northeast-2.amazonaws.com/images/default/default_member_image.jpg','우편번호1','주소1','1997-02-17',5, 'n', '일반', DEFAULT);
 INSERT INTO MEMBER values(seq_member_idx.nextval,'reporter2','2222','기자2','기자이번','010-2222-1111','https://goss-s3-test-bucket.s3.ap-northeast-2.amazonaws.com/images/default/default_member_image.jpg','우편번호2','주소2','1997-02-22',DEFAULT, DEFAULT, '기자', DEFAULT);
 
-SELECT * FROM MEMBER;
+-- SELECT * FROM MEMBER;
 
 ------ 성수&순철's 테이블  --------
 
@@ -121,10 +121,9 @@ INSERT INTO news values(seq_news_idx.nextval, '제목6', 'https://goss-s3-test-b
 INSERT INTO news values(seq_news_idx.nextval, '제목7', 'https://goss-s3-test-bucket.s3.ap-northeast-2.amazonaws.com/images/c7bc9f7f-cgrid-2.jpg', '내용7', 27, DEFAULT, NULL, 6, 2);
 
 
-SELECT * FROM news;
+-- SELECT * FROM news;
 
 
--- n
 
 CREATE TABLE news_s3Attechment(
                                   idx int PRIMARY KEY ,
@@ -156,7 +155,7 @@ INSERT INTO NEWS_LIKE values(seq_news_like_idx.nextval, 2, 1);
 INSERT INTO NEWS_LIKE values(seq_news_like_idx.nextval, 2, 2);
 
 -- 뉴스 좋아요 전체 조회
-SELECT * FROM NEWS_LIKE;
+-- SELECT * FROM NEWS_LIKE;
 
 
 -- Subscribe
@@ -188,30 +187,6 @@ CREATE TABLE REPLY (
 );
 
 
--- REPLY_LIKE
-CREATE TABLE REPLY_LIKE (
-                            rpy_like_idx    NUMBER PRIMARY KEY ,				-- 댓글 좋아요 고유값
-                            rpy_idx			NUMBER NOT NULL ,					-- 참조 댓글 고유값
-                            mem_idx			NUMBER NOT NULL ,					-- 참조 회원 고유값
-                            constraint fk_reply_like_reply_idx foreign key(rpy_idx)
-                                references reply(rpy_idx) on delete CASCADE ,
-                            constraint fk_reply_like_member_idx foreign key(mem_idx)
-                                references member(mem_idx) on delete cascade
-);
-
-
--- reply_unlikes
-CREATE TABLE REPLY_UNLIKE (
-                              rpy_unlikes_idx   	NUMBER PRIMARY KEY ,						-- 댓글 싫어요 고유값
-                              rpy_idx				NUMBER NOT NULL, 							-- 참조 댓글 고유값
-                              mem_idx				NUMBER NOT NULL ,					-- 참조 회원 고유값
-                              constraint fk_reply_unlike_reply_idx foreign KEY (rpy_idx)
-                                  references REPLY (rpy_idx) on delete CASCADE,
-                              constraint fk_reply_unlike_member_idx foreign KEY (mem_idx)
-                                  references MEMBER (mem_idx) on delete cascade
-);
-
-
 ------ 최범준's 테이블  --------
 
 -- report 테이블
@@ -230,30 +205,30 @@ CREATE TABLE REPORT (
                             references REPLY (rpy_idx) on delete CASCADE
 );
 
-select * from report;
+-- select * from report;
 
 
  -- 신고 한방 조회
- select * from (
- select distinct rr.*
- from (select  r.rep_type, r.mem_idx as idx,
-(select count( * ) from report where mem_idx = r.mem_idx ) as count
-  from report r
-  where r.mem_idx is not null) rr
-   union
-  select distinct rr.*
- from (select  r.rep_type, r.news_idx as idx,
-(select count( * ) from report where news_idx = r.news_idx ) as count
-  from report r
-  where r.news_idx is not null) rr
-   union
-    select distinct rr.*
- from (select  r.rep_type, r.rpy_idx as idx,
-(select count( * ) from report where news_idx = r.rpy_idx ) as count
-  from report r
-  where r.rpy_idx is not null) rr )
- order by count desc;
-  
+--  select * from (
+--  select distinct rr.*
+--  from (select  r.rep_type, r.mem_idx as idx,
+-- (select count( * ) from report where mem_idx = r.mem_idx ) as count
+--   from report r
+--   where r.mem_idx is not null) rr
+--    union
+--   select distinct rr.*
+--  from (select  r.rep_type, r.news_idx as idx,
+-- (select count( * ) from report where news_idx = r.news_idx ) as count
+--   from report r
+--   where r.news_idx is not null) rr
+--    union
+--     select distinct rr.*
+--  from (select  r.rep_type, r.rpy_idx as idx,
+-- (select count( * ) from report where news_idx = r.rpy_idx ) as count
+--   from report r
+--   where r.rpy_idx is not null) rr )
+--  order by count desc;
+--
 
 
 -- 더미 데이터 라인 --
@@ -262,7 +237,7 @@ select * from report;
 insert into REPLY values(seq_reply_idx.nextval,'댓글1',default,default,5,4);
 
 -- 신고 더미 데이터
-select * from report;
+-- select * from report;
 
 insert into report values(seq_report_idx.nextval, 1, '회원',null,4,null);
 insert into report values(seq_report_idx.nextval, 1, '뉴스',1,null,null);
@@ -270,12 +245,6 @@ insert into report values(seq_report_idx.nextval, 2, '댓글',null,null,1);
 insert into report values(seq_report_idx.nextval, 1, '회원',null,2,null);
 insert into report values(seq_report_idx.nextval, 1, '회원',null,5,null);
 insert into report values(seq_report_idx.nextval, 2, '회원',null,5,null);
-
-select * from report;
-select * from news where news_idx = 4;
-select * from member where mem_idx = 5;
-select * from reply;
-
 
 COMMIT;
 

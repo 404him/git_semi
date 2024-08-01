@@ -9,47 +9,114 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style type="text/css">
+
+/* insert form */
+.board_wrapper{
+    margin: 0 auto !important;
+    padding: 0;
+    box-sizing: border-box;
+    width: 1900px;
+}
+
 .basic{
-width: 40%;
-margin: auto;
-display: inline-block;
-}
-#box {
-	width: 600px;
-	margin: auto;
-	margin-top: 150px;
+    width: 1000px;
+    height: 100%;
 }
 
-textarea {
-	resize: none;
-	width: 50%;
-	height: 50%;
+input[type=file]::file-selector-button {
+    width: 120px;
+    height: 30px;
+    background: #fff;
+    border: 1px solid rgb(77,77,77);
+    border-radius: 10px;
+    cursor: pointer;
+    background: rgb(77,77,77);
+    color: #fff;
 }
 
-h4 {
-	font-weight: bold;
+#image{
+    font-size: 20px;
 }
 
-form {
-	display: inline-block;
+.submit_btn{
+    width: 100px;
+    height: 30px;
+    background: #fff;
+    border: 1px solid rgb(77,77,77);
+    border-radius: 10px;
+    cursor: pointer;
+    background: rgb(77,77,77);
+    color: #fff;
+    margin-left: 225px;
 }
 
-.post {
-	display: inline-block;
+.img_upload{
+    display: inline-block;   
+    font-size: 20px;
 }
 
-.title {
-	display: inline-block;
-	width: 10%;
+.category_form {
+    width: 800px;
 }
 
-.title_name {
-	display: inline-block;
+.category_title{
+    display: inline-block;
+    font-size: 20px;
 }
 
-img {
-	width: 100%;
+#category{
+    font-size: 20px;
+    height: 30px;
+    width: 708px;
+    text-align: center;
+    margin-top: 10px;
 }
+
+.title_name{
+    font-size: 20px;
+    height: 30px;
+    width: 700px;
+    margin-top: 10px;
+}
+
+.board_content{
+    font-size: 20px;
+}
+
+#news_content{
+    margin-top: 10px;
+    resize: none;
+    width: 700px;
+    height: 500px;
+}
+
+.btn.btn-info{
+   height: 30px;
+   background: #fff;
+    border: 1px solid rgb(77,77,77);
+    border-radius: 10px;
+    cursor: pointer;
+    background: rgb(77,77,77);
+    color: #fff;
+
+}
+
+.btn.btn-primary{
+   height: 30px;
+   background: #fff;
+    border: 1px solid rgb(77,77,77);    
+    border-radius: 10px;
+    cursor: pointer;
+    background: rgb(77,77,77);
+    color: #fff;
+}
+
+.preview_form{
+    vertical-align: top;
+    margin-top: -680px;
+    margin-left: 800px;
+}
+
 </style>
 
 
@@ -58,7 +125,7 @@ img {
  function preview1(){
 	 
 	 let news_title = $("#news_title").val();
-
+	 
 	 $("#news_title_retrun").html(news_title);
 
 }
@@ -128,21 +195,14 @@ img {
 
 </head>
 <body>
-
-	<div class="basic">
+<div class="board_wrapper">
+       <div class="basic">
 		<form method="POST" enctype="multipart/form-data">
-			<div>
-				이미지 등록 : <input type="file" name="image" id="image"
-					onclick="ClipboardClear();">
-					
-			</div>
-
-			<div>
-				<input type="button" value="이미지 올리기"
-					onclick="uploadS3(this.form);">
-			</div>
+                <input type="file" name="image" id="image" onclick="ClipboardClear();">
+				<input class="submit_btn" type="button" value="이미지 올리기" onclick="uploadS3(this.form);">
+            
 		</form>
-		<br>
+
 		<form class="post">
 				<div id="url_sum" style="display: none;" ></div>
 			<div id="box">
@@ -150,8 +210,7 @@ img {
 				<div class="panel panel-primary">
 					<div class="panel-body">
 						
-						<div>
-							<a>카테고리 : </a>
+						<div class="category_form">
 							<select id="category" name="category_idx">
 								<option value="none">==카테고리==</option>
 								<c:forEach var="category" items="${ categoryVo }">
@@ -160,27 +219,21 @@ img {
 							</select>
 						</div>
 
-						<div>
-							<h4 class="title">제목 :</h4>
-							<input class="title_name" name="news_title" id="news_title"
-								onkeyup="preview1();">
-						</div>
+						
+						<input class="title_name" name="news_title" id="news_title" placeholder="제목" onkeyup="preview1();">
+						
 
 						<div>
-							<h4>내용 :</h4>
 							<textarea class="form-control" rows="10" name="news_content"
 								id="news_content" onkeyup="preview2();"></textarea>
-
 						</div>
 
-						<div style="margin-top: 10px;">
+						<div>
 							<input class="btn btn-info" type="button" value="목록보기"
-								onclick="location.href='list.do'"> <input
+								onclick="location.href='../main.do'"> <input
 								class="btn btn-primary" type="button" value="글올리기"
 								onclick="send(this.form);">
 						</div>
-
-						<div></div>
 					</div>
 				</div>
 			</div>
@@ -188,19 +241,14 @@ img {
 	</div>
 	<div class="basic">
 		<form class="post">
-			<div id="box">
-				<!-- Bootstrap Panel -->
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h4>미리보기</h4>
-					</div>
-					<div class="panel-body">
+                <div class="preview_form">
+				
 
 						<div>
 							<h4 class="title">제목 :</h4>
 							<div class="title_name" id="news_title_retrun"></div>
 						</div>
-
+                     
 						<div>
 							<h4>내용 :</h4>
 							<div class="form-control" id="news_content_return"></div>
@@ -209,8 +257,7 @@ img {
 
 						<div></div>
 					</div>
-				</div>
-			</div>
+                </div>
 		</form>
 	</div>
 
