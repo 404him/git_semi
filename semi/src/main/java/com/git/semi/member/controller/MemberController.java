@@ -355,6 +355,7 @@ public class MemberController {
 	@RequestMapping("member_delete.do")
 	public String member_delete(int mem_idx,RedirectAttributes ra, MultipartFile image) {
 		
+		MemberVo user = (MemberVo)session.getAttribute("user");
 		
 		if (session.getAttribute("user") == null) {
 				
@@ -363,6 +364,17 @@ public class MemberController {
 			return "redirect:login_form.do";
 
 		}
+		
+		// 세션에 있는 유저의 idx와 현재 페이지의 idx가 다르면 비정상 접근으로 튕김
+				if (user.getMem_idx() != mem_idx) {
+					
+					ra.addAttribute("reason","no_idx");
+					
+					return "redirect:../main.do";
+					
+				}
+		
+		
 		
 		// 1. db에서 이미지 url을 가져와서 default image인지 비교한다.
 		String mem_image_url = member_dao.selectImageUrlByMemIdx(mem_idx);

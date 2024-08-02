@@ -217,7 +217,6 @@
 						count = count + 1;
 						return;
 					}
-					
 
 				} else {
                     if(confirm("현재 사용중인 전화번호 입니다")){
