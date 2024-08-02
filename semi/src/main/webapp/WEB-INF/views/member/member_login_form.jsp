@@ -57,17 +57,14 @@
   });
   
   function showMessage(){
-	  // /member/login_form.do?reason=fail_id => "true"
 	  if("${ param.reason == 'fail_id'}" == "true"){
 		  alert("아이디가 없습니다");
 	  }		
 	  
-	  // /member/login_form.do?reason=fail_pwd => "true"
 	  if("${ param.reason == 'fail_pwd'}" == "true"){
 		  alert("비밀번호가 틀립니다");
 	  }	
 	  
-	  // /member/login_form.do?reason=session_timeout
 	  if("${ param.reason == 'session_timeout'}" == "true"){
 		  alert("로그아웃되었습니다\n로그인을 다시 해주세요");
 	  }	

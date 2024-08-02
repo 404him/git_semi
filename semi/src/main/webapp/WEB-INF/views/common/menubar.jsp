@@ -58,7 +58,7 @@
 				<li class="r_li" style="font-size:22px; text-align: right; margin-right:5px;">
 				<span><b>${ user.mem_nickname }</b> 님 환영합니다!</span>
 				</li>
-				<li class="r_li"><a href="${pageContext.request.contextPath}/member/profile.do?mem_idx=${ user.mem_idx }" class="r__button">마이페이지</a></li>
+				<li class="r_li"><a href="#" onclick="myprofile();" class="r__button">마이페이지</a></li>
 				<li class="r_li"><a href="#" onclick="logout();" class="r__button">로그아웃</a></li>
 				<c:if test="${user.mem_grade eq '기자'}">
 					<li class="r_li"><a href="${pageContext.request.contextPath}/news/insert_form.do" class="r__button">기사등록</a></li>
@@ -118,6 +118,24 @@
 		}
     	
     	location.href="${pageContext.request.contextPath}/member/logout.do";
+    }
+    
+    // a태그를 POST 방식으로 요청
+    function myprofile(){
+
+        let form = document.createElement("form");
+        form.method = "POST";
+        form.action = "${pageContext.request.contextPath}/member/profile.do";
+
+        let input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "mem_idx";
+        input.value = "${user.mem_idx}";
+        
+        
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
     }
     
     
