@@ -31,7 +31,7 @@
 
 			<div  style="display: inline-block;">
 				<div class="footer-span-text">
-					<span style="font-weight: bold">로그인 | 전체서비스 | 서비스안내 | 오류신고 | 고객센터 | </span>
+					<span style="font-weight: bold"> 전체서비스 | 서비스안내 | 오류신고 | 고객센터 | </span>
 						<span class="footer-small-text">청소년 보호 책임자 : 류순철</span>
 				</div>
 				<div class="footer-span-text">
@@ -49,13 +49,13 @@
 			<span class="copyright">&copy; GlobalTimes. All rights
 				reserved.</span>
 			<ul class="footer-list">
-				<li class="footer-list-item"><a href="#"
+				<li class="footer-list-item"><a target="_blank" href="https://www.facebook.com/?locale=ko_KR"
 					class="footer-list-link"> <i class="ri-facebook-circle-line"></i>
 				</a></li>
-				<li class="footer-list-item"><a href="#"
+				<li class="footer-list-item"><a target="_blank" href="https://www.instagram.com/"
 					class="footer-list-link"> <i class="ri-instagram-line"></i>
 				</a></li>
-				<li class="footer-list-item"><a href="#"
+				<li class="footer-list-item"><a target="_blank" href="https://x.com/?lang=ko"
 					class="footer-list-link"> <i class="ri-twitter-line"></i>
 				</a></li>
 			</ul>

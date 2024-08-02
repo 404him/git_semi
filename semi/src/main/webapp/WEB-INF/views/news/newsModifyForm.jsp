@@ -255,7 +255,7 @@ input[type=file]::file-selector-button {
 							<div>
 								<input class="btn btn-info" type="button" value="목록보기"
 									onclick="location.href='../main.do'"> <input
-									class="btn btn-primary" type="button" value="글올리기"
+									class="btn btn-primary" type="button" value="수정하기"
 									onclick="send(this.form);">
 							</div>
 						</div>
@@ -282,7 +282,7 @@ input[type=file]::file-selector-button {
 
 								<div>
 									<h4>내용 :</h4>
-									<div class="form-control" id="news_content_return">${vo.news_content}</div>
+									<div class="form-control" id="news_content_return" style="width: 700px">${vo.news_content}</div>
 								</div>
 
 

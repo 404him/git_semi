@@ -65,8 +65,6 @@
 
                         <span style="float: right">${fn:substring(news.news_createAt,0,10)}</span>
                         <br>
-                        <span style="float: right;">&nbsp;기자</span>
-                        <span style="float: right; font-weight: bold;">${news.mem_name}</span>
                     </div>
                     <div style="text-align: right; padding-right: 10px;">
 							<span style="font-size: 14px;">

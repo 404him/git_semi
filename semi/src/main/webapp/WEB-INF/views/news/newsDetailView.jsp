@@ -170,6 +170,7 @@
             </c:if>
             <c:if test="${user.mem_idx eq vo.mem_idx }">
             <input style="float: right;" type="button" value="수정하기" onclick="location.href='${pageContext.request.contextPath}/news/modify_form.do?news_idx=${ vo.news_idx }'">
+            <input style="float: right;" type="button" value="삭제하기" onclick="location.href='${pageContext.request.contextPath}/news/delete.do?news_idx=${ vo.news_idx }'">
             </c:if>
         </div>
 

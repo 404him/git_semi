@@ -251,7 +251,7 @@ input[type=file]::file-selector-button {
                      
 						<div>
 							<h4>내용 :</h4>
-							<div class="form-control" id="news_content_return"></div>
+							<div class="form-control" id="news_content_return" style="width: 700px"></div>
 						</div>
 
 
