@@ -158,7 +158,7 @@
     <div class="main-blank-area"></div>
 
     <div id="news-content-area">
-        <div style="display: inline-block; font-size: 28px; font-weight: bold;">[${vo.category_name}] ${vo.news_title}</div>
+        <div style="display: inline-block; font-size: 24px; font-weight: bold;">[${vo.category_name}] ${vo.news_title}</div>
 
         <div style="display: inline-block; float: right; margin-right: 10px;">
             <c:if test="${ empty vo.news_updateAt}">
