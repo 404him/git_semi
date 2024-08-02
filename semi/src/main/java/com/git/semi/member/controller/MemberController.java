@@ -118,7 +118,6 @@ public class MemberController {
 						RedirectAttributes ra) {
 		
 		//계정 잠금 로직
-		
 		 MemberVo member = member_dao.account_lockCheck(mem_id);
 
 	        if (member == null) {

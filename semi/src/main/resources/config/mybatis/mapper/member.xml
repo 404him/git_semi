@@ -108,8 +108,9 @@
 					  WHERE mem_id = #{mem_id}
 	</update>
 
+	<!-- 현재 잠겨있는 계정 조회 -->
 	<select id="member_lock_mem" resultType="member">
-		select * from member where mem_use = 'n'
+		SELECT * FROM member WHERE mem_use = 'n'
 	</select>
 	
 </mapper>

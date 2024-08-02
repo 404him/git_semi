@@ -44,6 +44,7 @@
              src="${pageContext.request.contextPath}/resources/member/세미로고.png"
              alt="main_logo" onclick="location.href='${pageContext.request.contextPath}/'" />
     </h1>
+    <br><br><br><br>
     <span class="r_posi">
 			<c:if test="${ empty user.mem_idx }">
 			<ul class="r_info">
