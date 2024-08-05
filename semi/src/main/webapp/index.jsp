@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h2>세미 프로젝트!!</h2>
-
-<a href="s3/uploadS3Form.do">s3 업로드 테스트</a>
+<script>
+    location.href='main.do';
+</script>
 
 </body>
 </html>

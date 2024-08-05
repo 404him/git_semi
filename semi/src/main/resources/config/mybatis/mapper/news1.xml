@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="news">
+    <!-- 뉴스 리스트 조회 -->
+    <select id="news_list" resultType="news">
+        SELECT an.*, m.mem_name, c.category_name
+        FROM (SELECT *
+              FROM news n
+                       LEFT OUTER JOIN (SELECT news_idx as ni, count(news_idx) news_like_count
+                                        FROM news_like
+                                        GROUP BY news_idx) nl
+                                       ON nl.ni = n.news_idx) an
+                 JOIN category c
+                      ON an.category_idx = c.category_idx
+                 JOIN MEMBER m
+                      ON an.mem_idx = m.mem_idx
+        ORDER BY news_createAt DESC
+    </select>
+
+    <!-- 카테고리 별 뉴스 리스트 조회 -->
+    <select id="news_category_list" resultType="news" parameterType="int">
+        SELECT an.*, m.mem_name, c.category_name
+        FROM (SELECT *
+              FROM news n
+                       LEFT OUTER JOIN (SELECT news_idx as ni, count(news_idx) news_like_count
+                                        FROM news_like
+                                        GROUP BY news_idx) nl
+                                       ON nl.ni = n.news_idx) an
+                 JOIN category c
+                      ON an.category_idx = c.category_idx
+                 JOIN MEMBER m
+                      ON an.mem_idx = m.mem_idx
+        WHERE an.category_idx = #{category_idx}
+        ORDER BY news_createAt DESC
+    </select>
+
+    <!-- 뉴스 상세 조회 -->
+    <select id="news_one" resultType="news" parameterType="int">
+        SELECT nn.*, m.mem_name, m.mem_img_url, c.category_name
+        FROM (SELECT *
+              FROM (SELECT * FROM news) n,
+                   (SELECT count(*) news_like_count
+                    FROM news_like
+                    WHERE news_idx = #{news_idx}) nlc
+              WHERE n.news_idx = #{news_idx} ) nn
+                 JOIN CATEGORY c
+                      ON nn.category_idx = c.category_idx
+                 JOIN MEMBER m
+                      ON nn.mem_idx = m.mem_idx
+    </select>
+
+    <!-- 뉴스 조회수 증가 -->
+    <update id="news_count_up" parameterType="int">
+        UPDATE NEWS
+           SET news_count = (news_count + 1)
+         WHERE news_idx = #{news_idx}
+    </update>
+
+    <!-- 좋아요 확인 -->
+    <select id="check_news_like" resultType="int" parameterType="newsLike">
+        SELECT COUNT(*) FROM NEWS_LIKE
+        WHERE mem_idx = #{mem_idx}
+          AND news_idx = #{news_idx}
+    </select>
+
+    <!-- 뉴스 좋아요 개수 -->
+    <select id="news_like_count" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM NEWS_LIKE
+         WHERE news_idx = #{news_idx}
+    </select>
+
+    <!-- 뉴스 좋아요 추가 -->
+    <insert id="insert_news_like" parameterType="hashMap">
+        INSERT INTO NEWS_LIKE
+        VALUES (
+                seq_news_like_idx.nextval,
+                #{news_idx},
+                #{mem_idx}
+               )
+    </insert>
+
+    <!-- 뉴스 좋아요 삭제 -->
+    <delete id="delete_news_like" parameterType="hashMap">
+        DELETE FROM NEWS_LIKE
+         WHERE mem_idx = #{mem_idx}
+           AND news_idx = #{news_idx}
+    </delete>
+
+    <!-- 뉴스 검색(제목,내용,기자,카테고리) -->
+    <select id="news_search" parameterType="String" resultType="news">
+        SELECT an.*, m.mem_name, c.category_name
+        FROM (SELECT *
+              FROM news n
+                       LEFT OUTER JOIN (SELECT news_idx as ni, count(news_idx) news_like_count
+                                          FROM news_like
+                                         GROUP BY news_idx) nl
+                                            ON nl.ni = n.news_idx) an
+                 JOIN category c
+                      ON an.category_idx = c.category_idx
+                 JOIN MEMBER m
+                      ON an.mem_idx = m.mem_idx
+        WHERE an.news_title LIKE '%'|| #{news_search_text} ||'%'
+           OR an.news_content LIKE '%'|| #{news_search_text} ||'%'
+           OR m.mem_name LIKE '%'|| #{news_search_text} ||'%'
+           OR c.CATEGORY_NAME LIKE '%'|| #{news_search_text} ||'%'
+        ORDER BY news_createAt DESC
+    </select>
+
+</mapper>

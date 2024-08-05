@@ -13,7 +13,7 @@
 <body>
 <h3>업로드 된 이미지</h3>
 <div style="width: 300px; height: 200px">
-    <img src="${imageUrl}" width="200">
+    <img src="${imageUrl_return}" width="200">
 </div>
 </body>
 </html>

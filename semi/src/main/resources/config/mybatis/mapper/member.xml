@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+
+	<!-- 회원가입 -->
+	<insert id="member_login_insert" parameterType="member">
+		INSERT INTO member VALUES(seq_member_idx.nextval ,
+							 	  #{ mem_id } ,
+								  #{ mem_pwd } ,
+								  #{ mem_name } ,
+								  #{ mem_nickname } ,
+								  #{ mem_phone } ,
+								  #{ mem_img_url } ,
+								  #{ mem_zipcode } ,
+								  #{ mem_addr } ,
+								  #{ mem_birth } ,
+								  default , 
+								  default , 
+								  #{ mem_grade } ,
+								  default )
+	</insert>
+
+	<!-- 비밀번호 찾기 -->
+	<select id="member_search_pw" resultType="String" parameterType="Map">
+		SELECT mem_pwd FROM member WHERE mem_id = #{ mem_id } AND mem_phone = #{ mem_phone }
+	</select>
+
+
+	<!-- ID 중복체크 -->
+	<select id="member_one_id" parameterType="String" resultType="member">
+		SELECT * FROM member WHERE mem_id = #{ mem_id }
+	</select>
+	
+	<!-- 휴대폰 번호 중복체크 -->
+	<select id="member_one_phone" parameterType="String" resultType="member">
+		SELECT * FROM member WHERE mem_phone = #{ mem_phone }	
+	</select>
+	
+	<!-- 닉네임 중복체크 -->
+	<select id="member_one_nickname" parameterType="String" resultType="member">
+		SELECT * FROM member WHERE mem_nickname = #{ mem_nickname }
+	</select>
+	
+	
+	<!-- 회원 프로필 조회 -->
+	<select id="member_profile" resultType="member" parameterType="int">
+		SELECT * FROM member WHERE mem_idx = #{ mem_idx }
+	</select>
+	
+	<!-- 회원 프로필 수정 -->
+	<update id="member_profile_update" parameterType="member">
+		UPDATE member SET mem_nickname = #{ mem_nickname },
+						  mem_phone	= #{ mem_phone },
+						  mem_pwd = #{ mem_pwd },
+						  mem_grade = #{ mem_grade }
+						  WHERE mem_idx = #{ mem_idx }
+	</update>
+	
+	<!-- 회원 삭제 -->
+	<delete id="member_delete" parameterType="int">
+		DELETE member WHERE mem_idx = #{ mem_idx }
+	</delete>
+	
+	
+	<!-- 현재 로그인 된 유저의 사용중인 비밀번호 체크 -->
+	<select id="member_user_pw" parameterType="int" resultType="member">
+		SELECT mem_pwd FROM member WHERE mem_idx = #{ mem_idx }
+	</select>
+	
+	<!-- 회원 이미지 url 조회 -->
+	<select id="member_image_url" parameterType="int" resultType="String">
+		SELECT mem_img_url FROM member WHERE mem_idx = #{ mem_idx }
+	</select>
+	
+	<!-- 회원 이미지 업데이트 -->
+	<update id="member_image_url_update" parameterType="HashMap">
+		UPDATE member SET mem_img_url = #{ s3Url } WHERE mem_idx = #{ mem_idx } 
+	</update>
+	
+	<!-- 이미지 미리보기 -->
+	<select id="member_photo_preview" resultType="member" parameterType="int">
+		UPDATE member SET mem_img_url = #{ mem_img_url } WHERE mem_idx = #{ mem_idx }
+	</select>
+
+	<!-- 로그인 실패시 카운트 증가 -->
+	<update id="member_fail_lockCount">
+		UPDATE member SET mem_lockcount = mem_lockcount + 1
+						  WHERE mem_id = #{mem_id}
+	</update>
+
+	<!-- 로그인 시도시 계정 잠금유무 확인 -->
+	<select id="member_acount_lockCheck" resultType="member">
+		SELECT *FROM member WHERE mem_id = #{mem_id}
+	</select>
+	
+	<!-- 로그인 성공시 카운트 초기화 -->
+	<update id="member_resetLockCount">
+		UPDATE member SET mem_lockcount = 0
+					  WHERE mem_id = #{mem_id}
+	</update>
+
+	<!-- 5번실패시 계정잠금 -->
+	<update id="member_account_lock">
+		UPDATE member SET mem_use = 'n'
+					  WHERE mem_id = #{mem_id}
+	</update>
+
+	<!-- 현재 잠겨있는 계정 조회 -->
+	<select id="member_lock_mem" resultType="member">
+		SELECT * FROM member WHERE mem_use = 'n'
+	</select>
+	
+</mapper>

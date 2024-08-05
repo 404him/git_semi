@@ -1,0 +1,187 @@
+@charset "UTF-8";
+	
+	.profile_update_box {
+	    width: 800px;
+	    margin: 0 auto;
+	    margin-top: 50px;
+	    border: 1px solid #ccc;
+	    padding: 50px;
+	    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+	
+	.profile_update_zipcode_box{
+	    margin-bottom: 5px;
+	    margin-top: 20px;
+	}
+	
+	.profile_update_addr_box{
+	    margin-bottom: 20px;
+	}
+	
+	h1 {
+	    text-align: center;
+	    margin-bottom: 20px;
+	}
+	
+	.profile_update {
+	    margin-bottom: 15px;
+	    height: 30px;
+	}
+	
+	.profile_update_id{
+	    padding: 15px;
+	    width: 200px;
+	    height: 30px;
+	}
+	
+	.profile_update_name{
+	    padding: 15px;
+	    width: 200px;
+	    height: 30px;
+	}
+	
+	.profile_update_nickname{
+	    padding: 15px;
+	    width: 200px;
+	    height: 30px;
+	}
+	
+	.profile_update_phone{
+		padding: 15px;
+	    width: 200px;
+	    height: 30px;
+	}
+	
+	.profile_update_pw{
+	    padding: 15px;
+	    width: 180px;
+	    height: 30px;
+	}
+	
+	.profile_update_pw2{
+	    padding: 15px;
+	    width: 180px;
+	    height: 30px;
+	}
+	
+	.profile_update_birth{
+	    padding: 15px;
+	    width: 200px;
+	    height: 30px;
+	}
+	
+	.profile_update_zipcode{
+	    padding: 15px;
+	    width: 350px;
+	    height: 30px;
+	}
+	
+	.profile_update_addr{
+	    padding: 15px;
+	    width: 350px;
+	    height: 30px;
+	}
+	
+	.profile_update_member{
+		padding-left: 10px;
+	    width: 200px;
+	    height: 35px;
+	    font-size: 18px;
+	}
+	
+	.s_box{
+		display:inline-block;
+		width: 185px;
+	}
+	
+	.nickname_btn_box{
+		position: relative;
+        display: inline-block;
+	}
+	
+	
+	.profile_update_pw_btn,
+	.profile_update_nickname_btn,
+	.profile_update_zipcode_btn{
+	    width: 100px;
+	    height: 33px;
+	    margin-left: 10px;
+	    background-color: #56778d;
+	    border: none;
+	    color: white;
+	    border-radius: 5px;
+	    transition: all 0.5s;
+	}
+	
+	.profile_update_check_btn{
+		display : none;
+		width: 100px;
+	    height: 33px;
+	    margin-left: 10px;
+	    background-color: #56778d;
+	    border: none;
+	    color: white;
+	    border-radius: 5px;
+	    transition: all 0.5s;
+	}
+	
+	.profile_update_phone_btn{
+		display:none;
+		width: 100px;
+	    height: 33px;
+	    margin-left: 10px;
+	    background-color: #56778d;
+	    border: none;
+	    color: white;
+	    border-radius: 5px;
+	    transition: all 0.5s;
+	}
+	
+	.phone_btn{
+		width: 100px;
+	    height: 33px;
+	    margin-left: 10px;
+	    background-color: #56778d;
+	    border: none;
+	    color: white;
+	    border-radius: 5px;
+	    transition: all 0.5s;
+	}
+	
+	.profile_update_zipcode_btn:hover,
+	.profile_update_pw_btn:hover,
+	.profile_update_nickname_btn:hover,
+	.profile_update_phone_btn:hover,
+	.profile_update_check_btn:hover,
+	.phone_btn:hover{
+	    background-color: #3e5870;
+	    cursor: pointer;
+	}
+	
+	
+	.profile_update_btn_box{
+	    text-align: center;
+	}
+	
+	.phone_update_btn_box{
+		display:inline-block;
+		text-align: center;
+	}
+	
+	
+	
+	
+	.profile_update_btn {
+	    padding: 8px 12px;
+	    margin-top: 20px;
+	    background-color: #56778d;
+	    width: 49%;
+	    color: white;
+	    border: none;
+	    transition: all 0.5s;
+	}
+	
+	.profile_update_btn:hover {
+	    background-color: #3e5870;
+	    cursor: pointer;
+	}

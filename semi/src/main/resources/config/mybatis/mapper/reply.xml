@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reply">
+
+   <!-- 조회 -->
+   <select id="reply_list"  parameterType="int"  resultType="reply">
+			SELECT r.*, m.mem_img_url, m.mem_nickname
+			FROM REPLY r JOIN MEMBER m ON r.mem_idx = m.mem_idx
+				WHERE r.news_idx = #{news_idx}
+					ORDER BY r.rpy_idx DESC
+   </select>
+   
+
+   
+   
+   <!-- 추가 -->
+   <insert id="reply_insert"  parameterType="reply">
+      insert into reply values(
+           seq_reply_idx.nextVal,
+           #{ rpy_content },
+           sysdate,
+           sysdate,
+           #{mem_idx},
+           #{news_idx}
+      )
+   </insert>
+   
+   <!-- 삭제 -->
+   <delete id="reply_delete"  parameterType="int">
+      delete from reply where rpy_idx=#{ rpy_idx }
+   </delete>
+    
+    
+
+</mapper>

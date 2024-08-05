@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="news">
+	<!-- 카테고리 -->
+	<select id="news_category" resultType="category">
+		select * from CATEGORY
+	</select>
+	
+	<!-- 구독 기자 뉴스조회 -->
+	<select id="news_subscribe_list" resultType="news">
+					SELECT 
+			    n.news_idx,
+			    n.news_title,
+			    n.news_thumbnail_image,
+			    n.news_content,
+			    n.news_count,
+			    n.news_createAt,
+			    n.news_updateAt,
+			    n.category_idx,
+			    c.category_name,
+			    a.mem_idx AS author_idx,
+			    a.mem_name AS author_name
+			FROM 
+			    NEWS n
+			JOIN 
+			    MEMBER a ON n.mem_idx = a.mem_idx
+			JOIN
+				CATEGORY c ON n.category_idx = c.category_idx
+			JOIN 
+			    SUBSCRIBE s ON a.mem_idx = s.reporter_idx
+			WHERE 
+			    s.mem_idx = #{mem_idx}
+	</select>
+
+    <!-- 뉴스 등록 -->
+    
+    <insert id="news_insert" parameterType="news">
+    
+    
+    	  INSERT INTO news values(
+  						seq_news_idx.nextval,
+						#{news_title},
+						#{news_thumbnail_image},
+						#{news_content},
+						0,
+						default,
+						null,
+						#{mem_idx},
+						#{category_idx}
+			)
+		<selectKey resultType="int" keyProperty="news_idx" order="AFTER">
+    		SELECT seq_news_idx.CURRVAL from dual
+    	</selectKey>
+    
+    </insert>
+    
+      <!-- 삭제  -->
+   <delete id="news_delete"  parameterType="int">
+      delete from news where news_idx=#{ news_idx }
+   </delete>
+   
+     <!-- 뉴스 수정시 조회 -->
+    <select id="news_modify_select_one" resultType="news" parameterType="int">
+        select * from news where news_idx=#{news_idx}
+    </select>
+    
+    <!-- 수정하기 -->
+  <update id="news_update"  parameterType="news">
+      update news set news_title = #{news_title},
+						news_thumbnail_image = #{news_thumbnail_image},
+						news_content = #{news_content},
+						news_updateAt = sysdate,
+						category_idx = #{category_idx}
+      where news_idx=#{news_idx}                   
+  </update>
+   
+   <!-- 			구독 				-->
+   
+   <!-- 구독 확인 -->
+    <select id="check_subscribe" resultType="int" parameterType="subscribe">
+        SELECT COUNT(*) FROM subscribe
+        WHERE mem_idx = #{mem_idx}
+          AND reporter_idx = #{reporter_idx}
+    </select>
+    <!-- 구독 추가 -->
+     <insert id="insert_subscribe" parameterType="hashMap">
+        INSERT INTO subscribe
+        VALUES (
+                seq_news_like_idx.nextval,
+                #{mem_idx},
+                #{reporter_idx}
+               )
+    </insert>
+    
+     <!-- 구독 취소 ㅠ -->
+    <delete id="delete_subscribe" parameterType="hashMap">
+        DELETE FROM subscribe
+         WHERE mem_idx = #{mem_idx}
+           AND reporter_idx = #{reporter_idx}
+    </delete>
+    
+    
+   
+</mapper>

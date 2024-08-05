@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="s3attechment">
+    <select id="s3attechment_select_news_idx" parameterType="int" resultType="String">
+        select fileUrl from news_s3attechment where news_idx = #{news_idx}
+    </select>
+
+    <insert id="s3attechment_insert" parameterType="hashMap">
+        insert into news_s3attechment
+             values (news_s3attechment_seq.nextval, #{imageUrl}, #{news_idx})
+    </insert>
+
+    <delete id="s3attechment_delete_fileUrl" parameterType="String">
+        delete from news_s3attechment
+              where fileUrl = #{fileUrl}
+    </delete>
+
+    <delete id="s3attechment_delete_news_idx" parameterType="int">
+        delete from news_s3attechment
+              where news_idx = #{news_idx}
+    </delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
